@@ -58,6 +58,10 @@
 		021BAF9A2930CF2000231174 /* BudgetInHand */ = {
 			isa = PBXGroup;
 			children = (
+				021BAFB42930EB5700231174 /* View */,
+				021BAFB32930EB4900231174 /* Network */,
+				021BAFB22930EB1B00231174 /* Model */,
+				021BAFB12930EB0700231174 /* ViewModels */,
 				021BAF9B2930CF2000231174 /* BudgetInHandApp.swift */,
 				021BAF9D2930CF2000231174 /* ContentView.swift */,
 				021BAF9F2930CF2100231174 /* Assets.xcassets */,
@@ -76,6 +80,74 @@
 				021BAFA22930CF2100231174 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		021BAFB12930EB0700231174 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		021BAFB22930EB1B00231174 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		021BAFB32930EB4900231174 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		021BAFB42930EB5700231174 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				021BAFB92930EBBE00231174 /* NewExpense */,
+				021BAFB82930EBA300231174 /* Profile */,
+				021BAFB72930EB9B00231174 /* Settings */,
+				021BAFB62930EB9300231174 /* Login */,
+				021BAFB52930EB8800231174 /* Home */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		021BAFB52930EB8800231174 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		021BAFB62930EB9300231174 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		021BAFB72930EB9B00231174 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		021BAFB82930EBA300231174 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		021BAFB92930EBBE00231174 /* NewExpense */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewExpense;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
