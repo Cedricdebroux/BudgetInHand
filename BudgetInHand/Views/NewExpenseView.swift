@@ -12,14 +12,45 @@ struct NewExpenseView: View {
     @ObservedObject private var viewModel = ExpenseViewModel()
     @State private var presentAlert = false
     @State private var titleText = ""
-    @State private var amountText = ""
-    @State private var dateText = ""
-    @State private var category = ""
+    @State private var amountText: Float = 0.0
+    @State private var date = Date()
+    @State private var category : Category = .carburant
     @State private var userId = ""
     
     
+    
+    
+    
     var body: some View {
+        VStack{
+            
+            TextField("Enter the amount", value: $amountText, format: .number)
+            Spacer(minLength: 0.2)
+            TextField("Enter the title", text: $titleText)
+            
+            DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
+            
+            List {
+                Picker("Categories", selection: $category){
+                    ForEach(Category.allCases) {
+                        category in
+                        Text(category.rawValue.capitalized)
+                    }
+                }
+            }
+            
+            Button("Save", action: {
+                
+                // post the text to Firestore, then erase the text:
+                self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: category, date: date)
+                print("Test Q ok ")
+                                                    
+            })
+        }
         NavigationStack {
+            
+         
+            
             List {
                 ForEach(viewModel.expenses, id:\.id) { Expense in
                     
@@ -46,32 +77,13 @@ struct NewExpenseView: View {
                    }
                    }
                }
-                .alert("Expense", isPresented: $presentAlert, actions: {
-                    TextField("Enter the title", text: $titleText)
-                    TextField("Enter the amount", text: $amountText)
-                    TextField("Enter your date", text: $dateText)
-                    TextField("Enter the category", text: $category)
-                    
-                    
-                    Button("Save", action: {
-                        // post the text to Firestore, then erase the text:
-                        self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: category, date: dateText)
-                                                            
-                    })
-                    Button("Cancel", role: .cancel, action: {
-                        presentAlert = false
-                        titleText = ""
-                    })
-                }, message: {
-                    Text("Please, enter your expense")
-                })
-        }.accentColor(.brown)
+               }.accentColor(.brown)
             
     }
 }
 
-struct NewExpenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewExpenseView()
-    }
-}
+//struct NewExpenseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NewExpenseView( dateText: <#Date#>)
+//    }
+//}

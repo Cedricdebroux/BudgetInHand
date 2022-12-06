@@ -16,7 +16,7 @@ class ExpenseViewModel: ObservableObject {
     private var databaseReference = Firestore.firestore().collection("Dépenses") // reference to our Firestore's collection
 
     // function to post data
-    func addData(userId: String,title: String,  amount: String, category: String,date: String ) {
+    func addData(userId: String,title: String,  amount: Float, category: Category,date: Date ) {
         do {
             _ = try databaseReference.addDocument(data: ["userId": userId ,"title": title, "amount": amount, "category": category, "date": date])
         }
@@ -40,7 +40,7 @@ class ExpenseViewModel: ObservableObject {
     }
     
     // function to update data
-    func updateData(title: String, id: String, amount: String, category: String,date: String ) {
+    func updateData(title: String, id: String, amount: Float, category: Category,date: Date) {
         databaseReference.document(id).updateData(["title" : title]) { error in
             if let error = error {
                 print(error.localizedDescription)

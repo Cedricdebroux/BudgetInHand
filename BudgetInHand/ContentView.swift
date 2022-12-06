@@ -18,7 +18,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 NavigationLink("New Expense", destination: NewExpenseView()).buttonStyle(PlainButtonStyle())
-                Spacer()
+               
                 NavigationLink("Login", destination: LoginView()).buttonStyle(PlainButtonStyle())
             }
         }.environmentObject(appModel)

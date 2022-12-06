@@ -11,9 +11,9 @@ import SwiftUI
 struct Expense: Codable {
     @DocumentID var id: String? // @DocumentID to fetch the identifier from Firestore
     var title: String?
-    var category: String?
-    var date: String?
-    var amount: String?
+    var category: Category?
+    var date: Date?
+    var amount: Float?
     var userId: String?
     
     enum CodingKeys: CodingKey {
@@ -26,11 +26,7 @@ struct Expense: Codable {
     }
 }
 
-enum Categorie: Codable {
-    
-    case carburant
-    case energie
-    case nourriture
-    case home
-    
-}
+
+
+
+

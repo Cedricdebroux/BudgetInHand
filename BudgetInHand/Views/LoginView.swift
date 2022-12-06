@@ -13,8 +13,8 @@ struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     
     @State private var isLogin = false
-    @State var email = ""
-    @State var password = ""
+    @State var email = "qb@bih.com"
+    @State var password = "123456"
     @State var password1 = ""
     
     //test
@@ -30,6 +30,8 @@ struct LoginView: View {
                               .tag(false)
                       }.pickerStyle(SegmentedPickerStyle())
                       .padding()
+                      
+                   
                       TextField("Email", text: $email)
                           .keyboardType(.emailAddress)
                           .disableAutocorrection(true)
@@ -62,16 +64,22 @@ struct LoginView: View {
                if let err = err {
                    print("Failed due to error:", err)
                    return
+                   //TODO navigation to home
                }
-               print("Successfully logged in with ID: \(result?.user.uid ?? "")")
                appModel.userId = result?.user.uid
+               
+               if( appModel.userId != nil){
+                   print("Successfully logged in with ID: \(result?.user.uid ?? "")")
+               } else{
+                   print("This userId doesn't exist\(result?.user.uid)")
+               }
                
                
                
            }
        }
        
-       private func createUser() {
+    private func createUser() {
            Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
                if let err = err {
                    print("Failed due to error:", err)
@@ -79,6 +87,7 @@ struct LoginView: View {
                }
                print("Successfully created account with ID: \(result?.user.uid ?? "")")
                appModel.userId = result?.user.uid
+               
            })
        }
    
