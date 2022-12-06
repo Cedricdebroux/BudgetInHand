@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct NewExpenseView: View {
+    @EnvironmentObject var appModel: BudgetInHandModel
     @ObservedObject private var viewModel = ExpenseViewModel()
     @State private var presentAlert = false
     @State private var titleText = ""
     @State private var amountText = ""
     @State private var dateText = ""
     @State private var category = ""
+    @State private var userId = ""
     
     
     var body: some View {
@@ -26,8 +28,24 @@ struct NewExpenseView: View {
                     }.frame(maxHeight: .none)
                     
                 }
-            }.onAppear(perform: self.viewModel.fetchData)
+            }.onAppear(perform :{ self.viewModel.fetchData(userId: appModel.userId!)})
                 .navigationTitle("Expense")
+                .toolbar {
+                   ToolbarItem(placement: .bottomBar) {
+                       Text("\(viewModel.expenses.count) expenses")
+                   }
+                   ToolbarItem(placement: .bottomBar) {
+                       Button {
+                           presentAlert = true
+                       }
+                   label: {
+                       Image(systemName: "square.and.pencil")
+                           .imageScale(.large)
+                           .bold()
+                           .accentColor(.yellow)
+                   }
+                   }
+               }
                 .alert("Expense", isPresented: $presentAlert, actions: {
                     TextField("Enter the title", text: $titleText)
                     TextField("Enter the amount", text: $amountText)
@@ -37,11 +55,8 @@ struct NewExpenseView: View {
                     
                     Button("Save", action: {
                         // post the text to Firestore, then erase the text:
-                        self.viewModel.addData(title: titleText, amount: amountText, category: category, date: dateText)
-                        //                                       titleText = ""
-                        //                                       amountText = ""
-                        //                                       dateText = ""
-                        //                                       category = ""
+                        self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: category, date: dateText)
+                                                            
                     })
                     Button("Cancel", role: .cancel, action: {
                         presentAlert = false
@@ -51,22 +66,7 @@ struct NewExpenseView: View {
                     Text("Please, enter your expense")
                 })
         }.accentColor(.brown)
-             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Text("\(viewModel.expenses.count) expenses")
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        presentAlert = true
-                    }
-                label: {
-                    Image(systemName: "square.and.pencil")
-                        .imageScale(.large)
-                        .bold()
-                        .accentColor(.yellow)
-                }
-                }
-            }
+            
     }
 }
 

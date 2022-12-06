@@ -10,8 +10,18 @@ import CoreData
 
 struct ContentView: View {
     
+    @StateObject var appModel = BudgetInHandModel()
+    
     var body: some View {
-        NewExpenseView()
+        
+        
+        NavigationView {
+            VStack {
+                NavigationLink("New Expense", destination: NewExpenseView()).buttonStyle(PlainButtonStyle())
+                Spacer()
+                NavigationLink("Login", destination: LoginView()).buttonStyle(PlainButtonStyle())
+            }
+        }.environmentObject(appModel)
     }
     
     

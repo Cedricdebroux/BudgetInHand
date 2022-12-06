@@ -14,6 +14,7 @@ struct Expense: Codable {
     var category: String?
     var date: String?
     var amount: String?
+    var userId: String?
     
     enum CodingKeys: CodingKey {
         case id
@@ -21,6 +22,7 @@ struct Expense: Codable {
         case category
         case date
         case amount
+        case userId
     }
 }
 

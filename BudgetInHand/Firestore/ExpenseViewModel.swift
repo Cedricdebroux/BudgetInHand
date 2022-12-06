@@ -11,13 +11,14 @@ import SwiftUI
 
 class ExpenseViewModel: ObservableObject {
     
+    
     @Published var expenses = [Expense]() // Reference to our Model
     private var databaseReference = Firestore.firestore().collection("Dépenses") // reference to our Firestore's collection
 
     // function to post data
-    func addData(title: String,  amount: String, category: String,date: String ) {
+    func addData(userId: String,title: String,  amount: String, category: String,date: String ) {
         do {
-            _ = try databaseReference.addDocument(data: ["title": title, "amount": amount, "category": category, "date": date])
+            _ = try databaseReference.addDocument(data: ["userId": userId ,"title": title, "amount": amount, "category": category, "date": date])
         }
         catch {
             print(error.localizedDescription)
@@ -25,8 +26,8 @@ class ExpenseViewModel: ObservableObject {
     }
     
     // function to read data
-    func fetchData() {
-        databaseReference.addSnapshotListener { (querySnapshot, error) in
+    func fetchData(userId: String) {
+        databaseReference.whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
