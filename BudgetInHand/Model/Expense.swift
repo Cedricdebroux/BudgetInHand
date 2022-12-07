@@ -11,7 +11,7 @@ import SwiftUI
 struct Expense: Codable {
     @DocumentID var id: String? // @DocumentID to fetch the identifier from Firestore
     var title: String?
-    var category: Category?
+    var category: String?
     var date: Date?
     var amount: Float?
     var userId: String?

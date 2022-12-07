@@ -16,7 +16,7 @@ class ExpenseViewModel: ObservableObject {
     private var databaseReference = Firestore.firestore().collection("Dépenses") // reference to our Firestore's collection
 
     // function to post data
-    func addData(userId: String,title: String,  amount: Float, category: Category,date: Date ) {
+    func addData(userId: String,title: String,  amount: Float, category: String,date: Date ) {
         do {
             _ = try databaseReference.addDocument(data: ["userId": userId ,"title": title, "amount": amount, "category": category, "date": date])
         }

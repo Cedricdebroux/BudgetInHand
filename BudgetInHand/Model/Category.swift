@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum Category: String,Codable, CaseIterable,Identifiable {
+enum Category: String,CaseIterable, Identifiable {
     
     
     
     case carburant, energie, nourriture, home
     
-    var id: Self { self}
+    var id: Self { self }
     
 }
 

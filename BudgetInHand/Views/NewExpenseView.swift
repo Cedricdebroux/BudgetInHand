@@ -38,11 +38,12 @@ struct NewExpenseView: View {
                     }
                 }
             }
+            let textPicker = ("\(category.rawValue.capitalized)")
             
             Button("Save", action: {
                 
                 // post the text to Firestore, then erase the text:
-                self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: category, date: date)
+                self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: textPicker, date: date)
                 print("Test Q ok ")
                                                     
             })
