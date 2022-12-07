@@ -12,7 +12,7 @@ struct LoginView: View {
     
     @EnvironmentObject var appModel: BudgetInHandModel
     
-    @State private var isLogin = false
+    @State private var isLogin = true
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""

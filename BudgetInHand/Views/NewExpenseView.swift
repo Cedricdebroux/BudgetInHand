@@ -10,11 +10,13 @@ import SwiftUI
 struct NewExpenseView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     @ObservedObject private var viewModel = ExpenseViewModel()
+   
     @State private var presentAlert = false
     @State private var titleText = ""
     @State private var amountText: Float = 0.0
     @State private var date = Date()
     @State private var category : Category = .carburant
+    @State private var  textPicker: String = ""
     @State private var userId = ""
     
     
@@ -35,16 +37,24 @@ struct NewExpenseView: View {
                     ForEach(Category.allCases) {
                         category in
                         Text(category.rawValue.capitalized)
+                        
                     }
                 }
+                
             }
-            let textPicker = ("\(category.rawValue.capitalized)")
             
+           
             Button("Save", action: {
+                
+            textPicker = ("\(self.category.rawValue.capitalized)")
                 
                 // post the text to Firestore, then erase the text:
                 self.viewModel.addData(userId: appModel.userId ?? "",title: titleText, amount: amountText, category: textPicker, date: date)
-                print("Test Q ok ")
+                
+                titleText = ""
+                amountText = 0.0
+                category = Category.carburant
+                date = Date()
                                                     
             })
         }
