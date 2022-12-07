@@ -9,24 +9,16 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
-    
-    
-    
-    
     @EnvironmentObject var appModel: BudgetInHandModel
     
-    @State private var showHomeView = false
-    
+    @State private var isLoginValid = false
     @State private var isLogin = true
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""
-    
-    //test
-    
-    
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 16) {
                 Picker("", selection: $isLogin) {
                     Text("Log In")
@@ -35,8 +27,6 @@ struct LoginView: View {
                         .tag(false)
                 }.pickerStyle(SegmentedPickerStyle())
                     .padding()
-                
-                
                 
                 TextField("Email", text: $email)
                     .keyboardType(.emailAddress)
@@ -47,21 +37,19 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 280, height: 45, alignment: .center)
-                NavigationLink(destination: HomeView()){
-                    Text("Navigate to home")
-                }
-                
+               
                 Spacer()
-                
-                
-                
+                Button(action: {
+                    loginUser()
+                }
+                , label: {
+                    Text("Fucking Login")
+                })
+                   
                Button(action: {
 
                     if isLogin {
                         loginUser()
-                        showHomeView = true
-
-
 
                     } else {
                         createUser()
@@ -75,11 +63,12 @@ struct LoginView: View {
                     .cornerRadius(8)
             
                 
-                }.navigationTitle(isLogin ? "Welcome Back" : "Welcome")
-                NavigationLink("",destination: HomeView(), isActive: $showHomeView)
+                }
+            .navigationDestination(isPresented: $isLoginValid){
+                HomeView()
             }
-            
-        
+            .navigationTitle(isLogin ? "Welcome Back" : "Welcome")
+            }
     }
     private func loginUser() {
            Auth.auth().signIn(withEmail: email, password: password) { result, err in
@@ -91,9 +80,7 @@ struct LoginView: View {
                appModel.userId = result?.user.uid
                
                if( appModel.userId != nil){
-                   
-                  
-                   
+                   isLoginValid = true
                    print("Successfully logged in with ID: \(result?.user.uid ?? "")")
                   
                } else{
@@ -104,6 +91,7 @@ struct LoginView: View {
                
            }
        }
+    
        
     private func createUser() {
            Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
