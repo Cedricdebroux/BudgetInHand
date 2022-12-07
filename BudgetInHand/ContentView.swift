@@ -13,15 +13,18 @@ struct ContentView: View {
     @StateObject var appModel = BudgetInHandModel()
     
     var body: some View {
-        
-        
-        NavigationView {
-            VStack {
-                NavigationLink("New Expense", destination: NewExpenseView()).buttonStyle(PlainButtonStyle())
-               
-                NavigationLink("Login", destination: LoginView()).buttonStyle(PlainButtonStyle())
-            }
+        NavigationView{
+            LoginView()
         }.environmentObject(appModel)
+       
+       
+//        NavigationView {
+//            VStack {
+//                NavigationLink("New Expense", destination: NewExpenseView()).buttonStyle(PlainButtonStyle())
+//
+//                NavigationLink("Login", destination: LoginView()).buttonStyle(PlainButtonStyle())
+//            }
+//        }.environmentObject(appModel)
     }
     
     
