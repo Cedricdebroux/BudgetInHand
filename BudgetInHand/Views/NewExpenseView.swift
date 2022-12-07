@@ -70,7 +70,8 @@ struct NewExpenseView: View {
                     }.frame(maxHeight: .none)
                     
                 }
-            }.onAppear(perform :{ self.viewModel.fetchData(userId: appModel.userId!)})
+            }.onAppear(perform :{ self.viewModel.fetchData(
+                userId: appModel.userId ?? "")})
                 .navigationTitle("Expense")
                 .toolbar {
                    ToolbarItem(placement: .bottomBar) {
