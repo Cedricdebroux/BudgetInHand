@@ -3,4 +3,54 @@
    uuid = "A7428118-24A5-430F-BE22-08265C4C8E00"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "539A5ADD-62B6-42C5-8EE5-629454B91D56"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BudgetInHand/Views/Login/LoginView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "539A5ADD-62B6-42C5-8EE5-629454B91D56 - 90d7a9f005f22f67"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BudgetInHand.LoginView.init() -&gt; BudgetInHand.LoginView"
+                  moduleName = "BudgetInHand"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cedricdebroux/Developpement/technifutur/swiftUi/BudgetInHand/BudgetInHand/Views/Login/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "539A5ADD-62B6-42C5-8EE5-629454B91D56 - a87205e868a27468"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BudgetInHand.LoginView.init(appModel: SwiftUI.EnvironmentObject&lt;BudgetInHand.BudgetInHandModel&gt;, email: Swift.String, password: Swift.String, password1: Swift.String) -&gt; BudgetInHand.LoginView"
+                  moduleName = "BudgetInHand"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cedricdebroux/Developpement/technifutur/swiftUi/BudgetInHand/BudgetInHand/Views/Login/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
