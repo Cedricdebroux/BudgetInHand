@@ -14,7 +14,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-            LoginView()
+            SplashScreenView()
+            //LoginView()
         }.environmentObject(appModel)
        
        

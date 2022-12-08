@@ -29,6 +29,8 @@
 		E44F617F293E2E830000EB92 /* NewExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F617E293E2E830000EB92 /* NewExpenseView.swift */; };
 		E44F6182293E35D30000EB92 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F6181293E35D30000EB92 /* LoginView.swift */; };
 		E44F6185293E441F0000EB92 /* BudgetInHandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */; };
+		E486DB442941EB0D00468DE8 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486DB432941EB0D00468DE8 /* SplashScreenView.swift */; };
+		E486DB4629422D8300468DE8 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486DB4529422D8300468DE8 /* SplashScreen.swift */; };
 		E48EA8AD293F81C800A15EDD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8AC293F81C800A15EDD /* Category.swift */; };
 		E48EA8B1293F906800A15EDD /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8B0293F906800A15EDD /* Todo.swift */; };
 		E48EA8BD2940B42700A15EDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8BC2940B42700A15EDD /* HomeView.swift */; };
@@ -59,6 +61,8 @@
 		E44F617E293E2E830000EB92 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
 		E44F6181293E35D30000EB92 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetInHandModel.swift; sourceTree = "<group>"; };
+		E486DB432941EB0D00468DE8 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		E486DB4529422D8300468DE8 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		E48EA8AC293F81C800A15EDD /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E48EA8B0293F906800A15EDD /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		E48EA8BC2940B42700A15EDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				E48EA8B92940B2A100A15EDD /* Expense */,
 				E48EA8B72940B16C00A15EDD /* Login */,
 				E48EA8B62940B16300A15EDD /* Home */,
+				E486DB432941EB0D00468DE8 /* SplashScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			children = (
 				E48EA8BC2940B42700A15EDD /* HomeView.swift */,
 				E48EA8C72941D62000A15EDD /* DetailsCategoryView.swift */,
+				E486DB4529422D8300468DE8 /* SplashScreen.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -349,7 +355,9 @@
 				E48EA8C12940B45200A15EDD /* SettingsView.swift in Sources */,
 				021BAF9E2930CF2000231174 /* ContentView.swift in Sources */,
 				E48EA8CC2941D67600A15EDD /* InitialNewExpenseview.swift in Sources */,
+				E486DB442941EB0D00468DE8 /* SplashScreenView.swift in Sources */,
 				E48EA8C42941D2DC00A15EDD /* CreateAccountView.swift in Sources */,
+				E486DB4629422D8300468DE8 /* SplashScreen.swift in Sources */,
 				021BAFA82930CF2100231174 /* BudgetInHand.xcdatamodeld in Sources */,
 				021BAF9C2930CF2000231174 /* BudgetInHandApp.swift in Sources */,
 				E48EA8BD2940B42700A15EDD /* HomeView.swift in Sources */,
