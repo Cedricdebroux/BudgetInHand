@@ -88,7 +88,7 @@ public struct PieChartView: View {
                     Circle()
                         .fill(self.backgroundColor)
                         .frame(width: widthFraction * geometry.size.width * innerRadiusFraction, height: widthFraction * geometry.size.width * innerRadiusFraction)
-                        
+                    
                     
                     VStack {
                         Text(self.activeIndex == -1 ? "Total" : names[self.activeIndex])
@@ -126,19 +126,25 @@ struct PieChartRows: View {
     var percents: [String]
     var iconNames: [String]
     
+    
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
-
-    
     var body: some View {
+        //        NavigationStack{
         var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
-        
+        NavigationStack{
+            
+            NavigationLink(destination : DetailExpenses()) {
                 LazyVGrid(columns: columns){
                     ForEach(0..<self.values.count){ i in
+                        
                         HStack {
+                            
                             VStack(alignment: .leading){
+                                
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 5.0)
                                         .fill(self.colors[i])
@@ -146,12 +152,10 @@ struct PieChartRows: View {
                                     Image(systemName:  self.iconNames[i])
                                         .aspectRatio(contentMode: .fit)
                                 }
-                                
-                                
                                 Text(self.names[i])
                                     .foregroundColor(blueColor)
+                                
                             }
-                            
                             Spacer()
                             VStack(alignment: .trailing) {
                                 Text(self.values[i])
@@ -160,34 +164,17 @@ struct PieChartRows: View {
                                     .foregroundColor(Color.gray)
                             }
                         }
-                        .padding(10)
-                        
-                        .background(Color.white)
-                        .cornerRadius(10)
                     }
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
                 }
-                .padding(10)
-        
-//        HStack{
-//            ForEach(0..<self.values.count){ i in
-//                HStack {
-//                    RoundedRectangle(cornerRadius: 5.0)
-//                        .fill(self.colors[i])
-//                        .frame(width: 20, height: 20)
-//                    Text(self.names[i])
-//                        .foregroundColor(blueColor)
-//                    Spacer()
-//                    VStack(alignment: .trailing) {
-//                        Text(self.values[i])
-//                            .foregroundColor(blueColor)
-//                        Text(self.percents[i])
-//                            .foregroundColor(Color.gray)
-//                    }
-//                }
-//            }
-//        }
+            }
+        }
+        .padding(10)
     }
 }
+
 
 @available(OSX 10.15.0, *)
 struct PieChartView_Previews: PreviewProvider {
@@ -195,5 +182,3 @@ struct PieChartView_Previews: PreviewProvider {
         PieChartView(values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
     }
 }
-
-

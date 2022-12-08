@@ -10,28 +10,49 @@ import SwiftUI
 struct DetailExpenses: View {
     var angleSpace: Angle = Angle(degrees: 0)
     
+    
+    
+    //var budgetUsed: Double = [300,300]
+    //var budgetTotal: Double = 500
+    
+    /*
+     
+     init() {
+     self.budgetUsed = 300
+     self.budgetTotal = 500
+     }
+     */
+    
     var valuesPie : [Double] = [300]
-    var budgetTotal : [Double] = [500]
-    init() {
-        self.valuesPie = [300]
-        self.budgetTotal = [500]
-    }
+    //var budgetTotal : [Double] = [500]
+    
+    /*
+     init() {
+     self.valuesPie = [300,500]
+     self.budgetTotal = [500]
+     }
+     */
     
     //var resultValue : Double = valuesPie / budgetTotal
     
     var namePie : [String] = ["Carburant"]
+    //"Total"
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216)]
+    //Color.fromInts(r: 128, g: 128, b: 128)
     
     var numberTotalExpenses : Int = 10
     
     let imageArray = ["car.fill"]
     
     var body: some View {
+        
+        //aluesPie = [budgetUsed,budgetTotal]
+        
         VStack{
             
             VStack{
                 PieChartView(
-                    values: [budgetTotal]-[valuesPie] ,
+                    values: valuesPie ,
                     names: namePie,
                     formatter: { $0.description },
                     colors: colorChart,
@@ -47,8 +68,8 @@ struct DetailExpenses: View {
                 NavigationStack{
                     List {
                         Section(header: Text("Liste des dernières dépenses")){
-                        
-                        
+                            
+                            
                             ForEach(0..<10) { _ in
                                 Text("Integer")
                             }
