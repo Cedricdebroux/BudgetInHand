@@ -11,6 +11,7 @@ import FirebaseAuth
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     
+    @State private var rememberMe = false
     @State private var isLoginValid = false
     @State private var isLogin = true
     @State var email = "qb@bih.com"
@@ -19,9 +20,8 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack(spacing: 150){
                 Text("Se connecter")
-                Spacer()
                 Form{
                     Section("Email"){
                         ZStack(alignment: .trailing){
@@ -47,26 +47,39 @@ struct LoginView: View {
                                     .onTapGesture {
                                         email = ""
                                     }
-                                
                             }
                         }
                         .foregroundColor(Color(UIColor(named: "FonttextField") ?? .blue))
                     }
+                    Toggle("Se souvenir de moi", isOn: $rememberMe)
+                        .listRowBackground(Color.clear)
+                    
                 }
                 .scrollContentBackground(.hidden)
                 
-                Button(action: {
-                    loginUser()
-                }){
-                    Text("Connection")
-                        .frame(maxWidth: 300)
+                VStack(spacing: 30){
+                    Button(action: {
+                        loginUser()
+                    }){
+                        Text("Connection")
+                            .frame(maxWidth: 300)
+                    }
+                    .tint(Color(UIColor(named: "Gray800") ?? .blue))
+                    .buttonStyle(.borderedProminent)
+                    .foregroundColor(.white)
+                    .controlSize(.large)
+                    
+                    HStack(spacing: 70){
+                        NavigationLink(destination: CreateAccountView()){
+                            Text("Nouveau compte")
+                        }
+                        NavigationLink(destination: HomeView()){
+                            Text("Mot de passe oublié ?")
+                        }
+                    }
+                    .font(.system(size: 15))
+                    .tint(Color.black)
                 }
-                .tint(Color(UIColor(named: "Gray800") ?? .blue))
-                .buttonStyle(.borderedProminent)
-                .foregroundColor(.white)
-                .controlSize(.large)
-                
-                
             }
             .navigationDestination(isPresented: $isLoginValid){
                 HomeView()
@@ -86,24 +99,13 @@ struct LoginView: View {
                 print("Successfully logged in with ID: \(result?.user.uid ?? "")")
                 
             } else{
-                print("This userId doesn't exist\(result?.user.uid)")
+                print("This userId doesn't exist\(String(describing: result?.user.uid))")
             }
         }
     }
     
     
-    private func createUser() {
-        Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
-            if let err = err {
-                print("Failed due to error:", err)
-                return
-            }
-            print("Successfully created account with ID: \(result?.user.uid ?? "")")
-            appModel.userId = result?.user.uid
-            
-        })
-    }
-    
+
 }
 
 struct LoginView_Previews: PreviewProvider {
