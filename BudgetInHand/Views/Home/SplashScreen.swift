@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SplashScreen: View {
+    @State private var startAnimating = false
     var body: some View {
         ZStack{
             Color("Blue700").ignoresSafeArea()
@@ -16,23 +17,29 @@ struct SplashScreen: View {
             GeometryReader{ proxy in
                 let size = proxy.size
                 
-                ZStack{
+                VStack{
                     
                     
                     
                         Image("logo")
                             .resizable()
                             .renderingMode(.template).aspectRatio(contentMode: .fit)
+                            .offset(x: 0, y: startAnimating ? 330 : 0)
+                            .animation(.default)
                             .foregroundColor(.white)
                         
-                        Image("2hand")
+                        Image("openHand")
                             .resizable()
                             .renderingMode(.template)
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio( contentMode: .fit)
                             .foregroundColor(.white)
                         
                     
                 }.frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+            }
+        }.onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                startAnimating.toggle()
             }
         }
         
