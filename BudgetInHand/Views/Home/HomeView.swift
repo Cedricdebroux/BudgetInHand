@@ -30,11 +30,11 @@ struct HomeView: View {
                                                         b: 250))
                 }
                 Spacer()
-                    .frame(height: 180)
+                    .frame(height: 230)
                 
                 NavigationStack{
                     List {
-                        ForEach(0..<4) { _ in
+                        ForEach(0..<3) { _ in
                             Text("Integer")
                         }
                     }
