@@ -16,73 +16,94 @@ struct LoginView: View {
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""
-
+    
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
+            VStack{
+                Text("Se connecter")
                 Spacer()
+                Form{
+                    Section("Email"){
+                        ZStack(alignment: .trailing){
+                            TextField("Email", text: $email)
+                                .keyboardType(.emailAddress)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                            if(!email.isEmpty){
+                                Image(systemName: "xmark.circle.fill")
+                                    .onTapGesture {
+                                        email = ""
+                                    }
+                            }
+                        }
+                        .foregroundColor(Color(UIColor(named: "FonttextField") ?? .blue))
+                    }
+                    Section("Mot de passe"){
+                        ZStack(alignment: .trailing){
+                            SecureField("Password", text: $password)
+                            
+                            if(!email.isEmpty){
+                                Image(systemName: "xmark.circle.fill")
+                                    .onTapGesture {
+                                        email = ""
+                                    }
+                                
+                            }
+                        }
+                        .foregroundColor(Color(UIColor(named: "FonttextField") ?? .blue))
+                    }
+                }
+                .scrollContentBackground(.hidden)
                 
-                TextField("Email", text: $email)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 280, height: 45, alignment: .center)
-                SecureField("Password", text: $password)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 280, height: 45, alignment: .center)
-                
-                Spacer()
                 Button(action: {
                     loginUser()
+                }){
+                    Text("Connection")
+                        .frame(maxWidth: 300)
                 }
-                       , label: {
-                    Text("Fucking Login")
-                })
+                .tint(Color(UIColor(named: "Gray800") ?? .blue))
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .controlSize(.large)
                 
                 
             }
             .navigationDestination(isPresented: $isLoginValid){
                 HomeView()
             }
-            
+            .background(Color(UIColor(named: "Gray300") ?? .white))
         }
     }
     private func loginUser() {
-           Auth.auth().signIn(withEmail: email, password: password) { result, err in
-               if let err = err {
-                   print("Failed due to error:", err)
-                   return
-                   
-               }
-               appModel.userId = result?.user.uid
-               
-               if( appModel.userId != nil){
-                   isLoginValid = true
-                   print("Successfully logged in with ID: \(result?.user.uid ?? "")")
-                  
-               } else{
-                   print("This userId doesn't exist\(result?.user.uid)")
-               }
-               
-               
-               
-           }
-       }
+        Auth.auth().signIn(withEmail: email, password: password) { result, err in
+            if let err = err {
+                print("Failed due to error:", err)
+                return
+            }
+            appModel.userId = result?.user.uid
+            if( appModel.userId != nil){
+                isLoginValid = true
+                print("Successfully logged in with ID: \(result?.user.uid ?? "")")
+                
+            } else{
+                print("This userId doesn't exist\(result?.user.uid)")
+            }
+        }
+    }
     
-       
+    
     private func createUser() {
-           Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
-               if let err = err {
-                   print("Failed due to error:", err)
-                   return
-               }
-               print("Successfully created account with ID: \(result?.user.uid ?? "")")
-               appModel.userId = result?.user.uid
-               
-           })
-       }
-   
+        Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
+            if let err = err {
+                print("Failed due to error:", err)
+                return
+            }
+            print("Successfully created account with ID: \(result?.user.uid ?? "")")
+            appModel.userId = result?.user.uid
+            
+        })
+    }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {
