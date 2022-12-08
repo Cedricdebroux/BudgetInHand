@@ -25,9 +25,9 @@ struct SplashScreen: View {
                         
                             .resizable()
                             .renderingMode(.template).aspectRatio(contentMode: .fit)
-                            .position(x: 180, y: -150)
-                            .offset(x: 0, y: startAnimating ? 660 : 0)
-                            .animation(.linear)
+                            .position(x: 180, y: -200)
+                            .offset(x: 0, y: startAnimating ? 720 : 0)
+                            .animation(.easeInOut(duration: 2.5).delay(1))
                             .foregroundColor(.white)
                         
                         Image("openHand")
