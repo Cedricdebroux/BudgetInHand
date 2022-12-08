@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Lottie
 
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
