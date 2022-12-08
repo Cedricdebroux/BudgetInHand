@@ -12,8 +12,7 @@ public struct PieChartView: View {
     public let values: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
-    
-    
+    public let angleSpace: Angle
     public var colors: [Color]
     public var iconNames: [String]
     public var backgroundColor: Color
@@ -38,16 +37,16 @@ public struct PieChartView: View {
         return tempSlices
     }
     
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60){
+    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
         self.values = values
         self.names = names
         self.formatter = formatter
-        
         self.colors = colors
         self.iconNames = iconNames
         self.backgroundColor = backgroundColor
         self.widthFraction = widthFraction
         self.innerRadiusFraction = innerRadiusFraction
+        self.angleSpace = angleSpace
     }
     
     public var body: some View {
@@ -55,7 +54,7 @@ public struct PieChartView: View {
             VStack{
                 ZStack{
                     ForEach(0..<self.values.count){ i in
-                        PieSlice(pieSliceData: self.slices[i])
+                        PieSlice(pieSliceData: self.slices[i], angleSpace: angleSpace)
                             .scaleEffect(self.activeIndex == i ? 1.03 : 1)
                             .animation(Animation.spring())
                     }
@@ -102,6 +101,7 @@ public struct PieChartView: View {
                     
                 }
                 PieChartRows(
+                    angleSpace: self.angleSpace,
                     colors: self.colors,
                     names: self.names,
                     values: self.values.map { self.formatter($0) },
@@ -119,6 +119,7 @@ public struct PieChartView: View {
 
 @available(OSX 10.15, *)
 struct PieChartRows: View {
+    var angleSpace: Angle
     var colors: [Color]
     var names: [String]
     var values: [String]
@@ -191,7 +192,7 @@ struct PieChartRows: View {
 @available(OSX 10.15.0, *)
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        PieChartView(values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250))
+        PieChartView(values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
     }
 }
 

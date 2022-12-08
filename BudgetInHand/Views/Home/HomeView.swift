@@ -14,6 +14,8 @@ struct HomeView: View {
     let imageArray = ["car.fill","bolt.fill","cart.fill","house.fill"]
     //let imageView = UIImageView(image: image)
     
+    var angleSpace: [Angle] = [Angle(degrees: 3)]
+    
     var body: some View {
      
             VStack{
@@ -27,16 +29,16 @@ struct HomeView: View {
                         iconNames: imageArray,
                         backgroundColor: Color.fromInts(r: 250,
                                                         g: 250,
-                                                        b: 250))
+                                                        b: 250), angleSpace: Angle(degrees: 3))
                 }
                 Spacer()
                     .frame(height: 230)
                 
-                NavigationStack{
+                
                     List {
                         ForEach(0..<3) { _ in
                             Text("Integer")
-                        }
+                        
                     }
                 }
                 
