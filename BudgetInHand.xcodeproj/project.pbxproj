@@ -32,6 +32,11 @@
 		E48EA8BD2940B42700A15EDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8BC2940B42700A15EDD /* HomeView.swift */; };
 		E48EA8BF2940B44200A15EDD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8BE2940B44200A15EDD /* ProfileView.swift */; };
 		E48EA8C12940B45200A15EDD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8C02940B45200A15EDD /* SettingsView.swift */; };
+		E48EA8C42941D2DC00A15EDD /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8C32941D2DC00A15EDD /* CreateAccountView.swift */; };
+		E48EA8C62941D5D400A15EDD /* bottomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8C52941D5D400A15EDD /* bottomNavView.swift */; };
+		E48EA8C82941D62000A15EDD /* DetailsCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8C72941D62000A15EDD /* DetailsCategoryView.swift */; };
+		E48EA8CC2941D67600A15EDD /* InitialNewExpenseview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8CB2941D67600A15EDD /* InitialNewExpenseview.swift */; };
+		E48EA8CE2941D6A400A15EDD /* SettingsProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8CD2941D6A400A15EDD /* SettingsProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +60,11 @@
 		E48EA8BC2940B42700A15EDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E48EA8BE2940B44200A15EDD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E48EA8C02940B45200A15EDD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E48EA8C32941D2DC00A15EDD /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		E48EA8C52941D5D400A15EDD /* bottomNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bottomNavView.swift; sourceTree = "<group>"; };
+		E48EA8C72941D62000A15EDD /* DetailsCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCategoryView.swift; sourceTree = "<group>"; };
+		E48EA8CB2941D67600A15EDD /* InitialNewExpenseview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialNewExpenseview.swift; sourceTree = "<group>"; };
+		E48EA8CD2941D6A400A15EDD /* SettingsProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				E48EA8BC2940B42700A15EDD /* HomeView.swift */,
+				E48EA8C72941D62000A15EDD /* DetailsCategoryView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E44F6181293E35D30000EB92 /* LoginView.swift */,
+				E48EA8C32941D2DC00A15EDD /* CreateAccountView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -186,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				E44F617E293E2E830000EB92 /* NewExpenseView.swift */,
+				E48EA8CB2941D67600A15EDD /* InitialNewExpenseview.swift */,
 			);
 			path = Expense;
 			sourceTree = "<group>";
@@ -194,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				E48EA8BE2940B44200A15EDD /* ProfileView.swift */,
+				E48EA8CD2941D6A400A15EDD /* SettingsProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -209,6 +223,7 @@
 		E48EA8C22940B4B700A15EDD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				E48EA8C52941D5D400A15EDD /* bottomNavView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -298,14 +313,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E48EA8B1293F906800A15EDD /* Todo.swift in Sources */,
+				E48EA8CE2941D6A400A15EDD /* SettingsProfileView.swift in Sources */,
 				E48EA8BF2940B44200A15EDD /* ProfileView.swift in Sources */,
 				021BAFA52930CF2100231174 /* Persistence.swift in Sources */,
+				E48EA8C62941D5D400A15EDD /* bottomNavView.swift in Sources */,
 				E48EA8AD293F81C800A15EDD /* Category.swift in Sources */,
+				E48EA8C82941D62000A15EDD /* DetailsCategoryView.swift in Sources */,
 				E44F617B293E2D830000EB92 /* ExpenseViewModel.swift in Sources */,
 				E44F6185293E441F0000EB92 /* BudgetInHandModel.swift in Sources */,
 				E44F617F293E2E830000EB92 /* NewExpenseView.swift in Sources */,
 				E48EA8C12940B45200A15EDD /* SettingsView.swift in Sources */,
 				021BAF9E2930CF2000231174 /* ContentView.swift in Sources */,
+				E48EA8CC2941D67600A15EDD /* InitialNewExpenseview.swift in Sources */,
+				E48EA8C42941D2DC00A15EDD /* CreateAccountView.swift in Sources */,
 				021BAFA82930CF2100231174 /* BudgetInHand.xcdatamodeld in Sources */,
 				021BAF9C2930CF2000231174 /* BudgetInHandApp.swift in Sources */,
 				E48EA8BD2940B42700A15EDD /* HomeView.swift in Sources */,

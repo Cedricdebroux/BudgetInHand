@@ -20,13 +20,7 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                Picker("", selection: $isLogin) {
-                    Text("Log In")
-                        .tag(true)
-                    Text("Create Account")
-                        .tag(false)
-                }.pickerStyle(SegmentedPickerStyle())
-                    .padding()
+                Spacer()
                 
                 TextField("Email", text: $email)
                     .keyboardType(.emailAddress)
@@ -37,38 +31,22 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 280, height: 45, alignment: .center)
-               
+                
                 Spacer()
                 Button(action: {
                     loginUser()
                 }
-                , label: {
+                       , label: {
                     Text("Fucking Login")
                 })
-                   
-               Button(action: {
-
-                    if isLogin {
-                        loginUser()
-
-                    } else {
-                        createUser()
-                    }
-
-                }, label: {
-                    Text(isLogin ? "Log In" : "Create Account")
-                        .foregroundColor(.white)
-                }).frame(width: 280, height: 45, alignment: .center)
-                    .background(Color.blue)
-                    .cornerRadius(8)
-            
                 
-                }
+                
+            }
             .navigationDestination(isPresented: $isLoginValid){
                 HomeView()
             }
-            .navigationTitle(isLogin ? "Welcome Back" : "Welcome")
-            }
+            
+        }
     }
     private func loginUser() {
            Auth.auth().signIn(withEmail: email, password: password) { result, err in
