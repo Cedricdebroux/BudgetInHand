@@ -11,9 +11,6 @@ import SwiftUI
 struct PieSlice: View {
     var pieSliceData: PieSliceData
     var angleSpace: Angle = Angle(degrees: 3)
-    
-    
-    
     var midRadians: Double {
         return Double.pi / 2.0 - (pieSliceData.startAngle  + pieSliceData.endAngle).radians / 2.0
     }

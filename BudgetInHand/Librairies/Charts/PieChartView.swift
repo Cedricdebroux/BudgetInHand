@@ -12,8 +12,6 @@ public struct PieChartView: View {
     public let values: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
-    
-    
     public var colors: [Color]
     public var iconNames: [String]
     public var backgroundColor: Color
@@ -42,7 +40,6 @@ public struct PieChartView: View {
         self.values = values
         self.names = names
         self.formatter = formatter
-        
         self.colors = colors
         self.iconNames = iconNames
         self.backgroundColor = backgroundColor
