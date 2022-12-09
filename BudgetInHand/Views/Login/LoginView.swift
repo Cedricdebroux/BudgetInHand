@@ -21,8 +21,9 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 150){
+            VStack(spacing: -50){
                 Text("Se connecter")
+                LottieView(name: "121421-login", loopMode: .loop)
                 Form{
                     Section("Email"){
                         ZStack(alignment: .trailing){
