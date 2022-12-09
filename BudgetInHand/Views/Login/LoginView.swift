@@ -7,82 +7,112 @@
 
 import SwiftUI
 import FirebaseAuth
+import Lottie
 
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     
+    @State private var rememberMe = false
     @State private var isLoginValid = false
     @State private var isLogin = true
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""
-
+    var isSignInButtonDisabled: Bool {
+        [email, password].contains(where: \.isEmpty)
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                Spacer()
-                
-                TextField("Email", text: $email)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 280, height: 45, alignment: .center)
-                SecureField("Password", text: $password)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 280, height: 45, alignment: .center)
-                
-                Spacer()
-                Button(action: {
-                    loginUser()
+            VStack(spacing: -50){
+                Text("Se connecter")
+                    .font(.title2)
+                    .foregroundColor(Color("Blue600"))
+                LottieView(name: "login", loopMode: .loop)
+                Form{
+                    Section("Email"){
+                        ZStack(alignment: .trailing){
+                            TextField("Email", text: $email)
+                                .keyboardType(.emailAddress)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                            if(!email.isEmpty){
+                                Image(systemName: "xmark.circle.fill")
+                                    .onTapGesture {
+                                        email = ""
+                                    }
+                            }
+                        }
+                        .foregroundColor(Color("Blue600"))
+                    }
+                    Section("Mot de passe"){
+                        ZStack(alignment: .trailing){
+                            SecureField("Password", text: $password)
+                            
+                            if(!password.isEmpty){
+                                Image(systemName: "xmark.circle.fill")
+                                    .onTapGesture {
+                                        password = ""
+                                    }
+                            }
+                        }
+                        .foregroundColor(Color("Blue600"))
+                    }
+                    Toggle("Se souvenir de moi", isOn: $rememberMe)
+                        .listRowBackground(Color.clear)
+                    
                 }
-                       , label: {
-                    Text("Fucking Login")
-                })
+                .scrollContentBackground(.hidden)
                 
-                
+                VStack(spacing: 30){
+                        Button(action: {
+                            loginUser()
+                        }){
+                            Text("Connection")
+                                .frame(maxWidth: 300)
+                        }
+                        .tint(Color("Blue600"))
+                        .buttonStyle(.borderedProminent)
+                        .foregroundColor(.white)
+                        .controlSize(.large)
+                        .disabled(isSignInButtonDisabled)
+                    HStack(spacing: 70){
+                        NavigationLink(destination: CreateAccountView()){
+                            Text("Nouveau compte")
+                        }
+                        NavigationLink(destination: HomeView()){
+                            Text("Mot de passe oublié ?")
+                        }
+                    }
+                    .font(.system(size: 15))
+                    .tint(Color.black)
+                }
             }
             .navigationDestination(isPresented: $isLoginValid){
                 HomeView()
             }
-            
+            .background(Color(UIColor(named: "Gray300") ?? .white))
         }
     }
     private func loginUser() {
-           Auth.auth().signIn(withEmail: email, password: password) { result, err in
-               if let err = err {
-                   print("Failed due to error:", err)
-                   return
-                   
-               }
-               appModel.userId = result?.user.uid
-               
-               if( appModel.userId != nil){
-                   isLoginValid = true
-                   print("Successfully logged in with ID: \(result?.user.uid ?? "")")
-                  
-               } else{
-                   print("This userId doesn't exist\(result?.user.uid)")
-               }
-               
-               
-               
-           }
-       }
+        Auth.auth().signIn(withEmail: email, password: password) { result, err in
+            if let err = err {
+                print("Failed due to error:", err)
+                return
+            }
+            appModel.userId = result?.user.uid
+            if( appModel.userId != nil){
+                isLoginValid = true
+                print("Successfully logged in with ID: \(result?.user.uid ?? "")")
+                
+            } else{
+                print("This userId doesn't exist\(String(describing: result?.user.uid))")
+            }
+        }
+    }
     
-       
-    private func createUser() {
-           Auth.auth().createUser(withEmail: email, password: password, completion: { result, err in
-               if let err = err {
-                   print("Failed due to error:", err)
-                   return
-               }
-               print("Successfully created account with ID: \(result?.user.uid ?? "")")
-               appModel.userId = result?.user.uid
-               
-           })
-       }
-   
+    
+
 }
 
 struct LoginView_Previews: PreviewProvider {

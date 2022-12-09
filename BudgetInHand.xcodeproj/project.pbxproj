@@ -14,6 +14,9 @@
 		021BAFA52930CF2100231174 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021BAFA42930CF2100231174 /* Persistence.swift */; };
 		021BAFA82930CF2100231174 /* BudgetInHand.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 021BAFA62930CF2100231174 /* BudgetInHand.xcdatamodeld */; };
 		021BAFB02930D15E00231174 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 021BAFAF2930D15E00231174 /* .gitignore */; };
+		022D31AE294266F300C0391D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 022D31AD294266F300C0391D /* Lottie */; };
+		022D31B129426A4300C0391D /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 022D31B029426A4300C0391D /* login.json */; };
+		022D31B429426B1100C0391D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D31B329426B1100C0391D /* LottieView.swift */; };
 		02A10D7E2941D91D00C7A0F3 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */; };
 		02A10D7F2941D91D00C7A0F3 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */; };
 		E44F6168293E2B9B0000EB92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E44F6167293E2B9B0000EB92 /* FirebaseAnalytics */; };
@@ -51,6 +54,8 @@
 		021BAFA72930CF2100231174 /* BudgetInHand.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetInHand.xcdatamodel; sourceTree = "<group>"; };
 		021BAFA92930CF2100231174 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		021BAFAF2930D15E00231174 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		022D31B029426A4300C0391D /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		022D31B329426B1100C0391D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		E44F6178293E2CAB0000EB92 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 				E44F6168293E2B9B0000EB92 /* FirebaseAnalytics in Frameworks */,
 				E44F616A293E2B9B0000EB92 /* FirebaseAuth in Frameworks */,
 				E44F6172293E2B9B0000EB92 /* FirebaseStorage in Frameworks */,
+				022D31AE294266F300C0391D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +114,7 @@
 		021BAF9A2930CF2000231174 /* BudgetInHand */ = {
 			isa = PBXGroup;
 			children = (
+				022D31AF29426A3500C0391D /* Animation */,
 				02A10D7B2941D8EF00C7A0F3 /* Librairies */,
 				E48EA8AB293F801900A15EDD /* Views */,
 				E45ACFB4293F4E0100633396 /* Model */,
@@ -134,6 +141,23 @@
 				021BAFA22930CF2100231174 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		022D31AF29426A3500C0391D /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				022D31B229426AB900C0391D /* LottieAnimation */,
+				022D31B329426B1100C0391D /* LottieView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		022D31B229426AB900C0391D /* LottieAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				022D31B029426A4300C0391D /* login.json */,
+			);
+			path = LottieAnimation;
 			sourceTree = "<group>";
 		};
 		02A10D7B2941D8EF00C7A0F3 /* Librairies */ = {
@@ -274,6 +298,7 @@
 				E44F616F293E2B9B0000EB92 /* FirebaseFirestoreSwift */,
 				E44F6171293E2B9B0000EB92 /* FirebaseStorage */,
 				E44F6173293E2B9B0000EB92 /* FirebaseStorageCombine-Community */,
+				022D31AD294266F300C0391D /* Lottie */,
 			);
 			productName = BudgetInHand;
 			productReference = 021BAF982930CF2000231174 /* BudgetInHand.app */;
@@ -305,6 +330,7 @@
 			mainGroup = 021BAF8F2930CF2000231174;
 			packageReferences = (
 				E44F6166293E2B9B0000EB92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				022D31AC294266F200C0391D /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 021BAF992930CF2000231174 /* Products */;
 			projectDirPath = "";
@@ -324,6 +350,7 @@
 				E44F617D293E2E240000EB92 /* GoogleService-Info.plist in Resources */,
 				021BAFB02930D15E00231174 /* .gitignore in Resources */,
 				021BAFA02930CF2100231174 /* Assets.xcassets in Resources */,
+				022D31B129426A4300C0391D /* login.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +370,7 @@
 				E48EA8AD293F81C800A15EDD /* Category.swift in Sources */,
 				E48EA8C82941D62000A15EDD /* DetailsCategoryView.swift in Sources */,
 				E44F617B293E2D830000EB92 /* ExpenseViewModel.swift in Sources */,
+				022D31B429426B1100C0391D /* LottieView.swift in Sources */,
 				E44F6185293E441F0000EB92 /* BudgetInHandModel.swift in Sources */,
 				E44F617F293E2E830000EB92 /* NewExpenseView.swift in Sources */,
 				02A10D7E2941D91D00C7A0F3 /* PieSliceView.swift in Sources */,
@@ -483,7 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-				DEVELOPMENT_TEAM = S68Z84G372;
+				DEVELOPMENT_TEAM = UQND3C5G35;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -512,7 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-				DEVELOPMENT_TEAM = S68Z84G372;
+				DEVELOPMENT_TEAM = UQND3C5G35;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -557,6 +585,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		022D31AC294266F200C0391D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E44F6166293E2B9B0000EB92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -568,6 +604,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		022D31AD294266F300C0391D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 022D31AC294266F200C0391D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		E44F6167293E2B9B0000EB92 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E44F6166293E2B9B0000EB92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
