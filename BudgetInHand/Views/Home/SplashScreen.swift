@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var startAnimating = false
+    @State private var handanimating = false
     var body: some View {
         ZStack{
             Color("Blue700").ignoresSafeArea()
@@ -17,32 +18,45 @@ struct SplashScreen: View {
             GeometryReader{ proxy in
                 let size = proxy.size
                 
+                
+                Image("logo")
+                
+                    .resizable()
+                    .renderingMode(.template).aspectRatio(contentMode: .fit)
+                    .position(x: 180, y: -200)
+                    .offset(x: 0, y: startAnimating ? 730 : 0)
+                    .animation(.easeInOut(duration: 2.5).delay(1))
+                    .foregroundColor(.white)
+                
                 VStack{
                     
                     
                     
-                        Image("logo")
-                        
-                            .resizable()
-                            .renderingMode(.template).aspectRatio(contentMode: .fit)
-                            .position(x: 180, y: -200)
-                            .offset(x: 0, y: startAnimating ? 720 : 0)
-                            .animation(.easeInOut(duration: 2.5).delay(1))
-                            .foregroundColor(.white)
+                       
                         
                         Image("openHand")
                             .resizable()
                             .renderingMode(.template)
                             .aspectRatio( contentMode: .fit)
                             .foregroundColor(.white)
+                            .frame(alignment: .center)
+                            .offset(x:0, y: startAnimating ? 400 : 0)
+                            .animation(.easeInOut(duration:  2.5).delay(1))
+                            
                         
                     
-                }.frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+                }.frame(width: .infinity, height:  .infinity ,alignment: .center)
+                    
+               
             }
-        }.onAppear{
+            
+        }
+        .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                 startAnimating.toggle()
+                handanimating.toggle()
             }
+            
         }
         
     }
