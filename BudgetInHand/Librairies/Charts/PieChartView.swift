@@ -9,6 +9,10 @@ import SwiftUI
 
 @available(OSX 10.15, *)
 public struct PieChartView: View {
+    //@StateObject var IsOpenDetail = BudgetInHandModel()
+   
+    
+    public let isClickable: Bool
     public let values: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
@@ -37,7 +41,7 @@ public struct PieChartView: View {
         return tempSlices
     }
     
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
+    public init(isClickable: Bool,values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
         self.values = values
         self.names = names
         self.formatter = formatter
@@ -47,6 +51,7 @@ public struct PieChartView: View {
         self.widthFraction = widthFraction
         self.innerRadiusFraction = innerRadiusFraction
         self.angleSpace = angleSpace
+        self.isClickable = isClickable
     }
     
     public var body: some View {
@@ -101,6 +106,7 @@ public struct PieChartView: View {
                     
                 }
                 PieChartRows(
+                    isClickable: self.isClickable,
                     angleSpace: self.angleSpace,
                     colors: self.colors,
                     names: self.names,
@@ -119,36 +125,48 @@ public struct PieChartView: View {
 
 @available(OSX 10.15, *)
 struct PieChartRows: View {
+    var isClickable: Bool
     var angleSpace: Angle
     var colors: [Color]
     var names: [String]
     var values: [String]
     var percents: [String]
     var iconNames: [String]
-    
-    
-    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    @StateObject private var showDetail = BudgetInHandModel()
     
     var body: some View {
-        
-        @StateObject var IsOpenDetail = BudgetInHandModel()
-        //        NavigationStack{
         var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
         NavigationStack{
-            
-            
-                LazyVGrid(columns: columns){
-                    ForEach(0..<self.values.count){ i in
-                        
-                        HStack {
+            LazyVGrid(columns: columns){
+                ForEach(0..<self.values.count){ i in
+                    HStack {
+                        if (isClickable == true)   {
                             NavigationLink(destination : DetailExpenses()) {
-                            
+                                VStack(alignment: .leading){
+                                    ZStack{
+                                        RoundedRectangle(cornerRadius: 5.0)
+                                            .fill(self.colors[i])
+                                            .frame(width: 20, height: 20)
+                                        Image(systemName:  self.iconNames[i])
+                                            .aspectRatio(contentMode: .fit)
+                                    }
+                                    Text(self.names[i])
+                                        .foregroundColor(blueColor)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing) {
+                                    Text(self.values[i])
+                                        .foregroundColor(blueColor)
+                                    Text(self.percents[i])
+                                        .foregroundColor(Color.gray)
+                                }
+                            }
+                        } else {
                             VStack(alignment: .leading){
-                                
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 5.0)
                                         .fill(self.colors[i])
@@ -158,7 +176,6 @@ struct PieChartRows: View {
                                 }
                                 Text(self.names[i])
                                     .foregroundColor(blueColor)
-                                
                             }
                             Spacer()
                             VStack(alignment: .trailing) {
@@ -168,21 +185,25 @@ struct PieChartRows: View {
                                     .foregroundColor(Color.gray)
                             }
                         }
+                        }
+                    .environmentObject(showDetail)
+                            .padding(10)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                           
                     }
-                    .padding(10)
-                    .background(Color.white)
-                    .cornerRadius(10)
                 }
-            }
         }
-        .padding(10)
+        
+            .padding(10)
+        }
     }
-}
-
-
-@available(OSX 10.15.0, *)
-struct PieChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        PieChartView(values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
+    
+    
+    @available(OSX 10.15.0, *)
+    struct PieChartView_Previews: PreviewProvider {
+        static var previews: some View {
+            PieChartView(isClickable : true ,values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
+        }
     }
-}
+

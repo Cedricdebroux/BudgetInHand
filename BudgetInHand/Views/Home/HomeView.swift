@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var showDetail = BudgetInHandModel()
+    var isClickable = true
     var valuesPie : [Double] = [300,400,600,500]
     var namePie : [String] = ["Carburant","Energie","Comissions","Charges"]
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216), Color.fromInts(r: 0, g: 119, b: 182),Color.fromInts(r: 144, g: 224, b: 238),Color.fromInts(r: 3, g: 4, b: 94)]
@@ -22,6 +24,7 @@ struct HomeView: View {
                 
                 VStack{
                     PieChartView(
+                        isClickable: isClickable,
                         values: valuesPie,
                         names: namePie,
                         formatter: { $0.description },
@@ -42,8 +45,11 @@ struct HomeView: View {
                     }
                 }
                 
+            }.environmentObject(showDetail)
+            .onAppear{
+                showDetail.isClickable = true 
             }
-        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
