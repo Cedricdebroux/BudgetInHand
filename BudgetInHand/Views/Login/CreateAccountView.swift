@@ -12,10 +12,14 @@ struct CreateAccountView: View {
     
     @EnvironmentObject var appModel: BudgetInHandModel
     
-    @State var email = ""
-    @State var name = ""
-    @State var passwordOne = ""
-    @State var passwordTwo = ""
+    @State private var showAlert = false
+    @State private var email = ""
+    @State private var name = ""
+    @State private var passwordOne = ""
+    @State private var passwordTwo = ""
+    var isSignUpButtonDisabled: Bool {
+        [email, passwordOne, passwordTwo, name].contains(where: \.isEmpty)  
+    }
     var body: some View {
         NavigationStack{
             ZStack{
@@ -99,7 +103,11 @@ struct CreateAccountView: View {
                     .scrollContentBackground(.hidden)
                     
                     Button(action: {
-                        createUser()
+                        if (passwordOne != passwordTwo) {
+                            showAlert = true
+                        } else {
+                            createUser()
+                        }
                     }){
                         Text("Créer votre compte")
                             .frame(maxWidth: 300)
@@ -108,6 +116,10 @@ struct CreateAccountView: View {
                     .buttonStyle(.borderedProminent)
                     .foregroundColor(.white)
                     .controlSize(.large)
+                    .disabled(isSignUpButtonDisabled)
+                    .alert(isPresented: $showAlert){
+                        Alert(title: Text("Attention !"), message: Text("Vos mots de passe ne correspondes pas"))
+                    }
                 }
             }
         }
