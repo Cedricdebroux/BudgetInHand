@@ -10,30 +10,16 @@ import SwiftUI
 struct DetailExpenses: View {
     @StateObject private var showDetail = BudgetInHandModel()
     var angleSpace: Angle = Angle(degrees: 0)
-
-    //var budgetUsed: Double = [300,300]
-    //var budgetTotal: Double = 500
-    /*
-     init() {
-     self.budgetUsed = 300
-     self.budgetTotal = 500
-     }
-     */
     var isClickable: Bool = false
     var valuesPie : [Double] = [300]
     var namePie : [String] = ["Carburant"]
-    //"Total"
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216)]
-    //Color.fromInts(r: 128, g: 128, b: 128)
     var numberTotalExpenses : Int = 10
     let imageArray = ["car.fill"]
     
     var body: some View {
-       
         VStack{
-            
             VStack{
-                
                 PieChartView(
                     isClickable : isClickable,
                     values: valuesPie ,
@@ -56,10 +42,6 @@ struct DetailExpenses: View {
                         }
                     }
                 }
-            }
-            .environmentObject(showDetail)
-            .onAppear{
-                showDetail.isClickable.toggle()
             }
         }
     }

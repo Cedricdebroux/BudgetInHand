@@ -10,7 +10,7 @@ import SwiftUI
 @available(OSX 10.15, *)
 public struct PieChartView: View {
     //@StateObject var IsOpenDetail = BudgetInHandModel()
-   
+    
     
     public let isClickable: Bool
     public let values: [Double]
@@ -78,7 +78,6 @@ public struct PieChartView: View {
                                 if (radians < 0) {
                                     radians = 2 * Double.pi + radians
                                 }
-                                
                                 for (i, slice) in slices.enumerated() {
                                     if (radians < slice.endAngle.radians) {
                                         self.activeIndex = i
@@ -93,8 +92,6 @@ public struct PieChartView: View {
                     Circle()
                         .fill(self.backgroundColor)
                         .frame(width: widthFraction * geometry.size.width * innerRadiusFraction, height: widthFraction * geometry.size.width * innerRadiusFraction)
-                    
-                    
                     VStack {
                         Text(self.activeIndex == -1 ? "Total" : names[self.activeIndex])
                             .font(.title)
@@ -103,7 +100,6 @@ public struct PieChartView: View {
                             .font(.title)
                             .foregroundColor(blueColor)
                     }
-                    
                 }
                 PieChartRows(
                     isClickable: self.isClickable,
@@ -122,7 +118,6 @@ public struct PieChartView: View {
         }
     }
 }
-
 @available(OSX 10.15, *)
 struct PieChartRows: View {
     var isClickable: Bool
@@ -185,25 +180,22 @@ struct PieChartRows: View {
                                     .foregroundColor(Color.gray)
                             }
                         }
-                        }
-                    .environmentObject(showDetail)
-                            .padding(10)
-                            .background(Color.white)
-                            .cornerRadius(10)
-                           
                     }
+                    .environmentObject(showDetail)
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    
                 }
+            }
         }
-        
-            .padding(10)
-        }
+        .padding(10)
     }
-    
-    
-    @available(OSX 10.15.0, *)
-    struct PieChartView_Previews: PreviewProvider {
-        static var previews: some View {
-            PieChartView(isClickable : true ,values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
-        }
+}
+@available(OSX 10.15.0, *)
+struct PieChartView_Previews: PreviewProvider {
+    static var previews: some View {
+        PieChartView(isClickable : true ,values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
     }
+}
 

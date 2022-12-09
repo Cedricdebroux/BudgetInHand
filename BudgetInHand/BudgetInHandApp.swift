@@ -19,7 +19,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     return true
   }
 }
-
 @main
 struct BudgetInHandApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
@@ -33,6 +32,3 @@ struct BudgetInHandApp: App {
         }
     }
 }
-
-
-
