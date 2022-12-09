@@ -18,11 +18,16 @@ struct LoginView: View {
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""
+    var isSignInButtonDisabled: Bool {
+        [email, password].contains(where: \.isEmpty)
+    }
     
     var body: some View {
         NavigationStack {
             VStack(spacing: -50){
                 Text("Se connecter")
+                    .font(.title2)
+                    .foregroundColor(Color("Blue600"))
                 LottieView(name: "login", loopMode: .loop)
                 Form{
                     Section("Email"){
@@ -38,20 +43,20 @@ struct LoginView: View {
                                     }
                             }
                         }
-                        .foregroundColor(Color(UIColor(named: "FonttextField") ?? .blue))
+                        .foregroundColor(Color("Blue600"))
                     }
                     Section("Mot de passe"){
                         ZStack(alignment: .trailing){
                             SecureField("Password", text: $password)
                             
-                            if(!email.isEmpty){
+                            if(!password.isEmpty){
                                 Image(systemName: "xmark.circle.fill")
                                     .onTapGesture {
-                                        email = ""
+                                        password = ""
                                     }
                             }
                         }
-                        .foregroundColor(Color(UIColor(named: "FonttextField") ?? .blue))
+                        .foregroundColor(Color("Blue600"))
                     }
                     Toggle("Se souvenir de moi", isOn: $rememberMe)
                         .listRowBackground(Color.clear)
@@ -60,17 +65,17 @@ struct LoginView: View {
                 .scrollContentBackground(.hidden)
                 
                 VStack(spacing: 30){
-                    Button(action: {
-                        loginUser()
-                    }){
-                        Text("Connection")
-                            .frame(maxWidth: 300)
-                    }
-                    .tint(Color(UIColor(named: "Gray800") ?? .blue))
-                    .buttonStyle(.borderedProminent)
-                    .foregroundColor(.white)
-                    .controlSize(.large)
-                    
+                        Button(action: {
+                            loginUser()
+                        }){
+                            Text("Connection")
+                                .frame(maxWidth: 300)
+                        }
+                        .tint(Color("Blue600"))
+                        .buttonStyle(.borderedProminent)
+                        .foregroundColor(.white)
+                        .controlSize(.large)
+                        .disabled(isSignInButtonDisabled)
                     HStack(spacing: 70){
                         NavigationLink(destination: CreateAccountView()){
                             Text("Nouveau compte")

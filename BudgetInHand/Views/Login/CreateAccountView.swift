@@ -24,13 +24,14 @@ struct CreateAccountView: View {
                 VStack{
                     Text("Création d'un nouveau compte")
                         .font(.title2)
+                        .foregroundColor(Color("Blue600"))
                     Image("Memoji")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 180)
                         .clipShape(Circle())
                     Form(){
-                        Section{
+                        Section("Email"){
                             ZStack(alignment: .trailing){
                                 TextField("Entrez votre mail", text: $email)
                                     .keyboardType(.emailAddress)
@@ -43,8 +44,10 @@ struct CreateAccountView: View {
                                         }
                                 }
                             }
+                            .foregroundColor(Color("Blue600"))
                         }
-                        Section{
+                        .foregroundColor(Color( "Gray600"))
+                        Section("Nom"){
                             ZStack(alignment: .trailing){
                                 TextField("Entrez votre Nom", text: $name)
                                     .keyboardType(.emailAddress)
@@ -57,8 +60,10 @@ struct CreateAccountView: View {
                                         }
                                 }
                             }
+                            .foregroundColor(Color("Blue600"))
                         }
-                        Section{
+                        .foregroundColor(Color( "Gray600"))
+                        Section("Mot de passe"){
                             ZStack(alignment: .trailing){
                                 SecureField("Entrez votre mot de passe", text: $passwordOne)
                                     .keyboardType(.emailAddress)
@@ -71,8 +76,10 @@ struct CreateAccountView: View {
                                         }
                                 }
                             }
+                            .foregroundColor(Color("Blue600"))
                         }
-                        Section{
+                        .foregroundColor(Color( "Gray600"))
+                        Section("Répétez votre mot de passe"){
                             ZStack(alignment: .trailing){
                                 SecureField("Confirmer votre mot de passe", text: $passwordTwo)
                                     .keyboardType(.emailAddress)
@@ -85,10 +92,11 @@ struct CreateAccountView: View {
                                         }
                                 }
                             }
+                            .foregroundColor(Color("Blue600"))
                         }
+                        .foregroundColor(Color( "Gray600"))
                     }
                     .scrollContentBackground(.hidden)
-                    .foregroundColor(Color( "FonttextField"))
                     
                     Button(action: {
                         createUser()
@@ -96,7 +104,7 @@ struct CreateAccountView: View {
                         Text("Créer votre compte")
                             .frame(maxWidth: 300)
                     }
-                    .tint(Color(UIColor(named: "Gray800") ?? .blue))
+                    .tint(Color("Blue600"))
                     .buttonStyle(.borderedProminent)
                     .foregroundColor(.white)
                     .controlSize(.large)
