@@ -37,7 +37,7 @@ struct SplashScreen: View {
                         .offset(x:0, y: startAnimating ? 400 : 0)
                         .animation(.easeInOut(duration:  2).delay(1))
  
-                }.frame(width: .infinity, height:  .infinity ,alignment: .center)
+                }
             }
         }
         .onAppear{
