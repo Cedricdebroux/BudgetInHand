@@ -23,7 +23,7 @@ struct LoginView: View {
         NavigationStack {
             VStack(spacing: -50){
                 Text("Se connecter")
-                LottieView(name: "121421-login", loopMode: .loop)
+                LottieView(name: "login", loopMode: .loop)
                 Form{
                     Section("Email"){
                         ZStack(alignment: .trailing){
