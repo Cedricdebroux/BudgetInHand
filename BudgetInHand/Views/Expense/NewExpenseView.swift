@@ -18,11 +18,7 @@ struct NewExpenseView: View {
     @State private var category : Category = .carburant
     @State private var  textPicker: String = ""
     @State private var userId = ""
-    
-    
-    
-    
-    
+
     var body: some View {
         VStack{
             
@@ -43,9 +39,7 @@ struct NewExpenseView: View {
                 
             }
             
-           
             Button("Save", action: {
-                
             textPicker = ("\(self.category.rawValue.capitalized)")
                 
                 // post the text to Firestore, then erase the text:
@@ -59,9 +53,7 @@ struct NewExpenseView: View {
             })
         }
         NavigationStack {
-            
-         
-            
+
             List {
                 ForEach(viewModel.expenses, id:\.id) { Expense in
                     
@@ -90,7 +82,6 @@ struct NewExpenseView: View {
                    }
                }
                }.accentColor(.brown)
-            
     }
 }
 

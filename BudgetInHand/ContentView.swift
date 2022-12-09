@@ -8,25 +8,32 @@
 import SwiftUI
 import CoreData
 
+
 struct ContentView: View {
     
+    @State private var isSplashActive = false
     @StateObject var appModel = BudgetInHandModel()
     
     var body: some View {
-        NavigationView{
-            LoginView()
+        
+        VStack{
+            
+            if self.isSplashActive{
+                LoginView()
+                
+            } else {
+                SplashScreen().transition(.opacity)
+            }
+            
         }.environmentObject(appModel)
-       
-       
-//        NavigationView {
-//            VStack {
-//                NavigationLink("New Expense", destination: NewExpenseView()).buttonStyle(PlainButtonStyle())
-//
-//                NavigationLink("Login", destination: LoginView()).buttonStyle(PlainButtonStyle())
-//            }
-//        }.environmentObject(appModel)
+            .onAppear{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.8){
+                    withAnimation{
+                        self.isSplashActive = true
+                    }
+                }
+            }
     }
-    
     
     
     struct ContentView_Previews: PreviewProvider {

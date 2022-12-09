@@ -9,9 +9,7 @@ import SwiftUI
 
 @available(OSX 10.15, *)
 public struct PieChartView: View {
-    //@StateObject var IsOpenDetail = BudgetInHandModel()
-    
-    
+   
     public let isClickable: Bool
     public let values: [Double]
     public let names: [String]
