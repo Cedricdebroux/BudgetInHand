@@ -10,5 +10,7 @@ import Foundation
 class BudgetInHandModel: ObservableObject{
     
     @Published var userId: String?
+    @Published var openDetail = true
+    @Published var openDetailCategory = 0
     
 }

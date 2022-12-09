@@ -132,16 +132,20 @@ struct PieChartRows: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    
     var body: some View {
+        
+        @StateObject var IsOpenDetail = BudgetInHandModel()
         //        NavigationStack{
         var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
         NavigationStack{
             
-            NavigationLink(destination : DetailExpenses()) {
+            
                 LazyVGrid(columns: columns){
                     ForEach(0..<self.values.count){ i in
                         
                         HStack {
+                            NavigationLink(destination : DetailExpenses()) {
                             
                             VStack(alignment: .leading){
                                 

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct DetailExpenses: View {
+    @StateObject var isOpebDetail = BudgetInHandModel()
+    isOpenDetail = false
+    
     var angleSpace: Angle = Angle(degrees: 0)
-    
-    
-    
+
     //var budgetUsed: Double = [300,300]
     //var budgetTotal: Double = 500
     
