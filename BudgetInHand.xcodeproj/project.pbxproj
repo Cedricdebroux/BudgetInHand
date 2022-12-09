@@ -213,9 +213,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E486DB472943872500468DE8 /* BeforeApp */ = {
+			isa = PBXGroup;
+			children = (
+				E486DB4529422D8300468DE8 /* SplashScreen.swift */,
+			);
+			path = BeforeApp;
+			sourceTree = "<group>";
+		};
 		E48EA8AB293F801900A15EDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E486DB472943872500468DE8 /* BeforeApp */,
 				E48EA8C22940B4B700A15EDD /* Navigation */,
 				E48EA8BB2940B39000A15EDD /* Settings */,
 				E48EA8BA2940B38400A15EDD /* Profile */,
@@ -231,7 +240,6 @@
 			children = (
 				E48EA8BC2940B42700A15EDD /* HomeView.swift */,
 				E48EA8C72941D62000A15EDD /* DetailsCategoryView.swift */,
-				E486DB4529422D8300468DE8 /* SplashScreen.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
