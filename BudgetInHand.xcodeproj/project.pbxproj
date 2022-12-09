@@ -32,6 +32,7 @@
 		E44F617F293E2E830000EB92 /* NewExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F617E293E2E830000EB92 /* NewExpenseView.swift */; };
 		E44F6182293E35D30000EB92 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F6181293E35D30000EB92 /* LoginView.swift */; };
 		E44F6185293E441F0000EB92 /* BudgetInHandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */; };
+		E4593C062941EA1A0005CB1C /* DetailExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4593C052941EA1A0005CB1C /* DetailExpenses.swift */; };
 		E486DB4629422D8300468DE8 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486DB4529422D8300468DE8 /* SplashScreen.swift */; };
 		E48EA8AD293F81C800A15EDD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8AC293F81C800A15EDD /* Category.swift */; };
 		E48EA8B1293F906800A15EDD /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EA8B0293F906800A15EDD /* Todo.swift */; };
@@ -65,6 +66,7 @@
 		E44F617E293E2E830000EB92 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
 		E44F6181293E35D30000EB92 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetInHandModel.swift; sourceTree = "<group>"; };
+		E4593C052941EA1A0005CB1C /* DetailExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenses.swift; sourceTree = "<group>"; };
 		E486DB4529422D8300468DE8 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		E48EA8AC293F81C800A15EDD /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E48EA8B0293F906800A15EDD /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				E44F617E293E2E830000EB92 /* NewExpenseView.swift */,
 				E48EA8CB2941D67600A15EDD /* InitialNewExpenseview.swift */,
+				E4593C052941EA1A0005CB1C /* DetailExpenses.swift */,
 			);
 			path = Expense;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				02A10D7F2941D91D00C7A0F3 /* PieChartView.swift in Sources */,
 				E48EA8B1293F906800A15EDD /* Todo.swift in Sources */,
 				E48EA8CE2941D6A400A15EDD /* SettingsProfileView.swift in Sources */,
+				E4593C062941EA1A0005CB1C /* DetailExpenses.swift in Sources */,
 				E48EA8BF2940B44200A15EDD /* ProfileView.swift in Sources */,
 				021BAFA52930CF2100231174 /* Persistence.swift in Sources */,
 				E48EA8C62941D5D400A15EDD /* bottomNavView.swift in Sources */,
@@ -515,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-				DEVELOPMENT_TEAM = UQND3C5G35;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -544,7 +548,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-				DEVELOPMENT_TEAM = UQND3C5G35;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

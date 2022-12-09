@@ -9,9 +9,12 @@ import SwiftUI
 
 @available(OSX 10.15, *)
 public struct PieChartView: View {
+   
+    public let isClickable: Bool
     public let values: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
+    public let angleSpace: Angle
     public var colors: [Color]
     public var iconNames: [String]
     public var backgroundColor: Color
@@ -36,7 +39,7 @@ public struct PieChartView: View {
         return tempSlices
     }
     
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60){
+    public init(isClickable: Bool,values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
         self.values = values
         self.names = names
         self.formatter = formatter
@@ -45,6 +48,8 @@ public struct PieChartView: View {
         self.backgroundColor = backgroundColor
         self.widthFraction = widthFraction
         self.innerRadiusFraction = innerRadiusFraction
+        self.angleSpace = angleSpace
+        self.isClickable = isClickable
     }
     
     public var body: some View {
@@ -52,7 +57,7 @@ public struct PieChartView: View {
             VStack{
                 ZStack{
                     ForEach(0..<self.values.count){ i in
-                        PieSlice(pieSliceData: self.slices[i])
+                        PieSlice(pieSliceData: self.slices[i], angleSpace: angleSpace)
                             .scaleEffect(self.activeIndex == i ? 1.03 : 1)
                             .animation(Animation.spring())
                     }
@@ -71,7 +76,6 @@ public struct PieChartView: View {
                                 if (radians < 0) {
                                     radians = 2 * Double.pi + radians
                                 }
-                                
                                 for (i, slice) in slices.enumerated() {
                                     if (radians < slice.endAngle.radians) {
                                         self.activeIndex = i
@@ -86,8 +90,6 @@ public struct PieChartView: View {
                     Circle()
                         .fill(self.backgroundColor)
                         .frame(width: widthFraction * geometry.size.width * innerRadiusFraction, height: widthFraction * geometry.size.width * innerRadiusFraction)
-                        
-                    
                     VStack {
                         Text(self.activeIndex == -1 ? "Total" : names[self.activeIndex])
                             .font(.title)
@@ -96,9 +98,10 @@ public struct PieChartView: View {
                             .font(.title)
                             .foregroundColor(blueColor)
                     }
-                    
                 }
                 PieChartRows(
+                    isClickable: self.isClickable,
+                    angleSpace: self.angleSpace,
                     colors: self.colors,
                     names: self.names,
                     values: self.values.map { self.formatter($0) },
@@ -113,27 +116,49 @@ public struct PieChartView: View {
         }
     }
 }
-
 @available(OSX 10.15, *)
 struct PieChartRows: View {
+    var isClickable: Bool
+    var angleSpace: Angle
     var colors: [Color]
     var names: [String]
     var values: [String]
     var percents: [String]
     var iconNames: [String]
-    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
-
+    @StateObject private var showDetail = BudgetInHandModel()
     
     var body: some View {
         var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
-        
-                LazyVGrid(columns: columns){
-                    ForEach(0..<self.values.count){ i in
-                        HStack {
+        NavigationStack{
+            LazyVGrid(columns: columns){
+                ForEach(0..<self.values.count){ i in
+                    HStack {
+                        if (isClickable == true)   {
+                            NavigationLink(destination : DetailExpenses()) {
+                                VStack(alignment: .leading){
+                                    ZStack{
+                                        RoundedRectangle(cornerRadius: 5.0)
+                                            .fill(self.colors[i])
+                                            .frame(width: 20, height: 20)
+                                        Image(systemName:  self.iconNames[i])
+                                            .aspectRatio(contentMode: .fit)
+                                    }
+                                    Text(self.names[i])
+                                        .foregroundColor(blueColor)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing) {
+                                    Text(self.values[i])
+                                        .foregroundColor(blueColor)
+                                    Text(self.percents[i])
+                                        .foregroundColor(Color.gray)
+                                }
+                            }
+                        } else {
                             VStack(alignment: .leading){
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 5.0)
@@ -142,12 +167,9 @@ struct PieChartRows: View {
                                     Image(systemName:  self.iconNames[i])
                                         .aspectRatio(contentMode: .fit)
                                 }
-                                
-                                
                                 Text(self.names[i])
                                     .foregroundColor(blueColor)
                             }
-                            
                             Spacer()
                             VStack(alignment: .trailing) {
                                 Text(self.values[i])
@@ -156,40 +178,22 @@ struct PieChartRows: View {
                                     .foregroundColor(Color.gray)
                             }
                         }
-                        .padding(10)
-                        
-                        .background(Color.white)
-                        .cornerRadius(10)
                     }
+                    .environmentObject(showDetail)
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    
                 }
-                .padding(10)
-        
-//        HStack{
-//            ForEach(0..<self.values.count){ i in
-//                HStack {
-//                    RoundedRectangle(cornerRadius: 5.0)
-//                        .fill(self.colors[i])
-//                        .frame(width: 20, height: 20)
-//                    Text(self.names[i])
-//                        .foregroundColor(blueColor)
-//                    Spacer()
-//                    VStack(alignment: .trailing) {
-//                        Text(self.values[i])
-//                            .foregroundColor(blueColor)
-//                        Text(self.percents[i])
-//                            .foregroundColor(Color.gray)
-//                    }
-//                }
-//            }
-//        }
+            }
+        }
+        .padding(10)
     }
 }
-
 @available(OSX 10.15.0, *)
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        PieChartView(values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250))
+        PieChartView(isClickable : true ,values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
     }
 }
-
 
