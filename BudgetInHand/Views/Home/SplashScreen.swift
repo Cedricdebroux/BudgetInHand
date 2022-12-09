@@ -13,12 +13,10 @@ struct SplashScreen: View {
     var body: some View {
         ZStack{
             Color("Blue700").ignoresSafeArea()
-
             
             GeometryReader{ proxy in
                 let size = proxy.size
-                
-                
+            
                 Image("logo")
                 
                     .resizable()
@@ -27,30 +25,20 @@ struct SplashScreen: View {
                     .offset(x: 0, y: startAnimating ? 730 : 0)
                     .animation(.easeInOut(duration: 2).delay(1))
                     .foregroundColor(.white)
-                    
                 
                 VStack{
                     
-                    
-                    
-                       
-                        
-                        Image("openHand")
-                            .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio( contentMode: .fit)
-                            .foregroundColor(.white)
-                            .frame(alignment: .center)
-                            .offset(x:0, y: startAnimating ? 400 : 0)
-                            .animation(.easeInOut(duration:  2).delay(1))
-                            
-                        
-                    
+                    Image("openHand")
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio( contentMode: .fit)
+                        .foregroundColor(.white)
+                        .frame(alignment: .center)
+                        .offset(x:0, y: startAnimating ? 400 : 0)
+                        .animation(.easeInOut(duration:  2).delay(1))
+ 
                 }.frame(width: .infinity, height:  .infinity ,alignment: .center)
-                    
-               
             }
-            
         }
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() ){

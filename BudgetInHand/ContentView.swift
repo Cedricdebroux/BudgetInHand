@@ -8,18 +8,11 @@
 import SwiftUI
 import CoreData
 
-extension AnyTransition {
-    static var moveAndFade : AnyTransition {
-        .asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .scale.combined(with: .opacity))
-    }
-}
 
 struct ContentView: View {
     
     @State private var isSplashActive = false
-    
     @StateObject var appModel = BudgetInHandModel()
-
     
     var body: some View {
         
@@ -31,7 +24,7 @@ struct ContentView: View {
             } else {
                 SplashScreen().transition(.opacity)
             }
-            //LoginView()
+            
         }.environmentObject(appModel)
             .onAppear{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.8){
@@ -41,11 +34,6 @@ struct ContentView: View {
                 }
             }
     }
-       
-       
-
-    
-    
     
     
     struct ContentView_Previews: PreviewProvider {
