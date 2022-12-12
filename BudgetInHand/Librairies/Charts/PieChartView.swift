@@ -131,7 +131,6 @@ struct PieChartRows: View {
     ]
     @StateObject private var showDetail = BudgetInHandModel()
     
-    let blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
     var body: some View {
         NavigationStack{
             LazyVGrid(columns: columns){
@@ -169,12 +168,12 @@ struct PieChartRows: View {
                         .aspectRatio(contentMode: .fit)
                 }
                 Text(self.names[index])
-                    .foregroundColor(blueColor)
+                    .foregroundColor(Color("Blue800"))
             }
             Spacer()
             VStack(alignment: .trailing) {
                 Text(self.values[index])
-                    .foregroundColor(blueColor)
+                    .foregroundColor(Color("Blue800"))
                 Text(self.percents[index])
                     .foregroundColor(Color.gray)
             }
