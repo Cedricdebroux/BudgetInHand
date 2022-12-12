@@ -9,13 +9,17 @@ import SwiftUI
 
 struct DetailExpenses: View {
     @StateObject private var showDetail = BudgetInHandModel()
-    var angleSpace: Angle = Angle(degrees: 0)
-    var isClickable: Bool = false
-    var valuesPie : [Double] = [300]
-    var namePie : [String] = ["Carburant"]
-    var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216)]
-    var numberTotalExpenses : Int = 10
+    private var angleSpace: Angle = Angle(degrees: 0)
+    private var isClickable: Bool = false
+    let valuesPie : [Double]
+    let namePie : [String]
+    private var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216)]
+    private var numberTotalExpenses : Int = 10
     let imageArray = ["car.fill"]
+    init(value: Double, name: String) {
+        valuesPie = [value]
+        namePie = [name]
+    }
     
     var body: some View {
         VStack{
@@ -47,7 +51,7 @@ struct DetailExpenses: View {
     }
     struct DetailExpenses_Previews: PreviewProvider {
         static var previews: some View {
-            DetailExpenses()
+            DetailExpenses(value: 300, name: "test")
         }
     }
 }

@@ -131,52 +131,19 @@ struct PieChartRows: View {
     ]
     @StateObject private var showDetail = BudgetInHandModel()
     
+    let blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
     var body: some View {
-        var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
         NavigationStack{
             LazyVGrid(columns: columns){
-                ForEach(0..<self.values.count){ i in
+                ForEach(0..<self.values.count, id: \.self){ i in
                     HStack {
                         if (isClickable == true)   {
-                            NavigationLink(destination : DetailExpenses()) {
-                                VStack(alignment: .leading){
-                                    ZStack{
-                                        RoundedRectangle(cornerRadius: 5.0)
-                                            .fill(self.colors[i])
-                                            .frame(width: 20, height: 20)
-                                        Image(systemName:  self.iconNames[i])
-                                            .aspectRatio(contentMode: .fit)
-                                    }
-                                    Text(self.names[i])
-                                        .foregroundColor(blueColor)
-                                }
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text(self.values[i])
-                                        .foregroundColor(blueColor)
-                                    Text(self.percents[i])
-                                        .foregroundColor(Color.gray)
-                                }
+                            NavigationLink(destination : DetailExpenses(value: Double(self.values[i]) ?? 0, name: self.names[i]))
+                            {
+                                detailExpense(index: i)
                             }
                         } else {
-                            VStack(alignment: .leading){
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 5.0)
-                                        .fill(self.colors[i])
-                                        .frame(width: 20, height: 20)
-                                    Image(systemName:  self.iconNames[i])
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                                Text(self.names[i])
-                                    .foregroundColor(blueColor)
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text(self.values[i])
-                                    .foregroundColor(blueColor)
-                                Text(self.percents[i])
-                                    .foregroundColor(Color.gray)
-                            }
+                            detailExpense(index: i)
                         }
                     }
                     .environmentObject(showDetail)
@@ -188,6 +155,29 @@ struct PieChartRows: View {
             }
         }
         .padding(10)
+    }
+    func detailExpense(index: Int) -> some View{
+        
+        HStack{
+            VStack(alignment: .leading){
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .fill(self.colors[index])
+                        .frame(width: 20, height: 20)
+                    Image(systemName:  self.iconNames[index])
+                        .aspectRatio(contentMode: .fit)
+                }
+                Text(self.names[index])
+                    .foregroundColor(blueColor)
+            }
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(self.values[index])
+                    .foregroundColor(blueColor)
+                Text(self.percents[index])
+                    .foregroundColor(Color.gray)
+            }
+        }
     }
 }
 @available(OSX 10.15.0, *)
