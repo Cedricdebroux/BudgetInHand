@@ -34,7 +34,6 @@ struct SplashScreen: View {
                         .foregroundColor(.white)
                         .frame(alignment: .center)
                         .offset(x:0, y: startAnimating ? 280 : 0)
-
                 }
             }
         }
