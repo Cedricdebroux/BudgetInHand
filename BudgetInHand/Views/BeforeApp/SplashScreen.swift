@@ -22,8 +22,7 @@ struct SplashScreen: View {
                     .resizable()
                     .renderingMode(.template).aspectRatio(contentMode: .fit)
                     .position(x: 180, y: -200)
-                    .offset(x: 0, y: startAnimating ? 730 : 0)
-                    .animation(.easeInOut(duration: 2).delay(1))
+                    .offset(x: 0, y: startAnimating ? 625 : 0)
                     .foregroundColor(.white)
                 
                 VStack{
@@ -34,16 +33,16 @@ struct SplashScreen: View {
                         .aspectRatio( contentMode: .fit)
                         .foregroundColor(.white)
                         .frame(alignment: .center)
-                        .offset(x:0, y: startAnimating ? 400 : 0)
-                        .animation(.easeInOut(duration:  2).delay(1))
- 
+                        .offset(x:0, y: startAnimating ? 280 : 0)
                 }
             }
         }
         .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now() ){
-                startAnimating.toggle()
-                handanimating.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                withAnimation(.easeInOut(duration: 1.5).delay(1)){
+                    startAnimating.toggle()
+                    handanimating.toggle()
+                }
             }
             
         }

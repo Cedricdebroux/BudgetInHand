@@ -16,6 +16,8 @@ struct HomeView: View {
     let imageArray = ["car.fill","bolt.fill","cart.fill","house.fill"]
     var angleSpace: [Angle] = [Angle(degrees: 3)]
     var body: some View {
+        
+        
         VStack{
             VStack{
                 PieChartView(
@@ -36,7 +38,7 @@ struct HomeView: View {
                     Text("Integer")
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     struct HomeView_Previews: PreviewProvider {
         static var previews: some View {
