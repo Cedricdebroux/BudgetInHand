@@ -91,7 +91,10 @@ struct LoginView: View {
             }
             .navigationDestination(isPresented: $isLoginValid){
                 MainView()
+                    .navigationBarBackButtonHidden(true)
+
             }
+
             .background(Color(UIColor(named: "Gray300") ?? .white))
         }
     }

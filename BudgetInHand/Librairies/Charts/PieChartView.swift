@@ -56,10 +56,10 @@ public struct PieChartView: View {
         GeometryReader { geometry in
             VStack{
                 ZStack{
-                    ForEach(0..<self.values.count){ i in
+                    ForEach(0..<self.values.count, id: \.self){ i in
                         PieSlice(pieSliceData: self.slices[i], angleSpace: angleSpace)
-                            .scaleEffect(self.activeIndex == i ? 1.03 : 1)
-                            .animation(Animation.spring())
+//                            .scaleEffect(self.activeIndex == i ? 1.03 : 1)
+//                            .animation(Animation.spring())
                     }
                     .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
                     .gesture(
@@ -154,10 +154,9 @@ struct PieChartRows: View {
                 }
             }
         }
-        .padding(10)
+        .padding(20)
     }
     func detailExpense(index: Int) -> some View{
-        
         HStack{
             VStack(alignment: .leading){
                 ZStack{
