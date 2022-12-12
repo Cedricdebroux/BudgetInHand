@@ -47,6 +47,7 @@ struct OnBoarding: View {
                 
         }
         .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         
     }
 }
