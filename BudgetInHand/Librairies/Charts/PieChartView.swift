@@ -138,7 +138,8 @@ struct PieChartRows: View {
                 ForEach(0..<self.values.count, id: \.self){ i in
                     HStack {
                         if (isClickable == true)   {
-                            NavigationLink(destination : DetailExpenses(value: Double(self.values[i]) ?? 0, name: self.names[i]))
+                            NavigationLink(
+                                destination : DetailExpenses(value: Double(self.values[i]) ?? 0, name: self.names[i], image: self.iconNames[i], colors: self.colors[i]))
                             {
                                 detailExpense(index: i)
                             }

@@ -13,12 +13,15 @@ struct DetailExpenses: View {
     private var isClickable: Bool = false
     let valuesPie : [Double]
     let namePie : [String]
-    private var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216)]
+    let colorChart: [Color]
     private var numberTotalExpenses : Int = 10
-    let imageArray = ["car.fill"]
-    init(value: Double, name: String) {
+    let imageArray: [String]
+    
+    init(value: Double, name: String, image: String, colors: Color) {
         valuesPie = [value]
         namePie = [name]
+        imageArray = [image]
+        colorChart = [colors]
     }
     
     var body: some View {
@@ -51,7 +54,7 @@ struct DetailExpenses: View {
     }
     struct DetailExpenses_Previews: PreviewProvider {
         static var previews: some View {
-            DetailExpenses(value: 300, name: "test")
+            DetailExpenses(value: 300, name: "test", image: "cars", colors: Color.fromInts(r: 0, g: 181, b: 216))
         }
     }
 }
