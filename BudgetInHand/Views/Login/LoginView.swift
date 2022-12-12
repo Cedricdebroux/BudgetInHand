@@ -65,6 +65,12 @@ struct LoginView: View {
                 .scrollContentBackground(.hidden)
                 
                 VStack(spacing: 30){
+                    
+                    
+                    NavigationLink(destination: OnBoarding()){
+                        Text("showonboarding")
+                    }
+                    
                         Button(action: {
                             loginUser()
                         }){
