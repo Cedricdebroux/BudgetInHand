@@ -10,19 +10,19 @@ import SwiftUI
 struct BottomNavView: View {
     var body: some View {
         TabView{
-            HomeView()
-                .tabItem{
-                    Label("Home",systemImage: "house")
-                }
-            ProfileView()
-                .tabItem{
-                    Label("Profile", systemImage: "person")
-                }
-            InitialNewExpenseview()
-                .tabItem{
-                    Label("Add expense", systemImage: "plus.circle")
-                }
-           
+                HomeView()
+                    .tabItem{
+                        Label("Home",systemImage: "house")
+                    }
+                ProfileView()
+                    .tabItem{
+                        Label("Profile", systemImage: "person")
+                    }
+                InitialNewExpenseview()
+                    .tabItem{
+                        Label("Add expense", systemImage: "plus.circle")
+                    }
+            
         }
     }
 }
