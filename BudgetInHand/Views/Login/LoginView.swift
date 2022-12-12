@@ -68,8 +68,10 @@ struct LoginView: View {
                         Button(action: {
                             loginUser()
                         }){
-                            Text("Connection")
-                                .frame(maxWidth: 300)
+                            NavigationLink(destination: MainView()){
+                                Text("Connection")
+                                    .frame(maxWidth: 300)
+                            }
                         }
                         .tint(Color("Blue600"))
                         .buttonStyle(.borderedProminent)
@@ -81,7 +83,7 @@ struct LoginView: View {
                             Text("Nouveau compte")
                         }
                         NavigationLink(destination:
-                        MainView()){
+                        ResetPasswordView()){
                             Text("Mot de passe oublié ?")
                         }
                     }
