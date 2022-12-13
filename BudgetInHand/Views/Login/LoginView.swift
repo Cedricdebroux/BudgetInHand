@@ -12,6 +12,8 @@ import Lottie
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     
+    
+    
     @State private var rememberMe = false
     @State private var isLoginValid = false
     @State private var isLogin = true
@@ -22,8 +24,11 @@ struct LoginView: View {
         [email, password].contains(where: \.isEmpty)
     }
     
+
+    
     var body: some View {
         NavigationStack {
+            
             VStack(spacing: -50){
                 Text("Se connecter")
                     .font(.title2)
@@ -67,9 +72,7 @@ struct LoginView: View {
                 VStack(spacing: 30){
                     
                     
-                    NavigationLink(destination: OnBoarding()){
-                        Text("showonboarding")
-                    }
+                    
                     
                         Button(action: {
                             loginUser()
@@ -99,7 +102,11 @@ struct LoginView: View {
             }
             .background(Color(UIColor(named: "Gray300") ?? .white))
         }
+        .navigationBarBackButtonHidden(true)
     }
+    
+    
+    
     private func loginUser() {
         Auth.auth().signIn(withEmail: email, password: password) { result, err in
             if let err = err {
