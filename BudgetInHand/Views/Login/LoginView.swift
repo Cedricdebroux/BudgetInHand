@@ -18,6 +18,7 @@ struct LoginView: View {
     @State var email = "qb@bih.com"
     @State var password = "123456"
     @State var password1 = ""
+    @State var showSheet : Bool = false
     var isSignInButtonDisabled: Bool {
         [email, password].contains(where: \.isEmpty)
     }
@@ -81,10 +82,12 @@ struct LoginView: View {
                     HStack(spacing: 70){
                         NavigationLink(destination: CreateAccountView()){
                             Text("Nouveau compte")
+                            
                         }
-                        NavigationLink(destination:
-                        ResetPasswordView()){
-                            Text("Mot de passe oublié ?")
+                        Button("Reset Password"){
+                            showSheet.toggle()
+                        }.sheet(isPresented: $showSheet){
+                            ResetPasswordView(showSheet: $showSheet)
                         }
                     }
                     .font(.system(size: 15))
@@ -93,7 +96,7 @@ struct LoginView: View {
             }
             .navigationDestination(isPresented: $isLoginValid){
                 MainView()
-            }
+            }.ignoresSafeArea(.keyboard)
             .background(Color(UIColor(named: "Gray300") ?? .white))
         }
     }
@@ -118,8 +121,8 @@ struct LoginView: View {
 
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView()
+//    }
+//}

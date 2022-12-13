@@ -10,11 +10,14 @@ import FirebaseAuth
 struct ResetPasswordView: View {
     
     @Environment(\.presentationMode) var presentation
-    @State var showAlert = false
+    @Binding var showSheet : Bool
     @State var email = ""
     @State var  showLogin : Bool = false
+    @State var showalert = false
     
     private func resetPassword(){
+        
+        
         Auth.auth().sendPasswordReset(withEmail: email){ error in
             if let err = error {
                 print("Error : \(err.localizedDescription)")
@@ -25,17 +28,12 @@ struct ResetPasswordView: View {
             presentation.wrappedValue.dismiss()
         }
     }
-    
-    
-    
+
     var body: some View {
         
         NavigationStack{
             VStack{
-                
-                
-                
-                
+
                 VStack(spacing: 20){
                     TextField("Email",text: $email, prompt: Text("Enter email..."))
                         .font(.title2)
@@ -48,31 +46,35 @@ struct ResetPasswordView: View {
                 VStack(spacing: 16){
                     
                     Button{
+                        showalert = true
                         resetPassword()
                     } label: {
                         Text("Reset Password")
                             .frame(maxWidth: .infinity)
                             .font(.title2)
+                    }.alert("Si votre mail existe dans notre base de données.Un mail vous a été envoyé pour créer un nouveau mot de passe", isPresented: $showalert){
+                        Button("ok", role: .cancel){
+                            
+                        }
+                        Button("Non", role: .none){
+                            
+                        }
                     }
                     .padding()
                     .foregroundColor(.white)
-                    .background(Color("Green800"))
+                    .background(Color("Blue600"))
                     .cornerRadius(16)
                     
                 }.padding(25)
             }
                 Spacer()
                 
-                
-                Button{
-                    
-                } label: {
-                    Text("Back to login")
-                        .frame(maxWidth: .infinity)
-                        .font(.title3)
-                        .foregroundColor(.gray)
+                NavigationLink(destination: LoginView()){
+                    Button("Back to login"){
+                        showSheet.toggle()
+                    }
                 }
-                .padding()
+              
             }
             .navigationTitle("Reset Password")
         }
@@ -80,8 +82,11 @@ struct ResetPasswordView: View {
 }
 
 
-struct ResetPasswordView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResetPasswordView()
-    }
-}
+//struct ResetPasswordView_Previews: PreviewProvider {
+//    
+//    @State var showSheet: Bool = false
+//    static var previews: some View {
+//        
+//        ResetPasswordView(showSheet: Binding(true))
+//    }
+//}

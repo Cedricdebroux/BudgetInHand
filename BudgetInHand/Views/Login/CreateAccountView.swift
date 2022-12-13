@@ -122,7 +122,7 @@ struct CreateAccountView: View {
                     }
                 }
             }
-        }
+        }.ignoresSafeArea(.keyboard)
     }
     private func createUser() {
         Auth.auth().createUser(withEmail: email, password: passwordOne, completion: { result, err in
