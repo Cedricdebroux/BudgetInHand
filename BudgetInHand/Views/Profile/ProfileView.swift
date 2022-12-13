@@ -28,7 +28,7 @@ struct ProfileView: View {
                 }
                 List {
                     
-                    NavigationLink(destination: Text("Paramètres du compte")) {
+                    NavigationLink(destination: SettingsView()) {
                         Label("Paramètres du compte", systemImage: "gear")
                             .foregroundColor(Color("Blue600"))
                     }
