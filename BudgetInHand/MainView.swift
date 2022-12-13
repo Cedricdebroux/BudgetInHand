@@ -17,18 +17,14 @@ struct MainView: View {
                         .tabItem{
                             Label("Home",systemImage: "house")
                         }.toolbar(.visible, for: .tabBar)
-                    .toolbarBackground(Color.yellow, for: .tabBar)
-                        
                     ProfileView()
                         .tabItem{
                             Label("Profile", systemImage: "person")
                         }.toolbar(.visible, for: .tabBar)
-                    .toolbarBackground(Color.yellow, for: .tabBar)
                     InitialNewExpenseview()
                         .tabItem{
                             Label("Add expense", systemImage: "plus.circle")
                         }.toolbar(.visible, for: .tabBar)
-                    
             }
         }
     }
