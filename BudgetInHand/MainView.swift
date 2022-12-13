@@ -28,7 +28,7 @@ struct MainView: View {
                         .tabItem{
                             Label("Add expense", systemImage: "plus.circle")
                         }.toolbar(.visible, for: .tabBar)
-                    .toolbarBackground(Color.yellow, for: .tabBar)
+                    
             }
         }
     }

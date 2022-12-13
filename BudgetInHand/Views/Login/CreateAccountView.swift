@@ -118,11 +118,11 @@ struct CreateAccountView: View {
                     .controlSize(.large)
                     .disabled(isSignUpButtonDisabled)
                     .alert(isPresented: $showAlert){
-                        Alert(title: Text("Attention !"), message: Text("Vos mots de passe ne correspondes pas"))
+                        Alert(title: Text("Attention !"), message: Text("Vos mots de passe ne correspondent pas"))
                     }
                 }
             }
-        }
+        }.ignoresSafeArea(.keyboard)
     }
     private func createUser() {
         Auth.auth().createUser(withEmail: email, password: passwordOne, completion: { result, err in
