@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var showDetail = BudgetInHandModel()
+    
     var isClickable = true
     var valuesPie : [Double] = [300,400,600,500]
     var namePie : [String] = ["Carburant","Energie","Comissions","Charges"]
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216), Color.fromInts(r: 0, g: 119, b: 182),Color.fromInts(r: 144, g: 224, b: 238),Color.fromInts(r: 3, g: 4, b: 94)]
     let imageArray = ["car.fill","bolt.fill","cart.fill","house.fill"]
     var angleSpace: [Angle] = [Angle(degrees: 3)]
+    
+ 
+    
+    
     var body: some View {
         
-        
+
         VStack{
-            VStack{
+            HStack{
                 PieChartView(
                     isClickable: isClickable,
                     values: valuesPie,
@@ -32,14 +36,21 @@ struct HomeView: View {
                                                     b: 250), angleSpace: Angle(degrees: 3))
             }
             Spacer()
-                .frame(height: 230)
-            List {
-                ForEach(0..<3) { _ in
-                    Text("Integer")
+                .frame(height: 300)
+                .scaledToFit()
+            HStack{
+
+                List {
+                    ForEach(0..<3) { _ in
+                        Text("Integer")
+                    }
                 }
+
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+
     }
+        
     struct HomeView_Previews: PreviewProvider {
         static var previews: some View {
             HomeView()
