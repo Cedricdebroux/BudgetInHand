@@ -21,7 +21,6 @@ struct LoginView: View {
     var isSignInButtonDisabled: Bool {
         [email, password].contains(where: \.isEmpty)
     }
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: -50){

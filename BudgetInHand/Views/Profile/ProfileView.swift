@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var appModel: BudgetInHandModel
     var body: some View {
         NavigationView{
             VStack{
                 Spacer()
-                Button {
-                    print("Edit button was tapped")
+                NavigationLink {
+                    Text("New image")
+                    
                 } label: {
                     Image(systemName: "person.fill")
                         .resizable()
@@ -24,10 +26,25 @@ struct ProfileView: View {
                     Text("Nom")
                 }
                 List {
-                    NavigationLink(destination: Text("Paramètre du compte"), label: {
-                        
-                    })
+                    
+                    NavigationLink(destination: Text("Paramètres du compte")) {
+                        Label("Paramètres du compte", systemImage: "gear")
+                    }
+                    NavigationLink(destination: Text("Changer le mot de passe")) {
+                        Text("Changer le mot de passe")
+                    }
+                    NavigationLink(destination: Text("Relevés de compte")) {
+                        Text("Relevés de compte")
+                    }
+        
+                    
+                    NavigationLink(destination: Text("Se désinscrire")
+                    ) {
+                        Label("Se désinscrire", systemImage: "wrongwaysign")
+                            .foregroundColor(Color.red)
+                    }
                 }
+                
             }
         }
     }
