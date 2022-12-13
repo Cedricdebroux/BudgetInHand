@@ -11,8 +11,7 @@ struct MainView: View {
     var body: some View {
         
             TabView{
-                
-                    
+
                     HomeView()
                         .tabItem{
                             Label("Home",systemImage: "house")
@@ -25,7 +24,7 @@ struct MainView: View {
                         .tabItem{
                             Label("Add expense", systemImage: "plus.circle")
                         }.toolbar(.visible, for: .tabBar)
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 
