@@ -69,10 +69,7 @@ struct LoginView: View {
                 .scrollContentBackground(.hidden)
                 
                 VStack(spacing: 30){
-                    
-                    
-                    
-                    
+
                         Button(action: {
                             loginUser()
                         }){
@@ -103,7 +100,8 @@ struct LoginView: View {
             }
             .navigationDestination(isPresented: $isLoginValid){
                 MainView()
-                .navigationBarBackButtonHidden(true)
+                    .navigationBarBackButtonHidden(true)
+            
 
             }
             .ignoresSafeArea(.keyboard)
