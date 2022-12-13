@@ -58,8 +58,8 @@ public struct PieChartView: View {
                 ZStack{
                     ForEach(0..<self.values.count, id: \.self){ i in
                         PieSlice(pieSliceData: self.slices[i], angleSpace: angleSpace)
-//                            .scaleEffect(self.activeIndex == i ? 1.03 : 1)
-//                            .animation(Animation.spring())
+                            .scaleEffect(self.activeIndex == i ? 1.03 : 1)
+                            .animation(Animation.spring())
                     }
                     .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
                     .gesture(
