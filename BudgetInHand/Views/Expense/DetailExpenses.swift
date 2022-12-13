@@ -25,7 +25,7 @@ struct DetailExpenses: View {
     }
     
     var body: some View {
-        VStack{
+        HStack{
             VStack{
                 PieChartView(
                     isClickable : isClickable,
@@ -39,7 +39,7 @@ struct DetailExpenses: View {
                                                     b: 250),
                     angleSpace: Angle(degrees: 0))
                 Spacer()
-                    .frame(height: 60)
+                    .frame(height: 100)
                 NavigationStack{
                     List {
                         Section(header: Text("Liste des dernières dépenses")){
