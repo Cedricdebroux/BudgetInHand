@@ -17,9 +17,8 @@ struct HomeView: View {
     var angleSpace: [Angle] = [Angle(degrees: 3)]
     var body: some View {
         
-        
         VStack{
-            VStack{
+            HStack{
                 PieChartView(
                     isClickable: isClickable,
                     values: valuesPie,
@@ -32,13 +31,16 @@ struct HomeView: View {
                                                     b: 250), angleSpace: Angle(degrees: 3))
             }
             Spacer()
-                .frame(height: 230)
-            List {
-                ForEach(0..<3) { _ in
-                    Text("Integer")
+                .frame(height: 300)
+                .scaledToFit()
+            HStack{
+                List {
+                    ForEach(0..<3) { _ in
+                        Text("Integer")
+                    }
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
     }
     struct HomeView_Previews: PreviewProvider {
         static var previews: some View {
