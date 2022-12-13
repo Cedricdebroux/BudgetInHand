@@ -21,32 +21,34 @@ struct HomeView: View {
     
     var body: some View {
         
-        NavigationView{
-            VStack{
-                VStack{
-                    PieChartView(
-                        isClickable: isClickable,
-                        values: valuesPie,
-                        names: namePie,
-                        formatter: { $0.description },
-                        colors: colorChart,
-                        iconNames: imageArray,
-                        backgroundColor: Color.fromInts(r: 250,
-                                                        g: 250,
-                                                        b: 250), angleSpace: Angle(degrees: 3))
-                }
-                Spacer()
-                    .frame(height: 230)
+
+        VStack{
+            HStack{
+                PieChartView(
+                    isClickable: isClickable,
+                    values: valuesPie,
+                    names: namePie,
+                    formatter: { $0.description },
+                    colors: colorChart,
+                    iconNames: imageArray,
+                    backgroundColor: Color.fromInts(r: 250,
+                                                    g: 250,
+                                                    b: 250), angleSpace: Angle(degrees: 3))
+            }
+            Spacer()
+                .frame(height: 300)
+                .scaledToFit()
+            HStack{
+
                 List {
                     ForEach(0..<3) { _ in
                         Text("Integer")
                     }
                 }
-            }.navigationBarBackButtonHidden(true)
+
+            }
         }
-//        .fullScreenCover(isPresented: $shouldShowOnboarding, content: {
-//
-//        })
+
     }
         
     struct HomeView_Previews: PreviewProvider {

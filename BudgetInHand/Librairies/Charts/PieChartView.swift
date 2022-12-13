@@ -56,7 +56,7 @@ public struct PieChartView: View {
         GeometryReader { geometry in
             VStack{
                 ZStack{
-                    ForEach(0..<self.values.count){ i in
+                    ForEach(0..<self.values.count, id: \.self){ i in
                         PieSlice(pieSliceData: self.slices[i], angleSpace: angleSpace)
                             .scaleEffect(self.activeIndex == i ? 1.03 : 1)
                             .animation(Animation.spring())
@@ -132,51 +132,18 @@ struct PieChartRows: View {
     @StateObject private var showDetail = BudgetInHandModel()
     
     var body: some View {
-        var blueColor : Color = Color.fromInts(r: 41, g: 55, b: 131)
         NavigationStack{
             LazyVGrid(columns: columns){
-                ForEach(0..<self.values.count){ i in
+                ForEach(0..<self.values.count, id: \.self){ i in
                     HStack {
                         if (isClickable == true)   {
-                            NavigationLink(destination : DetailExpenses()) {
-                                VStack(alignment: .leading){
-                                    ZStack{
-                                        RoundedRectangle(cornerRadius: 5.0)
-                                            .fill(self.colors[i])
-                                            .frame(width: 20, height: 20)
-                                        Image(systemName:  self.iconNames[i])
-                                            .aspectRatio(contentMode: .fit)
-                                    }
-                                    Text(self.names[i])
-                                        .foregroundColor(blueColor)
-                                }
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text(self.values[i])
-                                        .foregroundColor(blueColor)
-                                    Text(self.percents[i])
-                                        .foregroundColor(Color.gray)
-                                }
+                            NavigationLink(
+                                destination : DetailExpenses(value: Double(self.values[i]) ?? 0, name: self.names[i], image: self.iconNames[i], colors: self.colors[i]))
+                            {
+                                detailExpense(index: i)
                             }
                         } else {
-                            VStack(alignment: .leading){
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 5.0)
-                                        .fill(self.colors[i])
-                                        .frame(width: 20, height: 20)
-                                    Image(systemName:  self.iconNames[i])
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                                Text(self.names[i])
-                                    .foregroundColor(blueColor)
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text(self.values[i])
-                                    .foregroundColor(blueColor)
-                                Text(self.percents[i])
-                                    .foregroundColor(Color.gray)
-                            }
+                            detailExpense(index: i)
                         }
                     }
                     .environmentObject(showDetail)
@@ -187,7 +154,29 @@ struct PieChartRows: View {
                 }
             }
         }
-        .padding(10)
+        .padding(20)
+    }
+    func detailExpense(index: Int) -> some View{
+        HStack{
+            VStack(alignment: .leading){
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .fill(self.colors[index])
+                        .frame(width: 20, height: 20)
+                    Image(systemName:  self.iconNames[index])
+                        .aspectRatio(contentMode: .fit)
+                }
+                Text(self.names[index])
+                    .foregroundColor(Color("Blue800"))
+            }
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(self.values[index])
+                    .foregroundColor(Color("Blue800"))
+                Text(self.percents[index])
+                    .foregroundColor(Color.gray)
+            }
+        }
     }
 }
 @available(OSX 10.15.0, *)

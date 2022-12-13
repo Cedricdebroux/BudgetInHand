@@ -89,7 +89,8 @@ struct LoginView: View {
                         NavigationLink(destination: CreateAccountView()){
                             Text("Nouveau compte")
                         }
-                        NavigationLink(destination: HomeView()){
+                        NavigationLink(destination:
+                        MainView()){
                             Text("Mot de passe oublié ?")
                         }
                     }
@@ -98,8 +99,11 @@ struct LoginView: View {
                 }
             }
             .navigationDestination(isPresented: $isLoginValid){
-                HomeView()
+                MainView()
+                    .navigationBarBackButtonHidden(true)
+
             }
+
             .background(Color(UIColor(named: "Gray300") ?? .white))
         }
         .navigationBarBackButtonHidden(true)
