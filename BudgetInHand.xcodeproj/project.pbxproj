@@ -17,6 +17,9 @@
 		022D31AE294266F300C0391D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 022D31AD294266F300C0391D /* Lottie */; };
 		022D31B129426A4300C0391D /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 022D31B029426A4300C0391D /* login.json */; };
 		022D31B429426B1100C0391D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D31B329426B1100C0391D /* LottieView.swift */; };
+		02590C202949D3770073DDBD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C1F2949D3770073DDBD /* ImagePicker.swift */; };
+		02590C222949FE090073DDBD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C212949FE090073DDBD /* UserViewModel.swift */; };
+		02590C24294A085C0073DDBD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C23294A085C0073DDBD /* User.swift */; };
 		02A10D7E2941D91D00C7A0F3 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */; };
 		02A10D7F2941D91D00C7A0F3 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */; };
 		E446FA0C294870AF0047FE98 /* financialplan.json in Resources */ = {isa = PBXBuildFile; fileRef = E446FA0B294870AF0047FE98 /* financialplan.json */; };
@@ -65,6 +68,9 @@
 		021BAFAF2930D15E00231174 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		022D31B029426A4300C0391D /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		022D31B329426B1100C0391D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		02590C1F2949D3770073DDBD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		02590C212949FE090073DDBD /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		02590C23294A085C0073DDBD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		E446FA0B294870AF0047FE98 /* financialplan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = financialplan.json; sourceTree = "<group>"; };
@@ -140,7 +146,6 @@
 				E45ACFB5293F4E1700633396 /* ViewModel */,
 				E44F6177293E2C930000EB92 /* Firestore */,
 				021BAF9B2930CF2000231174 /* BudgetInHandApp.swift */,
-				E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */,
 				E44F617C293E2E240000EB92 /* GoogleService-Info.plist */,
 				021BAF9D2930CF2000231174 /* ContentView.swift */,
 				021BAF9F2930CF2100231174 /* Assets.xcassets */,
@@ -220,6 +225,7 @@
 			children = (
 				E44F6178293E2CAB0000EB92 /* Expense.swift */,
 				E48EA8AC293F81C800A15EDD /* Category.swift */,
+				02590C23294A085C0073DDBD /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,7 +233,10 @@
 		E45ACFB5293F4E1700633396 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E44F6184293E441F0000EB92 /* BudgetInHandModel.swift */,
 				E44F617A293E2D830000EB92 /* ExpenseViewModel.swift */,
+				02590C1F2949D3770073DDBD /* ImagePicker.swift */,
+				02590C212949FE090073DDBD /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -401,12 +410,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				02A10D7F2941D91D00C7A0F3 /* PieChartView.swift in Sources */,
+				02590C222949FE090073DDBD /* UserViewModel.swift in Sources */,
 				E48EA8B1293F906800A15EDD /* Todo.swift in Sources */,
 				E48EA8CE2941D6A400A15EDD /* SettingsProfileView.swift in Sources */,
 				E4593C062941EA1A0005CB1C /* DetailExpenses.swift in Sources */,
 				E48EA8BF2940B44200A15EDD /* ProfileView.swift in Sources */,
 				021BAFA52930CF2100231174 /* Persistence.swift in Sources */,
 				E48EA8C62941D5D400A15EDD /* BottomNavView.swift in Sources */,
+				02590C24294A085C0073DDBD /* User.swift in Sources */,
 				E48EA8AD293F81C800A15EDD /* Category.swift in Sources */,
 				E465700E2947698E00361E91 /* ResetPassword.swift in Sources */,
 				E48EA8C82941D62000A15EDD /* DetailsCategoryView.swift in Sources */,
@@ -417,6 +428,7 @@
 				E465700C29472AA500361E91 /* MainView.swift in Sources */,
 				02A10D7E2941D91D00C7A0F3 /* PieSliceView.swift in Sources */,
 				E4C01128294729FC004FE542 /* OnBoarding.swift in Sources */,
+				02590C202949D3770073DDBD /* ImagePicker.swift in Sources */,
 				E48EA8C12940B45200A15EDD /* SettingsView.swift in Sources */,
 				021BAF9E2930CF2000231174 /* ContentView.swift in Sources */,
 				E48EA8CC2941D67600A15EDD /* InitialNewExpenseview.swift in Sources */,
@@ -555,16 +567,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-
 				DEVELOPMENT_TEAM = UQND3C5G35;
-
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -586,16 +596,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BudgetInHand/Preview Content\"";
-
-				DEVELOPMENT_TEAM = S68Z84G372;
-
+				DEVELOPMENT_TEAM = UQND3C5G35;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

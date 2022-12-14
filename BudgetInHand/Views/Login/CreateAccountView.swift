@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseStorage
+import Firebase
 
 struct CreateAccountView: View {
     
@@ -17,11 +19,15 @@ struct CreateAccountView: View {
     @State private var name = ""
     @State private var passwordOne = ""
     @State private var passwordTwo = ""
+    @State private var shouldShowImagePicker = false
+    @State private var image: UIImage?
+    @State private var loginStatusMessage = ""
+    
     var isSignUpButtonDisabled: Bool {
         [email, passwordOne, passwordTwo, name].contains(where: \.isEmpty)  
     }
     var body: some View {
-        NavigationStack{
+        NavigationView{
             ZStack{
                 Color("Gray300")
                     .ignoresSafeArea()
@@ -29,11 +35,29 @@ struct CreateAccountView: View {
                     Text("Création d'un nouveau compte")
                         .font(.title2)
                         .foregroundColor(Color("Blue600"))
-                    Image("Memoji")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 180)
-                        .clipShape(Circle())
+                    Spacer()
+                    Button {
+                        shouldShowImagePicker
+                            .toggle()
+                    } label: {
+                        VStack{
+                            if let image = self.image{
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 128, height: 128)
+                                    .cornerRadius(64)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 90))
+                                    .padding()
+                                    .foregroundColor(Color("Blue600"))
+                            }
+                        }
+                        .overlay(RoundedRectangle(cornerRadius: 64)
+                            .stroke(Color.black, lineWidth: 1))
+                    }
+                 
                     Form(){
                         Section("Email"){
                             ZStack(alignment: .trailing){
@@ -41,6 +65,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.emailAddress)
                                 if(!email.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -57,6 +82,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.name)
                                 if(!name.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -73,6 +99,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.newPassword)
                                 if(!passwordOne.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -89,6 +116,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.password)
                                 if(!passwordTwo.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -123,6 +151,9 @@ struct CreateAccountView: View {
                 }
             }
         }.ignoresSafeArea(.keyboard)
+            .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
+                ImagePicker(image: $image)
+            }
     }
     private func createUser() {
         Auth.auth().createUser(withEmail: email, password: passwordOne, completion: { result, err in
@@ -133,7 +164,45 @@ struct CreateAccountView: View {
             print("Successfully created account with ID: \(result?.user.uid ?? "")")
             appModel.userId = result?.user.uid
             
+            self.persistImageToStorage()
+            
         })
+    }
+    private func persistImageToStorage(){
+        let fileName = UUID().uuidString
+        guard let uid = Auth.auth().currentUser?.uid
+        else { return }
+        let ref = Storage.storage().reference(withPath: uid)
+        guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
+        else { return }
+        ref.putData(imageData,metadata: nil) { metadata, err in
+            if let err = err {
+                self.loginStatusMessage = "Failed to push image to Storage : \(err)"
+                return
+            }
+            ref.downloadURL{url, err in
+                if let err = err {
+                    self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
+                    return
+                }
+                self.loginStatusMessage = "Successfully stored image with url: \(url?.absoluteString ?? "")"
+                print(url?.absoluteString)
+                guard let url = url else { return }
+                self.storeUserInformation(imageProfileUrl: url)
+            }
+        }
+    }
+    private func storeUserInformation(imageProfileUrl: URL) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let userData = ["uid": uid, "email" : self.email, "userName" :self.name,"profileImageUrl" : imageProfileUrl.absoluteString]
+        Firestore.firestore().collection("users")
+            .document(uid).setData(userData) { err in
+                if let err = err {
+                    print(err)
+                    self.loginStatusMessage = "\(err)"
+                    return
+                }
+            }
     }
 }
 

@@ -11,14 +11,11 @@ import Lottie
 
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
-    
-    
-    
-    @State private var rememberMe = false
+
     @State private var isLoginValid = false
     @State private var isLogin = true
-    @State var email = "qb@bih.com"
-    @State var password = "123456"
+    @State var email = "ced.debroux@gmail.com"
+    @State var password = "654321"
     @State var password1 = ""
     @State var showSheet : Bool = false
     var isSignInButtonDisabled: Bool {
@@ -62,8 +59,6 @@ struct LoginView: View {
                         }
                         .foregroundColor(Color("Blue600"))
                     }
-                    Toggle("Se souvenir de moi", isOn: $rememberMe)
-                        .listRowBackground(Color.clear)
                     
                 }
                 .scrollContentBackground(.hidden)
@@ -127,8 +122,8 @@ struct LoginView: View {
     }
 }
 
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginView()
-//    }
-//}
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+    }
+}
