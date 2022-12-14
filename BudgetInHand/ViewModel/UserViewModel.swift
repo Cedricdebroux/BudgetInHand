@@ -30,7 +30,9 @@ class UserViewModel: ObservableObject {
                     return
                 }
                 guard let data = snapshot?.data() else { return }
+                
                 self.errorMessage = "\(data)"
+                
                 let uid = data["uid"] as? String ?? ""
                 let email = data["email"] as? String ?? ""
                 let name = data["userName"] as? String ?? ""
