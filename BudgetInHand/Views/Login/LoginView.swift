@@ -14,8 +14,8 @@ struct LoginView: View {
 
     @State private var isLoginValid = false
     @State private var isLogin = true
-    @State var email = "qb@bih.com"
-    @State var password = "123456"
+    @State var email = "ced.debroux@gmail.com"
+    @State var password = "654321"
     @State var password1 = ""
     @State var showSheet : Bool = false
     var isSignInButtonDisabled: Bool {

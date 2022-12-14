@@ -9,19 +9,26 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
+    @ObservedObject private var fetchCurrentUserViewModel = UserViewModel()
     @State private var showAlert = false
+    
     var body: some View {
         NavigationView{
             VStack{
                 Spacer()
-                NavigationLink {
-                    Text("New image")
-                    
-                } label: {
-                    Image(systemName: "person.fill")
+                
+                AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? ""), content: {image in
+                    image
                         .resizable()
-                        .frame(width: 100, height: 100)
-                }
+                        .scaledToFill()
+                        .clipped()
+                }, placeholder: {})
+//                AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? "")) { image in
+//                       image
+//                           .resizable()
+//                           .scaledToFill()
+//                           .overlay(Material.ultraThin)
+//                   }
                 HStack{
                     Text("Prénom")
                     Text("Nom")

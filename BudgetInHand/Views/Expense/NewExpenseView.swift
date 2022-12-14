@@ -85,8 +85,8 @@ struct NewExpenseView: View {
     }
 }
 
-//struct NewExpenseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewExpenseView( dateText: <#Date#>)
-//    }
-//}
+struct NewExpenseView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewExpenseView()
+    }
+}
