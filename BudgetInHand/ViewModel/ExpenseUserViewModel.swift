@@ -1,5 +1,5 @@
 //
-//  UserViewModel.swift
+//  ExpenseUserViewModel.swift
 //  BudgetInHand
 //
 //  Created by Cédric Debroux on 14/12/2022.
@@ -8,21 +8,17 @@
 import Foundation
 import Firebase
 
-class UserViewModel: ObservableObject {
-    
+class ExpenseUserViewModel: ObservableObject {
     @Published var errorMessage = ""
-    @Published var currentUser: User?
-    
+    @Published var currentExpenseUser: Expense?
     init() {
-        fetchCurrentUser()
+        
     }
-    
-    private func fetchCurrentUser() {
+    private func fetchExpenseCurrentUser(){
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        
         Firestore.firestore().collection("users")
             .document(uid).getDocument { snapshot, error in
                 if let error = error {
@@ -38,7 +34,20 @@ class UserViewModel: ObservableObject {
                 let name = data["userName"] as? String ?? ""
                 let profileImageUrl = data["profileImageUrl"] as? String ?? ""
                 
-                self.currentUser = User(uid: uid, email: email, name: name, profileImageUrl: profileImageUrl)
+//                self.currentExpenseUser = Expense(userId: uid,title: <#T##String?#>, category: <#T##String?#> )
             }
     }
+    
+//    func fetchData(userId: String) {
+//        databaseReference.whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
+//            guard let documents = querySnapshot?.documents else {
+//                print("No documents")
+//                return
+//            }
+//
+//            self.expenses = documents.compactMap { queryDocumentSnapshot -> Expense? in
+//                return try? queryDocumentSnapshot.data(as: Expense.self)
+//            }
+//        }
+//    }
 }
