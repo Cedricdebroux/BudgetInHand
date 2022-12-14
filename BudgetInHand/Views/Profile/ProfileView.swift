@@ -20,18 +20,24 @@ struct ProfileView: View {
                 AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? ""), content: {image in
                     image
                         .resizable()
-                        .scaledToFill()
-                        .clipped()
-                }, placeholder: {})
-//                AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? "")) { image in
-//                       image
-//                           .resizable()
-//                           .scaledToFill()
-//                           .overlay(Material.ultraThin)
-//                   }
+                        .frame(width: 128, height: 128)
+                        
+                }, placeholder: {Image(systemName: "person.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 128, height: 128)
+                        .cornerRadius(64)
+                })
+                .cornerRadius(64)
+                .overlay(RoundedRectangle(cornerRadius: 70)
+                    .stroke(Color.black, lineWidth: 1))
+                .scaledToFit()
+                
+
                 HStack{
-                    Text("Prénom")
-                    Text("Nom")
+                    Text(fetchCurrentUserViewModel.currentUser?.name ?? "")
+                        .foregroundColor(Color("Blue600"))
+                        .fontWeight(.bold)
                 }
                 List {
                     NavigationLink(destination: SettingsView()) {

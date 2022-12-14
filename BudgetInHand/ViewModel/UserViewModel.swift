@@ -33,7 +33,7 @@ class UserViewModel: ObservableObject {
                 self.errorMessage = "\(data)"
                 let uid = data["uid"] as? String ?? ""
                 let email = data["email"] as? String ?? ""
-                let name = data["name"] as? String ?? ""
+                let name = data["userName"] as? String ?? ""
                 let profileImageUrl = data["profileImageUrl"] as? String ?? ""
                 
                 self.currentUser = User(uid: uid, email: email, name: name, profileImageUrl: profileImageUrl)
