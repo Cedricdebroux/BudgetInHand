@@ -39,6 +39,9 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
+    
+
+    
     // function to update data
     func updateData(title: String, id: String, amount: Float, category: Category,date: Date) {
         databaseReference.document(id).updateData(["title" : title]) { error in

@@ -15,7 +15,7 @@ struct NewExpenseView: View {
     @State private var titleText = ""
     @State private var amountText: Float = 0.0
     @State private var date = Date()
-    @State private var category : Category = .carburant
+    @State private var category : Category = .Carburant
     @State private var  textPicker: String = ""
     @State private var userId = ""
 
@@ -47,7 +47,7 @@ struct NewExpenseView: View {
                 
                 titleText = ""
                 amountText = 0.0
-                category = Category.carburant
+                category = Category.Carburant
                 date = Date()
                                                     
             })
@@ -85,8 +85,8 @@ struct NewExpenseView: View {
     }
 }
 
-//struct NewExpenseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewExpenseView( dateText: <#Date#>)
-//    }
-//}
+struct NewExpenseView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewExpenseView()
+    }
+}
