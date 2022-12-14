@@ -29,11 +29,14 @@ struct CreateAccountView: View {
                     Text("Création d'un nouveau compte")
                         .font(.title2)
                         .foregroundColor(Color("Blue600"))
-                    Image("Memoji")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 180)
-                        .clipShape(Circle())
+                    NavigationLink {
+                        Text("New image")
+                        
+                    } label: {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                    }
                     Form(){
                         Section("Email"){
                             ZStack(alignment: .trailing){
