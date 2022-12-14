@@ -36,7 +36,7 @@ struct HomeView: View {
             return "house.fill"
             
         default:
-            return "house.fill"
+            return ""
         }
     }
     
@@ -76,13 +76,8 @@ struct HomeView: View {
                                 
                                 //                                        if Expense.category == [namePie].description {
                                 
-                                Text(Expense.title ?? "" )
-                                    .font(.system(size: 18, weight: .regular))
-                                    .bold()
-                                
                                 HStack{
-                                    Text("-")
-                                        .font(.system(size: 12, weight: .regular))
+                                    
                                         //.foregroundColor(Color("Blue100"))
                                     //category de l'expense
                                     ZStack{
@@ -94,7 +89,10 @@ struct HomeView: View {
                                             .foregroundColor(Color(.white))
                                             .aspectRatio(contentMode: .fit)
                                     }
-                                    
+                                    //Text("-").font(.system(size: 12, weight: .regular))
+                                    Text(Expense.title ?? "" )
+                                        .font(.system(size: 18, weight: .regular))
+                                        .bold()
 //                                    Text(Expense.category ?? "" )
 //                                        .font(.system(size: 12, weight: .regular))
 //                                        .foregroundColor(.gray)
@@ -105,13 +103,6 @@ struct HomeView: View {
                                 Text(Expense.date ?? Date.now, style: .date )
                                     .font(.system(size: 12, weight: .regular))
                                     .foregroundColor(.gray)
-                                
-                                
-                                //titre de l'expense
-                                
-                                
-                               
-                                
                                 Spacer()
                                 
                                 //amount de l'expense
@@ -122,23 +113,13 @@ struct HomeView: View {
                                         .bold()
                                     Text("€")
                                 }
-                                //                                                }
                             }
-                            
                         }
-                        
-                        
-                    }.onAppear(perform :{ self.viewModel.fetchData(
-                        userId: appModel.userId ?? "")})
-                    
+                    }.onAppear(perform :{ self.viewModel.fetchData(userId: appModel.userId ?? "")})
                 }
             }
-            
         }
     }
-    
-    
-    
     struct HomeView_Previews: PreviewProvider {
         static var previews: some View {
             HomeView()

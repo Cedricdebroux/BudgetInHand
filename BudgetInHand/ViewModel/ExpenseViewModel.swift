@@ -38,7 +38,18 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
-    
+    func fetchDataCategory(userId: String,category: String) {
+        databaseReference.whereField("userId" , isEqualTo: userId).whereField("category", isEqualTo: category).addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.expenses = documents.compactMap { queryDocumentSnapshot -> Expense? in
+                return try? queryDocumentSnapshot.data(as: Expense.self)
+            }
+        }
+    }
     
 
     
