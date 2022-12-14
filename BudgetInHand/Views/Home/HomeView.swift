@@ -32,7 +32,7 @@ struct HomeView: View {
                     })
                     .cornerRadius(25)
                     .overlay(RoundedRectangle(cornerRadius: 35)
-                        .stroke(Color.black, lineWidth: 1))
+                        .stroke(Color("Blue600"), lineWidth: 1))
                     .scaledToFit()
                     if (Date.now.formatted(date: .omitted, time: .shortened)) <= "17:00:00"{
                         Text("Bonjour")
