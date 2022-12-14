@@ -29,14 +29,14 @@ struct CreateAccountView: View {
                     Text("Création d'un nouveau compte")
                         .font(.title2)
                         .foregroundColor(Color("Blue600"))
-                    NavigationLink {
-                        Text("New image")
-                        
+                    Button {
+                        print("Buton clicked")
                     } label: {
                         Image(systemName: "person.fill")
                             .resizable()
                             .frame(width: 100, height: 100)
                     }
+                 
                     Form(){
                         Section("Email"){
                             ZStack(alignment: .trailing){
@@ -44,6 +44,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.emailAddress)
                                 if(!email.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -60,6 +61,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.name)
                                 if(!name.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -76,6 +78,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.newPassword)
                                 if(!passwordOne.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
@@ -92,6 +95,7 @@ struct CreateAccountView: View {
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .textContentType(.password)
                                 if(!passwordTwo.isEmpty){
                                     Image(systemName: "xmark.circle.fill")
                                         .onTapGesture {
