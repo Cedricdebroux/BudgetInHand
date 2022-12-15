@@ -35,7 +35,7 @@ class ExpenseUserViewModel: ObservableObject {
                 let category = data["category"] as? String ?? ""
                 let amount = data["amount"] as? Float ?? 0.0
                 
-                self.currentExpenseUser = Expense(title: title, category: category, date: date, amount: amount, userId: uid)
+                self.currentExpenseUser = Expense(category: category, date: date, amount: amount, userId: uid)
             }
     }
 }

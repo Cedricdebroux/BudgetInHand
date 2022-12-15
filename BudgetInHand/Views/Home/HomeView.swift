@@ -118,9 +118,9 @@ struct HomeView: View {
                                             .aspectRatio(contentMode: .fit)
                                     }
                                     //Text("-").font(.system(size: 12, weight: .regular))
-                                    Text(Expense.title ?? "" )
-                                        .font(.system(size: 18, weight: .regular))
-                                        .bold()
+//                                    Text(Expense.title ?? "" )
+//                                        .font(.system(size: 18, weight: .regular))
+//                                        .bold()
                                     //                                    Text(Expense.category ?? "" )
                                     //                                        .font(.system(size: 12, weight: .regular))
                                     //                                        .foregroundColor(.gray)

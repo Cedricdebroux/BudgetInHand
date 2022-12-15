@@ -144,9 +144,8 @@ struct DetailExpenses: View {
                                  
                                  //                                        if Expense.category == [namePie].description {
                                  
-                                 Text(Expense.title ?? "" )
-                                 .font(.system(size: 18, weight: .regular))
-                                 .bold()
+                                 
+                              
                                  
                                  Spacer()
                                  

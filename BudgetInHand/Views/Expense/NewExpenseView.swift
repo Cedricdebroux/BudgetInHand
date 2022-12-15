@@ -93,7 +93,7 @@ struct NewExpenseView: View {
                         // post the text to Firestore, then erase the text:
                 
                         amountText = 0.0
-                        category = Category.carburant
+                        category = Category.Carburant
                         date = Date()
                         
                     }).buttonStyle(.borderedProminent)
