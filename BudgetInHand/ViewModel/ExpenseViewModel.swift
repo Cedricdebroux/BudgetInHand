@@ -8,22 +8,28 @@
 
 import FirebaseFirestore
 import SwiftUI
+import FirebaseAuth
+import FirebaseStorage
 
 class ExpenseViewModel: ObservableObject {
     
     
     @Published var expenses = [Expense]() // Reference to our Model
-    private var databaseReference = Firestore.firestore().collection("Dépenses") // reference to our Firestore's collection
+    private var databaseReference = Firestore.firestore().collection("Expenses") // reference to our Firestore's collection
 
     // function to post data
-    func addData(userId: String,title: String,  amount: Float, category: String,date: Date ) {
+    func addData(userId: String,category: String,amount: Float, date: Date, image: String ) {
         do {
-            _ = try databaseReference.addDocument(data: ["userId": userId ,"title": title, "amount": amount, "category": category, "date": date])
-            
+            _ = try databaseReference.addDocument(data: ["userId": userId , "category": category, "amount": amount, "date": date,"image": image])
+
         }
         catch {
             print(error.localizedDescription)
         }
+        
+        
+        
+        
     }
     
     // function to read data
@@ -54,8 +60,8 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     // function to update data
-    func updateData(title: String, id: String, amount: Float, category: Category,date: Date) {
-        databaseReference.document(id).updateData(["title" : title]) { error in
+    func updateData(id: String, amount: Float, category: String,date: Date, image: String) {
+        databaseReference.document(id).updateData(["category" : category]) { error in
             if let error = error {
                 print(error.localizedDescription)
             } else {
