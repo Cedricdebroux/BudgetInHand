@@ -12,6 +12,7 @@ public struct PieChartView: View {
    
     public let isClickable: Bool
     public let values: [Double]
+    public let budgetTotal: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
     public let angleSpace: Angle
@@ -39,8 +40,10 @@ public struct PieChartView: View {
         return tempSlices
     }
     
-    public init(isClickable: Bool,values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
+    init(isClickable: Bool,values:[Double],budgetTotal:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], iconNames: [String], backgroundColor: Color, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60, angleSpace: Angle){
         self.values = values
+        self.budgetTotal = budgetTotal
+        //probleme additionner tout les budget total
         self.names = names
         self.formatter = formatter
         self.colors = colors
@@ -94,7 +97,7 @@ public struct PieChartView: View {
                         Text(self.activeIndex == -1 ? "Total" : names[self.activeIndex])
                             .font(.title)
                             .foregroundColor(Color.gray)
-                        Text(self.formatter(self.activeIndex == -1 ? values.reduce(0, +) : values[self.activeIndex]))
+                        Text(self.formatter(self.activeIndex == -1 ? budgetTotal.reduce(0, +) : values[self.activeIndex]))
                             .font(.title)
                             .foregroundColor(blueColor)
                     }
@@ -105,8 +108,10 @@ public struct PieChartView: View {
                     colors: self.colors,
                     names: self.names,
                     values: self.values.map { self.formatter($0) },
+                    budgetTotal: self.budgetTotal.map { self.formatter($0) },
                     percents: self.values.map {
-                        String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +))
+                        String(format: "%.0f%%", $0 * 100 / self.budgetTotal.reduce(0, +))
+                        //donne % sur budget total et pas budget total du type d'expense
                     },
                     iconNames: iconNames
                 )
@@ -123,6 +128,7 @@ struct PieChartRows: View {
     var colors: [Color]
     var names: [String]
     var values: [String]
+    var budgetTotal: [String]
     var percents: [String]
     var iconNames: [String]
     let columns = [
@@ -138,7 +144,7 @@ struct PieChartRows: View {
                     HStack {
                         if (isClickable == true)   {
                             NavigationLink(
-                                destination : DetailExpenses(value: Double(self.values[i]) ?? 0, name: self.names[i], image: self.iconNames[i], colors: self.colors[i]))
+                                destination : DetailExpenses(value: Double(self.values[i]) ?? 0,budgetTotalCategory: Double(self.budgetTotal[i]) ?? 0, name: self.names[i], image: self.iconNames[i], colors: self.colors[i]))
                             {
                                 detailExpense(index: i)
                             }
@@ -182,7 +188,7 @@ struct PieChartRows: View {
 @available(OSX 10.15.0, *)
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        PieChartView(isClickable : true ,values: [1300, 500, 300], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
+        PieChartView(isClickable : true ,values: [1300, 500, 300],budgetTotal: [1500, 700, 500], names: ["Carburant", "Energie", "Frais domestique","Comissions"], formatter: {value in String(format: "$%.2f", value)}, iconNames: ["car", "trash", "home"], backgroundColor: Color.fromInts(r: 250, g: 250, b: 250), angleSpace: Angle(degrees: 3))
     }
 }
 
