@@ -19,6 +19,7 @@ class ExpenseViewModel: ObservableObject {
     func addData(userId: String,title: String,  amount: Float, category: String,date: Date ) {
         do {
             _ = try databaseReference.addDocument(data: ["userId": userId ,"title": title, "amount": amount, "category": category, "date": date])
+            
         }
         catch {
             print(error.localizedDescription)
@@ -27,7 +28,7 @@ class ExpenseViewModel: ObservableObject {
     
     // function to read data
     func fetchData(userId: String) {
-        databaseReference.whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
+        databaseReference.whereField("userId" , isEqualTo: userId ).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject private var fetchCurrentUserViewModel = UserViewModel()
     
     @ObservedObject private var viewModel = ExpenseViewModel()
     @EnvironmentObject var appModel: BudgetInHandModel
@@ -23,8 +24,7 @@ struct HomeView: View {
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216), Color.fromInts(r: 0, g: 119, b: 182),Color.fromInts(r: 144, g: 224, b: 238),Color.fromInts(r: 3, g: 4, b: 94)]
     let imageArray = ["car.fill","bolt.fill","cart.fill","house.fill"]
     var angleSpace: [Angle] = [Angle(degrees: 3)]
-    
-    
+
     func switchIcone(category: [String]) -> String{
         switch category {
         case ["Carburant"]:
@@ -47,6 +47,27 @@ struct HomeView: View {
     var body: some View {
         VStack{
             HStack{
+                    AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? ""), content: {image in
+                        image
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            
+                    }, placeholder: {Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .cornerRadius(25)
+                    })
+                    .cornerRadius(25)
+                    .overlay(RoundedRectangle(cornerRadius: 35)
+                        .stroke(Color("Blue600"), lineWidth: 1))
+                    .scaledToFit()
+                        Text("Bonjour")
+                    Text(fetchCurrentUserViewModel.currentUser?.name ?? "")
+                }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+            .foregroundColor(Color("Blue600"))
                 PieChartView(
                     isClickable: isClickable,
                     values: valuesPie,
@@ -55,14 +76,17 @@ struct HomeView: View {
                     formatter: { $0.description },
                     colors: colorChart,
                     iconNames: imageArray,
-                    backgroundColor: Color.fromInts(r: 250,
-                                                    g: 250,
-                                                    b: 250), angleSpace: Angle(degrees: 3))
-            }
+                    backgroundColor: Color.fromInts(
+                        r: 250,
+                        g: 250,
+                        b: 250), angleSpace: Angle(degrees: 3)
+                )
+            
             Spacer()
                 .frame(height: 300)
                 .scaledToFit()
             HStack{
+
                 NavigationStack{
                     
                     List {
@@ -124,6 +148,7 @@ struct HomeView: View {
             }
         }
     }
+
     struct HomeView_Previews: PreviewProvider {
         static var previews: some View {
             HomeView()

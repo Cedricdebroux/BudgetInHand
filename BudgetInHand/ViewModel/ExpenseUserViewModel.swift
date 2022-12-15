@@ -1,5 +1,5 @@
 //
-//  UserViewModel.swift
+//  ExpenseUserViewModel.swift
 //  BudgetInHand
 //
 //  Created by Cédric Debroux on 14/12/2022.
@@ -8,22 +8,18 @@
 import Foundation
 import Firebase
 
-class UserViewModel: ObservableObject {
-    
+class ExpenseUserViewModel: ObservableObject {
     @Published var errorMessage = ""
-    @Published var currentUser: User?
-    
+    @Published var currentExpenseUser: Expense?
     init() {
-        fetchCurrentUser()
+        fetchExpenseCurrentUser()
     }
-    
-    private func fetchCurrentUser() {
+    private func fetchExpenseCurrentUser(){
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        
-        Firestore.firestore().collection("users")
+        Firestore.firestore().collection("Expenses")
             .document(uid).getDocument { snapshot, error in
                 if let error = error {
                     print("Failed to fetch current user:", error)
@@ -33,12 +29,13 @@ class UserViewModel: ObservableObject {
                 
                 self.errorMessage = "\(data)"
                 
-                let uid = data["uid"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let name = data["userName"] as? String ?? ""
-                let profileImageUrl = data["profileImageUrl"] as? String ?? ""
+                let uid = data["userId"] as? String ?? ""
+                let title = data["title"] as? String ?? ""
+                let date = data["date"] as? Date ?? Date()
+                let category = data["category"] as? String ?? ""
+                let amount = data["amount"] as? Float ?? 0.0
                 
-                self.currentUser = User(uid: uid, email: email, name: name, profileImageUrl: profileImageUrl)
+                self.currentExpenseUser = Expense(title: title, category: category, date: date, amount: amount, userId: uid)
             }
     }
 }
