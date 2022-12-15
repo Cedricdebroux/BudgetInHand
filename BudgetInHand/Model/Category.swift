@@ -11,7 +11,7 @@ enum Category: String,CaseIterable, Identifiable {
     
     
     
-    case carburant, energie, nourriture, home
+    case Carburant, Energie, Domicile, Commission
     
     var id: Self { self }
     
