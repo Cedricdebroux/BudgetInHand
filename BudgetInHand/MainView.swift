@@ -20,7 +20,7 @@ struct MainView: View {
                         .tabItem{
                             Label("Profile", systemImage: "person")
                         }.toolbar(.visible, for: .tabBar)
-                    InitialNewExpenseview()
+                    NewExpenseView()
                         .tabItem{
                             Label("Add expense", systemImage: "plus.circle")
                         }.toolbar(.visible, for: .tabBar)
