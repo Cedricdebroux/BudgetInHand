@@ -21,6 +21,7 @@ class ExpenseViewModel: ObservableObject {
     func addData(userId: String,category: String,amount: Float, date: Date, image: String ) {
         do {
             _ = try databaseReference.addDocument(data: ["userId": userId , "category": category, "amount": amount, "date": date,"image": image])
+
         }
         catch {
             print(error.localizedDescription)
@@ -31,11 +32,9 @@ class ExpenseViewModel: ObservableObject {
         
     }
     
-    
-    
     // function to read data
     func fetchData(userId: String) {
-        databaseReference.whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
+        databaseReference.whereField("userId" , isEqualTo: userId ).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -47,6 +46,19 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
+    func fetchDataCategory(userId: String,category: String) {
+        databaseReference.whereField("category", isEqualTo: category).whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
+            // .whereField("userId" , isEqualTo: userId)
+            guard let documents = querySnapshot?.documents, documents.isEmpty else {
+                print("No documents")
+                return
+            }
+            
+            self.expenses = documents.compactMap { queryDocumentSnapshot -> Expense? in
+                return try? queryDocumentSnapshot.data(as: Expense.self)
+            }
+        }
+    }
     // function to update data
     func updateData(id: String, amount: Float, category: String,date: Date, image: String) {
         databaseReference.document(id).updateData(["category" : category]) { error in
@@ -57,7 +69,6 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
-    
     // function to delete data
     func deleteData(at indexSet: IndexSet) {
         indexSet.forEach { index in

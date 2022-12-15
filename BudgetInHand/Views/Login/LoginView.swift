@@ -62,6 +62,7 @@ struct LoginView: View {
                     
                 }
                 .scrollContentBackground(.hidden)
+                .preferredColorScheme(.light)
                 
                 VStack(spacing: 30){
 

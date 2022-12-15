@@ -21,7 +21,7 @@ struct NewExpenseView: View {
     
     @State private var amountText: Float = 0.0
     @State private var date = Date()
-    @State private var category : Category = .carburant
+    @State private var category : Category = .Carburant
     @State private var  textPicker: String = ""
     @State private var userId = ""
     @State private var shouldShowImagePicker = false
@@ -155,6 +155,7 @@ struct NewExpenseView: View {
                 if let err = err {
                     self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
                     return
+
                 }
                 self.loginStatusMessage = "Successfully stored image with url: \(url?.absoluteString ?? "")"
                 print(url?.absoluteString)

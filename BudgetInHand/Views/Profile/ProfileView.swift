@@ -30,7 +30,7 @@ struct ProfileView: View {
                 })
                 .cornerRadius(64)
                 .overlay(RoundedRectangle(cornerRadius: 70)
-                    .stroke(Color.black, lineWidth: 1))
+                    .stroke(Color("Blue600"), lineWidth: 1))
                 .scaledToFit()
                 
 
