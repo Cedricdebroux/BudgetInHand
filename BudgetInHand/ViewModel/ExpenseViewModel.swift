@@ -38,9 +38,11 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
+    
     func fetchDataCategory(userId: String,category: String) {
-        databaseReference.whereField("userId" , isEqualTo: userId).whereField("category", isEqualTo: category).addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
+        databaseReference.whereField("category", isEqualTo: category).whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
+            // .whereField("userId" , isEqualTo: userId)
+            guard let documents = querySnapshot?.documents, documents.isEmpty else {
                 print("No documents")
                 return
             }
@@ -50,9 +52,6 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
-    
-
-    
     // function to update data
     func updateData(title: String, id: String, amount: Float, category: Category,date: Date) {
         databaseReference.document(id).updateData(["title" : title]) { error in
@@ -63,7 +62,6 @@ class ExpenseViewModel: ObservableObject {
             }
         }
     }
-    
     // function to delete data
     func deleteData(at indexSet: IndexSet) {
         indexSet.forEach { index in

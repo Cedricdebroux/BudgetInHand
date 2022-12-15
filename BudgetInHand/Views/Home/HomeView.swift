@@ -12,9 +12,13 @@ struct HomeView: View {
     @ObservedObject private var viewModel = ExpenseViewModel()
     @EnvironmentObject var appModel: BudgetInHandModel
     
+    
+    
     var isClickable = true
     var budgetTotalCategory: [Double] = [500,600,800,800]
+    
     var valuesPie : [Double] = [300,400,600,500]
+    
     var namePie : [String] = [Category.Carburant.rawValue,Category.Energie.rawValue,Category.Commission.rawValue,Category.Domicile.rawValue]
     var colorChart: [Color] = [Color.fromInts(r: 0, g: 181, b: 216), Color.fromInts(r: 0, g: 119, b: 182),Color.fromInts(r: 144, g: 224, b: 238),Color.fromInts(r: 3, g: 4, b: 94)]
     let imageArray = ["car.fill","bolt.fill","cart.fill","house.fill"]
@@ -78,7 +82,7 @@ struct HomeView: View {
                                 
                                 HStack{
                                     
-                                        //.foregroundColor(Color("Blue100"))
+                                    //.foregroundColor(Color("Blue100"))
                                     //category de l'expense
                                     ZStack{
                                         RoundedRectangle(cornerRadius: 5.0)
@@ -93,9 +97,9 @@ struct HomeView: View {
                                     Text(Expense.title ?? "" )
                                         .font(.system(size: 18, weight: .regular))
                                         .bold()
-//                                    Text(Expense.category ?? "" )
-//                                        .font(.system(size: 12, weight: .regular))
-//                                        .foregroundColor(.gray)
+                                    //                                    Text(Expense.category ?? "" )
+                                    //                                        .font(.system(size: 12, weight: .regular))
+                                    //                                        .foregroundColor(.gray)
                                 }
                                 
                                 Spacer()

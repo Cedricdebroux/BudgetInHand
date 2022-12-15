@@ -20,11 +20,14 @@ struct DetailExpenses: View {
     let valuesPie : [Double]
     let budgetTotal: [Double]
     let namePie : [String]
+    let namePieSingle : String
     let colorChart: [Color]
     private var numberTotalExpenses : Int = 10
     let imageArray: [String]
     
     let dateFormatter = DateFormatter()
+    
+    //let categoryDB : [String]
     
     
     @State private var userId = ""
@@ -33,6 +36,7 @@ struct DetailExpenses: View {
         valuesPie = [value]
         budgetTotal = [budgetTotalCategory]
         namePie = [name]
+        namePieSingle = name
         imageArray = [image]
         colorChart = [colors]
     }
@@ -173,7 +177,7 @@ struct DetailExpenses: View {
                                 
                             }
                         }
-                        //.onAppear(perform :{ self.viewModel.fetchDataCategory(userId: appModel.userId ?? "",category: Expense.category ?? "")
+                        //.onAppear(perform :{ self.viewModel.fetchDataCategory(userId: appModel.userId ?? "",category: namePieSingle )
                         .onAppear(perform :{ self.viewModel.fetchData(userId: appModel.userId ?? "")
                             
                         })
