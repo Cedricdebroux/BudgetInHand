@@ -34,11 +34,7 @@ struct HomeView: View {
                     .overlay(RoundedRectangle(cornerRadius: 35)
                         .stroke(Color("Blue600"), lineWidth: 1))
                     .scaledToFit()
-                    if (Date.now.formatted(date: .omitted, time: .shortened)) <= "17:00:00"{
                         Text("Bonjour")
-                    } else {
-                        Text("Bonsoir")
-                    }
                     Text(fetchCurrentUserViewModel.currentUser?.name ?? "")
                 }
             .frame(maxWidth: .infinity, alignment: .leading)

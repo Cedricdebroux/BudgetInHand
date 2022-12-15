@@ -16,7 +16,7 @@ struct NewExpenseView: View {
     @State private var amountText: Float = 0.0
     @State private var date = Date()
     @State private var category : Category = .carburant
-    @State private var  textPicker: String = ""
+    @State private var textPicker: String = ""
     @State private var userId = ""
 
     var body: some View {

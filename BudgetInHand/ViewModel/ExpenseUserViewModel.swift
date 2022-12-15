@@ -12,14 +12,14 @@ class ExpenseUserViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var currentExpenseUser: Expense?
     init() {
-        
+        fetchExpenseCurrentUser()
     }
     private func fetchExpenseCurrentUser(){
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        Firestore.firestore().collection("users")
+        Firestore.firestore().collection("Expenses")
             .document(uid).getDocument { snapshot, error in
                 if let error = error {
                     print("Failed to fetch current user:", error)
@@ -29,25 +29,13 @@ class ExpenseUserViewModel: ObservableObject {
                 
                 self.errorMessage = "\(data)"
                 
-                let uid = data["uid"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let name = data["userName"] as? String ?? ""
-                let profileImageUrl = data["profileImageUrl"] as? String ?? ""
+                let uid = data["userId"] as? String ?? ""
+                let title = data["title"] as? String ?? ""
+                let date = data["date"] as? Date ?? Date()
+                let category = data["category"] as? String ?? ""
+                let amount = data["amount"] as? Float ?? 0.0
                 
-//                self.currentExpenseUser = Expense(userId: uid,title: <#T##String?#>, category: <#T##String?#> )
+                self.currentExpenseUser = Expense(title: title, category: category, date: date, amount: amount, userId: uid)
             }
     }
-    
-//    func fetchData(userId: String) {
-//        databaseReference.whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
-//            guard let documents = querySnapshot?.documents else {
-//                print("No documents")
-//                return
-//            }
-//
-//            self.expenses = documents.compactMap { queryDocumentSnapshot -> Expense? in
-//                return try? queryDocumentSnapshot.data(as: Expense.self)
-//            }
-//        }
-//    }
 }
