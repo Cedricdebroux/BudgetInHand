@@ -51,7 +51,7 @@ struct NewExpenseView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 180, height: 180)
-                               
+                            
                         } else {
                             Image(systemName: "camera.fill")
                                 .font(.system(size: 90))
@@ -60,7 +60,7 @@ struct NewExpenseView: View {
                         }
                     }
                     
-                        
+                    
                 }
                 
                 Form{
@@ -83,60 +83,35 @@ struct NewExpenseView: View {
                 }
                 
                 VStack{
-                    Button("Save", action: {
+                    
+                    Button(action: {
                         textPicker = ("\(self.category.rawValue.capitalized)")
                         self.persistImageToStorage(){ imageUrl in
                             
-                            self.viewModel.addData(userId: appModel.userId ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+                            self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
                         }
                         
-                        // post the text to Firestore, then erase the text:
-                
-                        amountText = 0.0
-                        category = Category.Carburant
-                        date = Date()
+                        // post the text to Firestore, then erase the text
                         
-                    }).buttonStyle(.borderedProminent)
+                    }, label:{
+                        Text("Save")
+                            .frame(maxWidth: 300)
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color("Blue600"))
+                    .controlSize(.large)
+                    .foregroundColor(Color.white)
+                    
                 }
                 
                 Spacer()
-                
-                //            NavigationStack {
-                //                List {
-                //                    ForEach(viewModel.expenses, id:\.id) { Expense in
-                //
-                //                        VStack(alignment: .leading) {
-                //                            Text(Expense.title ?? "").font(.system(size: 18, weight: .regular))
-                //                        }.frame(maxHeight: .none)
-                //
-                //                    }
-                //                }.onAppear(perform :{ self.viewModel.fetchData(
-                //                    userId: appModel.userId ?? "")})
-                //                .navigationTitle("Expense")
-                //                .toolbar {
-                //                    ToolbarItem(placement: .bottomBar) {
-                //                        Text("\(viewModel.expenses.count) expenses")
-                //                    }
-                //                    ToolbarItem(placement: .bottomBar) {
-                //                        Button {
-                //                            presentAlert = true
-                //                        }
-                //                    label: {
-                //                        Image(systemName: "square.and.pencil")
-                //                            .imageScale(.large)
-                //                            .bold()
-                //                            .accentColor(.yellow)
-                //                    }
-                //                    }
-                //                }
-                //            }.accentColor(.brown)
             }
         }.ignoresSafeArea(.keyboard)
             .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
                 ImagePicker(image: $image)
             }
     }
-   
+    
     
     private func persistImageToStorage(completionHandler: @escaping (String) -> Void ){
         let fileName = UUID().uuidString
@@ -155,17 +130,16 @@ struct NewExpenseView: View {
                 if let err = err {
                     self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
                     return
-
                 }
                 self.loginStatusMessage = "Successfully stored image with url: \(url?.absoluteString ?? "")"
                 print(url?.absoluteString)
                 guard let url = url else { return }
                 completionHandler(url.absoluteString)
- 
+                
             }
         }
     }
-   
+    
 }
 
 
