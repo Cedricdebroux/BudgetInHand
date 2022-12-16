@@ -61,8 +61,6 @@ struct NewExpenseView: View {
                                     .foregroundColor(Color("Blue600"))
                             }
                         }
-                        
-                        
                     }
                     
                     Form{
@@ -88,13 +86,8 @@ struct NewExpenseView: View {
                         
                         Button(action: {
                             textPicker = ("\(self.category.rawValue.capitalized)")
-                            self.persistImageToStorage(){ imageUrl in
-                                
-                                self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
-                                showAlert.toggle()
-                                isExpenseValidate.toggle()
-                                
-                            }
+                            showAlert.toggle()
+                            createExpense()
                             
                             // post the text to Firestore, then erase the text
                             
@@ -113,10 +106,7 @@ struct NewExpenseView: View {
                             )
                         }.foregroundColor(Color("Blue600"))
                             .background(Color("Yellow600"))
-                        
-                        
                     }
-                    
                     Spacer()
                 }
             }.ignoresSafeArea(.keyboard)
@@ -127,6 +117,17 @@ struct NewExpenseView: View {
                     NewExpenseView()
                         .navigationBarBackButtonHidden(true)
                 }
+        }
+    }
+    
+    private func createExpense(){
+        DispatchQueue.main.async {
+            self.persistImageToStorage(){ imageUrl in
+                self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            isExpenseValidate.toggle()
         }
     }
     
