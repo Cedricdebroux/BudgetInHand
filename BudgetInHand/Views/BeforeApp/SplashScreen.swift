@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SplashScreen: View {
+    @EnvironmentObject var appModel: BudgetInHandModel
     @State private var startAnimating = false
     @State private var handanimating = false
     var body: some View {

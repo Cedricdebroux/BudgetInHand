@@ -25,6 +25,7 @@ struct MainView: View {
                             Label("Add expense", systemImage: "plus.circle")
                         }.toolbar(.visible, for: .tabBar)
             }.navigationBarBackButtonHidden(true)
+            
         }
     }
 

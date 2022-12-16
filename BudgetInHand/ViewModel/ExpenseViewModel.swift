@@ -35,7 +35,7 @@ class ExpenseViewModel: ObservableObject {
     // function to read data
     func fetchData(userId: String) {
         databaseReference.whereField("userId" , isEqualTo: userId ).addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
+            guard let documents = querySnapshot?.documents, !documents.isEmpty else {
                 print("No documents")
                 return
             }
@@ -47,9 +47,9 @@ class ExpenseViewModel: ObservableObject {
     }
     
     func fetchDataCategory(userId: String,category: String) {
-        databaseReference.whereField("category", isEqualTo: category).whereField("userId" , isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
-            // .whereField("userId" , isEqualTo: userId)
-            guard let documents = querySnapshot?.documents, documents.isEmpty else {
+        databaseReference.whereField("userId" , isEqualTo: userId).whereField("category", isEqualTo: category).addSnapshotListener { (querySnapshot, error) in
+
+            guard let documents = querySnapshot?.documents, !documents.isEmpty else {
                 print("No documents")
                 return
             }

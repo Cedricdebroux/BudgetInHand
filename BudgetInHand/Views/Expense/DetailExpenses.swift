@@ -176,9 +176,7 @@ struct DetailExpenses: View {
                                 
                             }
                         }
-                        //.onAppear(perform :{ self.viewModel.fetchDataCategory(userId: appModel.userId ?? "",category: namePieSingle )
-                        .onAppear(perform :{ self.viewModel.fetchData(userId: appModel.userId ?? "")
-                            
+                        .onAppear(perform :{ self.viewModel.fetchDataCategory(userId: appModel.userId ?? "",category: namePieSingle )
                         })
                                  
                     }
