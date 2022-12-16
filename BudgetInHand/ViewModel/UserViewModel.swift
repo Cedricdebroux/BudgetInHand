@@ -7,17 +7,22 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class UserViewModel: ObservableObject {
     
+    @EnvironmentObject var appModel: BudgetInHandModel
     @Published var errorMessage = ""
     @Published var currentUser: User?
     
     init() {
         fetchCurrentUser()
+        deleteCurrentUser()
     }
     
     private func fetchCurrentUser() {
+        
+
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
@@ -40,5 +45,17 @@ class UserViewModel: ObservableObject {
                 
                 self.currentUser = User(uid: uid, email: email, name: name, profileImageUrl: profileImageUrl)
             }
+    }
+    
+    private func deleteCurrentUser(){
+        let user = Auth.auth().currentUser
+        user?.delete { error in
+            if let error = error {
+                print("The current user are not delete \(error)")
+            } else {
+                print("The current users are delete from the database \(String(describing: user))")
+            }
+            
+        }
     }
 }
