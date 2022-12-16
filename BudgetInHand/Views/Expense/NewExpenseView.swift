@@ -115,8 +115,9 @@ struct NewExpenseView: View {
                 }
                 .navigationDestination(isPresented: $isExpenseValidate){
                     NewExpenseView()
-                        .navigationBarBackButtonHidden(true)
+                       
                 }
+                .navigationBarBackButtonHidden(true)
         }
     }
     
@@ -134,10 +135,12 @@ struct NewExpenseView: View {
     
     private func persistImageToStorage(completionHandler: @escaping (String) -> Void ){
         let fileName = UUID().uuidString
-        guard let uid =
-                Auth.auth().currentUser?.uid
-        else { return }
-        let ref = Storage.storage().reference(withPath: uid )
+        
+        let uid = UUID()
+//        guard let uid = UUID()
+//           Auth.auth().currentUser?.uid
+//        else { return }
+        let ref = Storage.storage().reference(withPath: "\(uid)" )
         guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
         else { return }
         ref.putData(imageData,metadata: nil) { metadata, err in
