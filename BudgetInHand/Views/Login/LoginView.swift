@@ -31,8 +31,8 @@ struct LoginView: View {
 
     @State private var isLoginValid = false
     @State private var isLogin = true
-    @State var email = "ced.debroux@gmail.com"
-    @State var password = "654321"
+    @State var email = "bonaq@gmail.com"
+    @State var password = "123456"
     @State var password1 = ""
     @State var showSheet : Bool = false
     var isSignInButtonDisabled: Bool {
@@ -112,8 +112,6 @@ struct LoginView: View {
             .navigationDestination(isPresented: $isLoginValid){
                 MainView()
                     .navigationBarBackButtonHidden(true)
-            
-
             }
             .ignoresSafeArea(.keyboard)
             .background(Color(UIColor(named: "Gray300") ?? .white))

@@ -27,89 +27,107 @@ struct NewExpenseView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
+    @State private var showAlert = false
+    @State private var isExpenseValidate = false
     
     var body: some View {
-        
-        ZStack{
-            Color("Gray300")
-                .ignoresSafeArea()
-            
-            VStack{
-                Text("Création d'une nouvelle dépense")
-                    .font(.title2)
-                    .foregroundColor(Color("Blue600"))
+        NavigationStack{
+            ZStack{
+                Color("Gray300")
+                    .ignoresSafeArea()
                 
-                Spacer()
-                
-                Button {
-                    shouldShowImagePicker
-                        .toggle()
-                } label: {
-                    VStack{
-                        if let image = self.image{
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 180, height: 180)
-                            
-                        } else {
-                            Image(systemName: "camera.fill")
-                                .font(.system(size: 90))
-                                .padding()
-                                .foregroundColor(Color("Blue600"))
+                VStack{
+                    Text("Création d'une nouvelle dépense")
+                        .font(.title2)
+                        .foregroundColor(Color("Blue600"))
+                    
+                    Spacer()
+                    
+                    Button {
+                        shouldShowImagePicker
+                            .toggle()
+                    } label: {
+                        VStack{
+                            if let image = self.image{
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 180, height: 180)
+                                
+                            } else {
+                                Image(systemName: "camera.fill")
+                                    .font(.system(size: 90))
+                                    .padding()
+                                    .foregroundColor(Color("Blue600"))
+                            }
                         }
+                        
+                        
                     }
                     
-                    
-                }
-                
-                Form{
-                    Section("Categorie"){
-                        List {
-                            Picker("Categories", selection: $category){
-                                ForEach(Category.allCases) {
-                                    category in
-                                    Text(category.rawValue.capitalized)
+                    Form{
+                        Section("Categorie"){
+                            List {
+                                Picker("Categories", selection: $category){
+                                    ForEach(Category.allCases) {
+                                        category in
+                                        Text(category.rawValue.capitalized)
+                                    }
                                 }
                             }
                         }
-                    }
-                    Section("Montant"){
-                        TextField("Enter the amount", value: $amountText, format: .number)}
-                    
-                    Section("Date"){
-                        DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
-                    }
-                }
-                
-                VStack{
-                    
-                    Button(action: {
-                        textPicker = ("\(self.category.rawValue.capitalized)")
-                        self.persistImageToStorage(){ imageUrl in
-                            
-                            self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+                        Section("Montant"){
+                            TextField("Enter the amount", value: $amountText, format: .number)}
+                        
+                        Section("Date"){
+                            DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
                         }
-                        
-                        // post the text to Firestore, then erase the text
-                        
-                    }, label:{
-                        Text("Save")
-                            .frame(maxWidth: 300)
-                    })
-                    .buttonStyle(.borderedProminent)
-                    .tint(Color("Blue600"))
-                    .controlSize(.large)
-                    .foregroundColor(Color.white)
+                    }
                     
+                    VStack{
+                        
+                        Button(action: {
+                            textPicker = ("\(self.category.rawValue.capitalized)")
+                            self.persistImageToStorage(){ imageUrl in
+                                
+                                self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+                                showAlert.toggle()
+                                isExpenseValidate.toggle()
+                                
+                            }
+                            
+                            // post the text to Firestore, then erase the text
+                            
+                        }, label:{
+                            Text("Save")
+                                .frame(maxWidth: 300)
+                            
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .tint(Color("Blue600"))
+                        .controlSize(.large)
+                        .foregroundColor(Color.white)
+                        .alert(isPresented: $showAlert){
+                            
+                            Alert(title: Text("Dépense validée"), message: Text("Cette dépense a bien été enregistrée")
+                            )
+                        }.foregroundColor(Color("Blue600"))
+                            .background(Color("Yellow600"))
+                        
+                        
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
-            }
-        }.ignoresSafeArea(.keyboard)
-            .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
-                ImagePicker(image: $image)
-            }
+            }.ignoresSafeArea(.keyboard)
+                .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
+                    ImagePicker(image: $image)
+                }
+                .navigationDestination(isPresented: $isExpenseValidate){
+                    NewExpenseView()
+                        .navigationBarBackButtonHidden(true)
+                }
+        }
     }
     
     
