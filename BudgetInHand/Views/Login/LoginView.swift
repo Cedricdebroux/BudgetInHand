@@ -7,7 +7,24 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 import Lottie
+
+class FirebaseManager: NSObject {
+    
+    let auth: Auth
+    
+    
+    override init() {
+        FirebaseApp.configure()
+        
+        self.auth = Auth.auth()
+        
+        super.init()
+    }
+    
+}
+
 
 struct LoginView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
@@ -106,6 +123,7 @@ struct LoginView: View {
     }
 
     private func loginUser() {
+    
         Auth.auth().signIn(withEmail: email, password: password) { result, err in
             if let err = err {
                 print("Failed due to error:", err)

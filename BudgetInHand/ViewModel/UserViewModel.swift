@@ -17,12 +17,10 @@ class UserViewModel: ObservableObject {
     
     init() {
         fetchCurrentUser()
-        deleteCurrentUser()
     }
     
     private func fetchCurrentUser() {
         
-
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
