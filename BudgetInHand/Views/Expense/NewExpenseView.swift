@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 struct NewExpenseView: View {
     
+    //MARK: variables
+    
     private var databaseReference = Firestore.firestore().collection("Expenses")
     
     @EnvironmentObject var appModel: BudgetInHandModel
@@ -29,8 +31,11 @@ struct NewExpenseView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
-    @State private var showAlert = true
+    @State private var showAlert = false
     @State private var isExpenseValidate = false
+    @State private var showChoiceCamera = false
+    @State private var choiceGalery = false
+    @State private var choiceCamera = false
     
     var body: some View {
         NavigationStack{
@@ -46,8 +51,9 @@ struct NewExpenseView: View {
                     Spacer()
                     
                     Button {
-                        shouldShowImagePicker
-                            .toggle()
+                        
+                        showChoiceCamera.toggle()
+                       
                     } label: {
                         VStack{
                             if let image = self.image{
@@ -62,6 +68,15 @@ struct NewExpenseView: View {
                                     .padding()
                                     .foregroundColor(Color("Blue600"))
                             }
+                        }
+                    }.alert("Quel methode d'encodage voulez vous utiliser ?",isPresented: $showChoiceCamera){
+                        Button("Galerie", role: .cancel){
+                            shouldShowImagePicker
+                                .toggle()
+                            
+                        }
+                        Button("Appareil photo", role: .none){
+                            choiceCamera.toggle()
                         }
                     }
                     
@@ -115,18 +130,17 @@ struct NewExpenseView: View {
                 .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
                     ImagePicker(image: $image)
                 }
+                .fullScreenCover(isPresented: $choiceCamera, onDismiss: nil){
+                    ImagePicker(image: $image)
+                }
                 .navigationDestination(isPresented: $isExpenseValidate){
                     MainView().accessibilityElement(children: .contain).unredacted()
                 }
                 .navigationBarBackButtonHidden(true)
-//                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
-//                    Button("Manuellement", role: .cancel){
-//                    }
-//                    Button("Avec l'aide de l'appareil photo", role: .none){
-//                    }
-//                }
         }
     }
+    
+    //MARK: Methods create and store image
     
     private func createExpense(){
         DispatchQueue.main.async {
