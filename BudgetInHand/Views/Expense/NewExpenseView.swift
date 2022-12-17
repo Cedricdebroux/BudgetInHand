@@ -19,6 +19,8 @@ struct NewExpenseView: View {
     
     @State private var presentAlert = false
     
+    @State private var selectedView = 2
+    
     @State private var amountText: Float = 0.0
     @State private var date = Date()
     @State private var category : Category = .Carburant
@@ -27,7 +29,7 @@ struct NewExpenseView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
-    @State private var showAlert = false
+    @State private var showAlert = true
     @State private var isExpenseValidate = false
     
     var body: some View {
@@ -114,10 +116,15 @@ struct NewExpenseView: View {
                     ImagePicker(image: $image)
                 }
                 .navigationDestination(isPresented: $isExpenseValidate){
-                    NewExpenseView()
-                       
+                    MainView().accessibilityElement(children: .contain).unredacted()
                 }
                 .navigationBarBackButtonHidden(true)
+                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
+                    Button("Manuellement", role: .cancel){
+                    }
+                    Button("Avec l'aide de l'appareil photo", role: .none){
+                    }
+                }
         }
     }
     
@@ -137,9 +144,9 @@ struct NewExpenseView: View {
         let fileName = UUID().uuidString
         
         let uid = UUID()
-//        guard let uid = UUID()
-//           Auth.auth().currentUser?.uid
-//        else { return }
+        //        guard let uid = UUID()
+        //           Auth.auth().currentUser?.uid
+        //        else { return }
         let ref = Storage.storage().reference(withPath: "\(uid)" )
         guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
         else { return }

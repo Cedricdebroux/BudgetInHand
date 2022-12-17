@@ -13,7 +13,7 @@ struct ProfileView: View {
     @State private var showAlert = false
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
                 Spacer()
                 
@@ -32,8 +32,6 @@ struct ProfileView: View {
                 .overlay(RoundedRectangle(cornerRadius: 70)
                     .stroke(Color("Blue600"), lineWidth: 1))
                 .scaledToFit()
-                
-
                 HStack{
                     Text(fetchCurrentUserViewModel.currentUser?.name ?? "")
                         .foregroundColor(Color("Blue600"))

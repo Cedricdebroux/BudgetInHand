@@ -110,7 +110,7 @@ struct LoginView: View {
                 }
             }
             .navigationDestination(isPresented: $isLoginValid){
-                MainView()
+                MainView().tag(1)
                     .navigationBarBackButtonHidden(true)
             }
             .ignoresSafeArea(.keyboard)
