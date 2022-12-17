@@ -119,12 +119,12 @@ struct NewExpenseView: View {
                     MainView().accessibilityElement(children: .contain).unredacted()
                 }
                 .navigationBarBackButtonHidden(true)
-                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
-                    Button("Manuellement", role: .cancel){
-                    }
-                    Button("Avec l'aide de l'appareil photo", role: .none){
-                    }
-                }
+//                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
+//                    Button("Manuellement", role: .cancel){
+//                    }
+//                    Button("Avec l'aide de l'appareil photo", role: .none){
+//                    }
+//                }
         }
     }
     
