@@ -19,6 +19,8 @@ struct NewExpenseView: View {
     
     @State private var presentAlert = false
     
+    @State private var selectedView = 2
+    
     @State private var amountText: Float = 0.0
     @State private var date = Date()
     @State private var category : Category = .Carburant
@@ -27,98 +29,125 @@ struct NewExpenseView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
+    @State private var showAlert = true
+    @State private var isExpenseValidate = false
     
     var body: some View {
-        
-        ZStack{
-            Color("Gray300")
-                .ignoresSafeArea()
-            
-            VStack{
-                Text("Création d'une nouvelle dépense")
-                    .font(.title2)
-                    .foregroundColor(Color("Blue600"))
+        NavigationStack{
+            ZStack{
+                Color("Gray300")
+                    .ignoresSafeArea()
                 
-                Spacer()
-                
-                Button {
-                    shouldShowImagePicker
-                        .toggle()
-                } label: {
-                    VStack{
-                        if let image = self.image{
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 180, height: 180)
-                            
-                        } else {
-                            Image(systemName: "camera.fill")
-                                .font(.system(size: 90))
-                                .padding()
-                                .foregroundColor(Color("Blue600"))
-                        }
-                    }
+                VStack{
+                    Text("Création d'une nouvelle dépense")
+                        .font(.title2)
+                        .foregroundColor(Color("Blue600"))
                     
+                    Spacer()
                     
-                }
-                
-                Form{
-                    Section("Categorie"){
-                        List {
-                            Picker("Categories", selection: $category){
-                                ForEach(Category.allCases) {
-                                    category in
-                                    Text(category.rawValue.capitalized)
-                                }
+                    Button {
+                        shouldShowImagePicker
+                            .toggle()
+                    } label: {
+                        VStack{
+                            if let image = self.image{
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 180, height: 180)
+                                
+                            } else {
+                                Image(systemName: "camera.fill")
+                                    .font(.system(size: 90))
+                                    .padding()
+                                    .foregroundColor(Color("Blue600"))
                             }
                         }
                     }
-                    Section("Montant"){
-                        TextField("Enter the amount", value: $amountText, format: .number)}
                     
-                    Section("Date"){
-                        DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
-                    }
-                }
-                
-                VStack{
-                    
-                    Button(action: {
-                        textPicker = ("\(self.category.rawValue.capitalized)")
-                        self.persistImageToStorage(){ imageUrl in
-                            
-                            self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+                    Form{
+                        Section("Categorie"){
+                            List {
+                                Picker("Categories", selection: $category){
+                                    ForEach(Category.allCases) {
+                                        category in
+                                        Text(category.rawValue.capitalized)
+                                    }
+                                }
+                            }
                         }
+                        Section("Montant"){
+                            TextField("Enter the amount", value: $amountText, format: .number)}
                         
-                        // post the text to Firestore, then erase the text
-                        
-                    }, label:{
-                        Text("Save")
-                            .frame(maxWidth: 300)
-                    })
-                    .buttonStyle(.borderedProminent)
-                    .tint(Color("Blue600"))
-                    .controlSize(.large)
-                    .foregroundColor(Color.white)
+                        Section("Date"){
+                            DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
+                        }
+                    }
                     
+                    VStack{
+                        
+                        Button(action: {
+                            textPicker = ("\(self.category.rawValue.capitalized)")
+                            showAlert.toggle()
+                            createExpense()
+                            
+                            // post the text to Firestore, then erase the text
+                            
+                        }, label:{
+                            Text("Save")
+                                .frame(maxWidth: 300)
+                            
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .tint(Color("Blue600"))
+                        .controlSize(.large)
+                        .foregroundColor(Color.white)
+                        .alert(isPresented: $showAlert){
+                            
+                            Alert(title: Text("Dépense validée"), message: Text("Cette dépense a bien été enregistrée")
+                            )
+                        }.foregroundColor(Color("Blue600"))
+                            .background(Color("Yellow600"))
+                    }
+                    Spacer()
                 }
-                
-                Spacer()
+            }.ignoresSafeArea(.keyboard)
+                .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
+                    ImagePicker(image: $image)
+                }
+                .navigationDestination(isPresented: $isExpenseValidate){
+                    MainView().accessibilityElement(children: .contain).unredacted()
+                }
+                .navigationBarBackButtonHidden(true)
+//                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
+//                    Button("Manuellement", role: .cancel){
+//                    }
+//                    Button("Avec l'aide de l'appareil photo", role: .none){
+//                    }
+//                }
+        }
+    }
+    
+    private func createExpense(){
+        DispatchQueue.main.async {
+            self.persistImageToStorage(){ imageUrl in
+                self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
             }
-        }.ignoresSafeArea(.keyboard)
-            .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
-                ImagePicker(image: $image)
-            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            isExpenseValidate.toggle()
+        }
     }
     
     
     private func persistImageToStorage(completionHandler: @escaping (String) -> Void ){
         let fileName = UUID().uuidString
-        guard let uid =
-                Auth.auth().currentUser?.uid
-        else { return }
-        let ref = Storage.storage().reference(withPath: uid )
+        
+        let uid = UUID()
+        //        guard let uid = UUID()
+        //           Auth.auth().currentUser?.uid
+        //        else { return }
+        let ref = Storage.storage().reference(withPath: "\(uid)" )
         guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
         else { return }
         ref.putData(imageData,metadata: nil) { metadata, err in

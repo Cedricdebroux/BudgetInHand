@@ -16,6 +16,8 @@ struct ContentView: View {
     
     var body: some View {
         
+        NavigationStack{
+        
         VStack{
             
             if self.isSplashActive{
@@ -25,14 +27,16 @@ struct ContentView: View {
                 SplashScreen().transition(.opacity)
             }
             
-        }.environmentObject(appModel)
+        }
             .onAppear{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.8){
                     withAnimation{
                         self.isSplashActive = true
                     }
+                    
                 }
-            }
+                }
+        }.environmentObject(appModel)
     }
     
     
