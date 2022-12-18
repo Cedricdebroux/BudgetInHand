@@ -9,4 +9,6 @@ import Foundation
 class BudgetInHandModel: ObservableObject{
     @Published var userId: String?
     @Published var selectedView : Int?
+    
+    @Published var isOnBoardingAlreadyAppear: Bool?
 }

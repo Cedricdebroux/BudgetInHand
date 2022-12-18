@@ -7,9 +7,12 @@
 
 import SwiftUI
 import Lottie
-
+import Combine
 struct OnBoarding: View {
-    @State private var showFistTimeOnboarding = true
+    @EnvironmentObject var appModel: BudgetInHandModel
+    @State private var showFirstTimeOnboarding = true
+    @State var isOnBoardingAlreadyAppear = false
+    
     
     var body: some View {
         TabView{
@@ -17,85 +20,79 @@ struct OnBoarding: View {
             VStack{
                 Text("Bienvenue dans l'application BudgetInHand")
                     .font(.title)
+                    .bold()
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: LoginView()){
-                                Text("Skip")
-                            }
-                        }
-                    }
-                
                     .navigationBarBackButtonHidden(true)
                 LottieView(name: "financialplan", loopMode: .loop)
-                Text("Cette application vous permmet de gérer et encoder facilement vos dépense")
+                Text("L'application qui vous facilite l'encodage et la gestion de vos dépenses")
                     .multilineTextAlignment(.center)
                 Spacer(minLength: 70)
             }
-            
             VStack{
                 
-                Text("Pour ajouter automatiquement vos dépense, vous pouvez utlisiser l'apparaeil photo")
-                    .font(.title3)
+                Text("Sélection d'une dépense grâce à l'appareil photo")
+                    .font(.title2)
+                    .bold()
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                 LottieView(name: "scanpicturetransparancy", loopMode: .loop)
-                Text("Cette application vous permmet de gérer et encoder facilement vos dépense")
+                Text("BudgetInHand vous permet d'utiliser la sélection d'une valeur grâce à la caméra de votre Iphone")
                     .multilineTextAlignment(.center)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: LoginView()){
-                                Text("Skip")
-                            }
-                            
-                        }
-                        
-                    }
                 Spacer(minLength: 70)
             }
             .navigationBarBackButtonHidden(true)
             
             VStack{
                 Spacer()
-                Text("Encodage simplifié")
-                    .font(.title)
+                Text("Gestion simplifiée")
+                    .font(.title2)
+                    .bold()
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                 
                 LottieView(name: "planbudget", loopMode: .loop)
-                Text("Vous pouvez ajouter un budget pour vos dépense en carburant, énergie et vos commission via l'écran des paramètres !")
-                    .font(.title3)
+                Text("Rendez vous dans les paramètres de votre compte et définissez vous un budget mensuel pour chaque catégorie de dépenses")
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .multilineTextAlignment(.center)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: LoginView()){
-                                Text("Skip")
-                            }
-                            
-                        }
-                        
-                    }
+
                 Spacer(minLength: 70)
             }
             .navigationBarBackButtonHidden(true)
+        }.onAppear{
+            DispatchQueue.main.async {
+                var isAlreadyAppear: Bool = UserDefaults.standard.bool(forKey: "onBoardingisAlreadyAppear")
+                
+                if isAlreadyAppear == true {
+                    
+                }else {
+                    UserDefaults.standard.set(isOnBoardingAlreadyAppear, forKey: "onBoardingisAlreadyAppear")
+                    appModel.isOnBoardingAlreadyAppear = true
+                }
+            }
         }
-        // }
-        
+        .navigationBarBackButtonHidden(true)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         .background(Color("Gray300"))
         .foregroundColor(Color("Blue600"))
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing){
+                NavigationLink(destination: LoginView()){
+                    Text("Skip").foregroundColor(Color("Blue600"))
+                }
+            }
+        }
     }
     
+    //MARK: methods
+    
     private func checkOnboarding(){
-        if showFistTimeOnboarding == true{
+        if showFirstTimeOnboarding == true{
             
-            showFistTimeOnboarding = false
-            UserDefaults.standard.set(self.showFistTimeOnboarding, forKey: "isShowOnboarding")
-            OnBoarding()
+            showFirstTimeOnboarding = false
+            UserDefaults.standard.set(self.showFirstTimeOnboarding, forKey: "isShowOnboarding")
         }
     }
     
