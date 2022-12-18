@@ -115,7 +115,7 @@ struct LoginView: View {
             }
             .ignoresSafeArea(.keyboard)
             .background(Color(UIColor(named: "Gray300") ?? .white))
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 
     private func loginUser() {
