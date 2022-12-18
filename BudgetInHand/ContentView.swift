@@ -13,7 +13,7 @@ struct ContentView: View {
     
     //MARK: Variables
     @StateObject var appModelOnBoarding = BudgetInHandModel()
-    var  isAlreadySwawned = UserDefaults.standard.bool(forKey: "isAlreadySpawned")
+    var  isAlreadySwawned = UserDefaults.standard.bool(forKey: "checkOnBoarding")
     @State private var isOnBoardingActive = false
     @State private var isSplashActive = false
     @StateObject var appModel = BudgetInHandModel()
