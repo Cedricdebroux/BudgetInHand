@@ -15,23 +15,22 @@ struct NewExpenseView: View {
     private var databaseReference = Firestore.firestore().collection("Expenses")
     
     @EnvironmentObject var appModel: BudgetInHandModel
-    @ObservedObject private var viewModel = ExpenseViewModel()
+    @ObservedObject var viewModel = ExpenseViewModel()
     
-    @State private var presentAlert = false
+    @State var presentAlert = false
     
-    @State private var selectedView = 2
     
-    @State private var amountText: Float = 0.0
+    @State private var amountText: Float = 0
     @State private var date = Date()
     @State private var category : Category = .Carburant
-    @State private var  textPicker: String = ""
+    @State private var textPicker: String = ""
     @State private var userId = ""
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
-    @State private var showAlert = true
+    @State private var showAlert = false
     @State private var isExpenseValidate = false
-    
+   
     var body: some View {
         NavigationStack{
             ZStack{
@@ -46,8 +45,8 @@ struct NewExpenseView: View {
                     Spacer()
                     
                     Button {
-                        shouldShowImagePicker
-                            .toggle()
+                        showAlert.toggle()
+                       
                     } label: {
                         VStack{
                             if let image = self.image{
@@ -61,6 +60,14 @@ struct NewExpenseView: View {
                                     .font(.system(size: 90))
                                     .padding()
                                     .foregroundColor(Color("Blue600"))
+                            }
+                        }
+                        .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
+                            Button("Manuellement", role: .cancel){
+                                shouldShowImagePicker
+                                    .toggle()
+                            }
+                            Button("Avec l'aide de l'appareil photo", role: .none){
                             }
                         }
                     }
@@ -77,7 +84,7 @@ struct NewExpenseView: View {
                             }
                         }
                         Section("Montant"){
-                            TextField("Enter the amount", value: $amountText, format: .number)}
+                            TextField("Entrez votre dépense", value: $amountText, formatter: NumberFormatter())}
                         
                         Section("Date"){
                             DatePicker("Quel jour est on?",selection:$date,displayedComponents: [.date])
@@ -90,7 +97,6 @@ struct NewExpenseView: View {
                             textPicker = ("\(self.category.rawValue.capitalized)")
                             showAlert.toggle()
                             createExpense()
-                            
                             // post the text to Firestore, then erase the text
                             
                         }, label:{
@@ -116,15 +122,11 @@ struct NewExpenseView: View {
                     ImagePicker(image: $image)
                 }
                 .navigationDestination(isPresented: $isExpenseValidate){
-                    MainView().accessibilityElement(children: .contain).unredacted()
+
+                    MainView()
                 }
                 .navigationBarBackButtonHidden(true)
-                .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
-                    Button("Manuellement", role: .cancel){
-                    }
-                    Button("Avec l'aide de l'appareil photo", role: .none){
-                    }
-                }
+          
         }
     }
     
@@ -134,19 +136,16 @@ struct NewExpenseView: View {
                 self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-            isExpenseValidate.toggle()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//            isExpenseValidate.toggle()
+//        }
+    
     }
     
     
     private func persistImageToStorage(completionHandler: @escaping (String) -> Void ){
         let fileName = UUID().uuidString
-        
         let uid = UUID()
-        //        guard let uid = UUID()
-        //           Auth.auth().currentUser?.uid
-        //        else { return }
         let ref = Storage.storage().reference(withPath: "\(uid)" )
         guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
         else { return }

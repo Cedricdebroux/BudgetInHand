@@ -7,34 +7,35 @@
 
 import SwiftUI
 
-struct MainView: View {
-    
-   
-    var body: some View {
+
+    struct MainView: View {
+        @State var selectedView = 1
         
-        TabView(){
-            HomeView().tag(1)
+        var body: some View {
+            
+            TabView(selection: $selectedView){
+                HomeView().tag(1)
                     .tabItem{
                         Image(systemName: "house")
                         Text("Accueil")
                     }.tag(1)
-            ProfileView().tag(2)
+                ProfileView().tag(2)
                     .tabItem{
                         Image(systemName: "person")
                         Text("Profil")
                     }.tag(2)
-            NewExpenseView().tag(3)
+                NewExpenseView().tag(3)
                     .tabItem{
                         Image(systemName: "plus.circle")
                         Text("Nouvelle Dépense")
                     }.tag(3)
             }.navigationBarBackButtonHidden(true)
-            .foregroundColor(Color("Blue800"))
-            .toolbar(.automatic)
-            .unredacted()
+                .foregroundColor(Color("Blue800"))
+                .toolbar(.automatic)
+                .unredacted()
             
+        }
     }
-}
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
