@@ -43,6 +43,24 @@ struct HomeView: View {
             return ""
         }
     }
+    func switchColors(category: [String]) -> Color{
+        switch category {
+        case ["Carburant"]:
+            return Color.fromInts(r: 0, g: 181, b: 216)
+            
+        case ["Energie"]:
+            return Color.fromInts(r: 0, g: 119, b: 182)
+            
+        case ["Commission"]:
+            return Color.fromInts(r: 144, g: 224, b: 238)
+            
+        case ["Domicile"]:
+            return Color.fromInts(r: 3, g: 4, b: 94)
+            
+        default:
+            return Color("Green600")
+        }
+    }
     
     var body: some View {
         VStack{
@@ -99,11 +117,12 @@ struct HomeView: View {
                                 HStack{
                                 ZStack{
                                         RoundedRectangle(cornerRadius: 5.0)
-                                            .fill(Color("Blue600"))
+                                        .fill(switchColors(category: [String(Expense.category ?? "house.fill")]))
                                             .frame(width: 20, height: 20)
                                         Image(systemName:switchIcone(category: [String(Expense.category ?? "house.fill")]))
                                             .foregroundColor(Color(.white))
                                             .aspectRatio(contentMode: .fit)
+                                            .frame(maxWidth: 50)
                                     }
                                 }
                                 
@@ -112,13 +131,16 @@ struct HomeView: View {
                                 Text(Expense.date ?? Date.now, style: .date )
                                     .font(.system(size: 12, weight: .regular))
                                     .foregroundColor(.gray)
+//                                    .frame(minWidth: 180)
                                 Spacer()
 
-                                HStack{
+                                HStack(spacing: -30){
                                     Text(String(Expense.amount ?? 0.0) )
                                         .font(.system(size: 18, weight: .regular))
                                         .frame(maxHeight: .none)
                                         .bold()
+                                        .frame(maxWidth: 140, alignment: .trailing)
+                                    Spacer()
                                     Text("€")
                                 }
                             }
