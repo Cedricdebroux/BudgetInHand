@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseStorage
 import Firebase
 import FirebaseFirestore
+import Combine
 
 struct NewExpenseView: View {
     
@@ -17,9 +18,8 @@ struct NewExpenseView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     @ObservedObject var viewModel = ExpenseViewModel()
     
+
     @State var presentAlert = false
-    
-    
     @State private var amountText: Float = 0
     @State private var date = Date()
     @State private var category : Category = .Carburant
