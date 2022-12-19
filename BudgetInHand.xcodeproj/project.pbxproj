@@ -22,6 +22,7 @@
 		02590C202949D3770073DDBD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C1F2949D3770073DDBD /* ImagePicker.swift */; };
 		02590C222949FE090073DDBD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C212949FE090073DDBD /* UserViewModel.swift */; };
 		02590C24294A085C0073DDBD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02590C23294A085C0073DDBD /* User.swift */; };
+		0275D3F22950854200C8FC21 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0275D3F12950854200C8FC21 /* UserDefault.swift */; };
 		02A10D7E2941D91D00C7A0F3 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */; };
 		02A10D7F2941D91D00C7A0F3 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */; };
 		E446FA0C294870AF0047FE98 /* financialplan.json in Resources */ = {isa = PBXBuildFile; fileRef = E446FA0B294870AF0047FE98 /* financialplan.json */; };
@@ -75,6 +76,7 @@
 		02590C1F2949D3770073DDBD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		02590C212949FE090073DDBD /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		02590C23294A085C0073DDBD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0275D3F12950854200C8FC21 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		02A10D7C2941D91C00C7A0F3 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		02A10D7D2941D91D00C7A0F3 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		E446FA0B294870AF0047FE98 /* financialplan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = financialplan.json; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				E486DB4529422D8300468DE8 /* SplashScreen.swift */,
 				E4C01127294729FB004FE542 /* OnBoarding.swift */,
+				0275D3F12950854200C8FC21 /* UserDefault.swift */,
 			);
 			path = BeforeApp;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				E44F617B293E2D830000EB92 /* ExpenseViewModel.swift in Sources */,
 				022D31B429426B1100C0391D /* LottieView.swift in Sources */,
 				021C1F68294A53C5008E50B2 /* ExpendUser.swift in Sources */,
+				0275D3F22950854200C8FC21 /* UserDefault.swift in Sources */,
 				E44F6185293E441F0000EB92 /* BudgetInHandModel.swift in Sources */,
 				E44F617F293E2E830000EB92 /* NewExpenseView.swift in Sources */,
 				E465700C29472AA500361E91 /* MainView.swift in Sources */,
