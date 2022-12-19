@@ -27,6 +27,7 @@ struct DetailExpenses: View {
     
     let dateFormatter = DateFormatter()
     
+    
     //let categoryDB : [String]
     
     
