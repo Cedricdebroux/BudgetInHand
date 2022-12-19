@@ -10,8 +10,10 @@ import Combine
 
 
 struct ContentView: View {
-    
+    @UserDefault(key:"isOnboarded", defaultValue: false)
+
     //MARK: Variables
+    static var isOnboarded: Bool
     @StateObject var appModelOnBoarding = BudgetInHandModel()
     var  isAlreadySwawned = UserDefaults.standard.bool(forKey: "checkOnBoarding")
     @State private var isOnBoardingActive = false
@@ -23,17 +25,17 @@ struct ContentView: View {
     
     //MARK:Methods
     
-    func checkOnBoarding(){
-        if isAlreadySwawned == true {
-            NavigationLink(destination: LoginView()){
-                
-            }
-        } else {
-            addValueForOnBoarding()
-            OnBoarding()
-        }
-    }
-    
+//    func checkOnBoarding(){
+//        if isAlreadySwawned == true {
+//            NavigationLink(destination: LoginView()){
+//
+//            }
+//        } else {
+//            addValueForOnBoarding()
+//            OnBoarding()
+//        }
+//    }
+//
     func addValueForOnBoarding(){
         UserDefaults.standard.set(isOnBoardingAlreadyAppear, forKey: "checkOnBoarding")
     }
@@ -47,11 +49,11 @@ struct ContentView: View {
         VStack{
             
             if self.isSplashActive{
-                if appModelOnBoarding.isOnBoardingAlreadyAppear == false {
-                    OnBoarding()
+                if Self.isOnboarded {
+                    LoginView()
                 }else
                 {
-                    LoginView()
+                    OnBoarding()
                 }
                 
             } else {

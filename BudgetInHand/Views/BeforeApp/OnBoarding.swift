@@ -12,7 +12,8 @@ struct OnBoarding: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     @State private var showFirstTimeOnboarding = true
     @State var isOnBoardingAlreadyAppear = false
-    
+
+    @State var isNavigation: Bool = false
     
     var body: some View {
         TabView{
@@ -60,17 +61,9 @@ struct OnBoarding: View {
                 Spacer(minLength: 70)
             }
             .navigationBarBackButtonHidden(true)
-        }.onAppear{
-            DispatchQueue.main.async {
-                var isAlreadyAppear: Bool = UserDefaults.standard.bool(forKey: "onBoardingisAlreadyAppear")
-                
-                if isAlreadyAppear == true {
-                    
-                }else {
-                    UserDefaults.standard.set(isOnBoardingAlreadyAppear, forKey: "onBoardingisAlreadyAppear")
-                    appModel.isOnBoardingAlreadyAppear = true
-                }
-            }
+        }
+        .navigationDestination(isPresented: $isNavigation) {
+            LoginView()
         }
         .navigationBarBackButtonHidden(true)
         .tabViewStyle(PageTabViewStyle())
@@ -79,14 +72,22 @@ struct OnBoarding: View {
         .foregroundColor(Color("Blue600"))
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing){
-                NavigationLink(destination: LoginView()){
-                    Text("Skip").foregroundColor(Color("Blue600"))
+                Button("Skip") {
+                    isNavigation.toggle()
+                    addValueForOnBoarding()
                 }
+                .foregroundColor(Color("Blue600"))
             }
         }
     }
     
     //MARK: methods
+    
+    func addValueForOnBoarding(){
+            UserDefaults.standard.set(isOnBoardingAlreadyAppear, forKey: "isOnBoarded")
+        ContentView.isOnboarded = true
+
+        }
     
     private func checkOnboarding(){
         if showFirstTimeOnboarding == true{

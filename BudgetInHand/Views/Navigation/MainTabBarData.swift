@@ -11,11 +11,8 @@ import Combine
 
 final class MainTabBarData: ObservableObject {
 
-    
     let customActionteminidex: Int
-
         let objectWillChange = PassthroughSubject<MainTabBarData, Never>()
-
         var itemSelected: Int {
             didSet {
                 if itemSelected == customActionteminidex {

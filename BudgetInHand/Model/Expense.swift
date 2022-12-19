@@ -8,7 +8,7 @@
 import FirebaseFirestoreSwift
 import SwiftUI
 
-struct Expense: Codable {
+struct Expense: Codable, Identifiable {
     @DocumentID var id: String? // @DocumentID to fetch the identifier from Firestore
     var category: String?
     var date: Date?
