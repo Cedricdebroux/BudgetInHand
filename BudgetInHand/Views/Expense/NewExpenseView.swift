@@ -95,12 +95,12 @@ struct NewExpenseView: View {
                         
                         Button(action: {
                             textPicker = ("\(self.category.rawValue.capitalized)")
-                            showAlert.toggle()
+                            isExpenseValidate.toggle()
                             createExpense()
                             // post the text to Firestore, then erase the text
                             
                         }, label:{
-                            Text("Save")
+                            Text("Sauvegarder")
                                 .frame(maxWidth: 300)
                             
                         })
@@ -108,7 +108,7 @@ struct NewExpenseView: View {
                         .tint(Color("Blue600"))
                         .controlSize(.large)
                         .foregroundColor(Color.white)
-                        .alert(isPresented: $showAlert){
+                        .alert(isPresented: $isExpenseValidate){
                             
                             Alert(title: Text("Dépense validée"), message: Text("Cette dépense a bien été enregistrée")
                             )

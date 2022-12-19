@@ -22,6 +22,7 @@ struct CreateAccountView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
+    @State private var isAccountCreate = false
     
     var isSignUpButtonDisabled: Bool {
         [email, passwordOne, passwordTwo, name].contains(where: \.isEmpty)  
@@ -135,6 +136,7 @@ struct CreateAccountView: View {
                             showAlert = true
                         } else {
                             createUser()
+                            isAccountCreate.toggle()
                         }
                     }){
                         Text("Créer votre compte")
@@ -149,6 +151,9 @@ struct CreateAccountView: View {
                         Alert(title: Text("Attention !"), message: Text("Vos mots de passe ne correspondent pas"))
                     }
                 }
+            }
+            .navigationDestination(isPresented: $isAccountCreate) {
+                LoginView()
             }
         }.ignoresSafeArea(.keyboard)
             .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){

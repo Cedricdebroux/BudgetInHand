@@ -83,16 +83,16 @@ struct HomeView: View {
                 )
             
             Spacer()
-                .frame(height: 300)
+                .frame(height: 320)
                 .scaledToFit()
             HStack{
 
                 NavigationStack{
-                    
+                    Spacer()
+                    Text("Vos dernières dépenses :")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                     List {
-                        Section {
-                            Text("Vos dernières dépenses :")
-                        }
                         ForEach(viewModel.expenses, id:\.id) { Expense in
                             HStack() {
                                 HStack{
