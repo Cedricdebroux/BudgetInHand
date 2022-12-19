@@ -95,35 +95,15 @@ struct HomeView: View {
                         }
                         ForEach(viewModel.expenses, id:\.id) { Expense in
                             HStack() {
-                                
-                                /*
-                                 //date
-                                 Text(String(from: Expense.date ?? "" )).font(.system(size: 18, weight: .regular))
-                                 */
-                                
-                                
-                                //                                        if Expense.category == [namePie].description {
-                                
                                 HStack{
-                                    
-                                    //.foregroundColor(Color("Blue100"))
-                                    //category de l'expense
-                                    ZStack{
+                                ZStack{
                                         RoundedRectangle(cornerRadius: 5.0)
                                             .fill(Color("Blue600"))
-                                        // adevelloper plus ytard mettre la cardbox en fond de l'icon de la couleur du type de la categorie
                                             .frame(width: 20, height: 20)
                                         Image(systemName:switchIcone(category: [String(Expense.category ?? "house.fill")]))
                                             .foregroundColor(Color(.white))
                                             .aspectRatio(contentMode: .fit)
                                     }
-                                    //Text("-").font(.system(size: 12, weight: .regular))
-//                                    Text(Expense.title ?? "" )
-//                                        .font(.system(size: 18, weight: .regular))
-//                                        .bold()
-                                    //                                    Text(Expense.category ?? "" )
-                                    //                                        .font(.system(size: 12, weight: .regular))
-                                    //                                        .foregroundColor(.gray)
                                 }
                                 
                                 Spacer()
@@ -132,8 +112,7 @@ struct HomeView: View {
                                     .font(.system(size: 12, weight: .regular))
                                     .foregroundColor(.gray)
                                 Spacer()
-                                
-                                //amount de l'expense
+
                                 HStack{
                                     Text(String(Expense.amount ?? 0.0) )
                                         .font(.system(size: 18, weight: .regular))

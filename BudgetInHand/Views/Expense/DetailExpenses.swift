@@ -77,21 +77,13 @@ struct DetailExpenses: View {
                     .frame(height: 100)
                 NavigationStack{
                     List {
-                   
                         ForEach(viewModel.expenses, id:\.id) { Expense in
-                           
-                            
                             HStack() {
-                                
                                 Spacer()
-                                
                                 Text(Expense.date ?? Date.now, style: .date )
                                     .font(.system(size: 12, weight: .regular))
                                     .foregroundColor(.gray)
-                                
-                                
                                 Spacer()
-                                
                                 HStack{
                                     Text(String(Expense.amount ?? 0.0) )
                                         .font(.system(size: 18, weight: .regular))
@@ -99,22 +91,17 @@ struct DetailExpenses: View {
                                         .bold()
                                     Text("€")
                                 }
-                                //                                                }
                             }
-                            
                         }
-            
                     }
                     .onAppear(perform :{ self.viewModel.fetchDataCategory(userId: appModel.userId ?? "",category: namePieSingle )
                         
                     })
-                    
                 }
             }
         }
     }
-    
-    
+
     struct DetailExpenses_Previews: PreviewProvider {
         static var previews: some View {
             DetailExpenses(value: 300,budgetTotalCategory: 500, name: "test", image: "cars", colors: Color.fromInts(r: 0, g: 181, b: 216))
