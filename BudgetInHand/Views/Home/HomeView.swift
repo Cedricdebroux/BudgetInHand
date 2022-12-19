@@ -46,6 +46,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack{
+            
             HStack{
                     AsyncImage(url: URL(string: fetchCurrentUserViewModel.currentUser?.profileImageUrl ?? ""), content: {image in
                         image
@@ -126,6 +127,8 @@ struct HomeView: View {
                 }
             }
         }
+        .background(Color("Gray100"))
+
     }
 
     struct HomeView_Previews: PreviewProvider {
