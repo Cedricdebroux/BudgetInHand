@@ -23,9 +23,10 @@ struct CreateAccountView: View {
     @State private var image: UIImage?
     @State private var loginStatusMessage = ""
     @State private var isAccountCreate = false
+    @State private var isAccountCreateError = false
     
     var isSignUpButtonDisabled: Bool {
-        [email, passwordOne, passwordTwo, name].contains(where: \.isEmpty)  
+        [email, passwordOne, passwordTwo, name].contains(where: \.isEmpty)
     }
     var body: some View {
         NavigationView{
@@ -58,7 +59,7 @@ struct CreateAccountView: View {
                         .overlay(RoundedRectangle(cornerRadius: 64)
                             .stroke(Color.black, lineWidth: 1))
                     }
-                 
+                    
                     Form(){
                         Section("Email"){
                             ZStack(alignment: .trailing){
@@ -136,7 +137,6 @@ struct CreateAccountView: View {
                             showAlert = true
                         } else {
                             createUser()
-                            isAccountCreate.toggle()
                         }
                     }){
                         Text("Créer votre compte")
@@ -150,12 +150,20 @@ struct CreateAccountView: View {
                     .alert(isPresented: $showAlert){
                         Alert(title: Text("Attention !"), message: Text("Vos mots de passe ne correspondent pas"))
                     }
+                    .alert("Votre compte a bien été créé",isPresented: $isAccountCreate){
+                        Button("Ok", role: .cancel){
+                        }
+                    }
+                    .alert("Un erreur s'est produite veuillez réessayer",isPresented: $isAccountCreateError){
+                        Button("Ok", role: .cancel){
+                        }
+                    }
                 }
             }
             .navigationDestination(isPresented: $isAccountCreate) {
                 LoginView()
+            }.ignoresSafeArea(.keyboard)
             }
-        }.ignoresSafeArea(.keyboard)
             .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
                 ImagePicker(image: $image)
             }
@@ -164,11 +172,12 @@ struct CreateAccountView: View {
         Auth.auth().createUser(withEmail: email, password: passwordOne, completion: { result, err in
             if let err = err {
                 print("Failed due to error:", err)
+                isAccountCreateError.toggle()
                 return
             }
             print("Successfully created account with ID: \(result?.user.uid ?? "")")
             appModel.userId = result?.user.uid
-            
+            isAccountCreate.toggle()
             self.persistImageToStorage()
             
         })
@@ -216,3 +225,4 @@ struct CreateAccountView_Previews: PreviewProvider {
         CreateAccountView()
     }
 }
+
