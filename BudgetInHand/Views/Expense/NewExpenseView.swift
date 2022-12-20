@@ -53,8 +53,8 @@ struct NewExpenseView: View {
                             if let image = self.image{
                                 Image(uiImage: image)
                                     .resizable()
-                                    .scaledToFill()
                                     .frame(width: 180, height: 180)
+                                    .scaledToFill()
                                 
                             } else {
                                 Image(systemName: "camera.fill")
