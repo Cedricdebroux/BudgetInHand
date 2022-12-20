@@ -18,7 +18,7 @@ struct NewExpenseView: View {
     @EnvironmentObject var appModel: BudgetInHandModel
     @ObservedObject var viewModel = ExpenseViewModel()
     
-
+    
     @State var presentAlert = false
     @State private var amountText: Float = 0
     @State private var date = Date()
@@ -31,7 +31,7 @@ struct NewExpenseView: View {
     @State private var showAlert = false
     @State private var isExpenseValidate = false
     @State private var showAlertExpense = false
-   
+    
     var body: some View {
         NavigationStack{
             ZStack{
@@ -47,7 +47,7 @@ struct NewExpenseView: View {
                     
                     Button {
                         showAlert.toggle()
-                       
+                        
                     } label: {
                         VStack{
                             if let image = self.image{
@@ -63,7 +63,7 @@ struct NewExpenseView: View {
                                     .foregroundColor(Color("Blue600"))
                             }
                         }
-                        .alert("Methode d'encodage d'une dépense",isPresented: $showAlert){
+                        .alert("Méthode d'encodage d'une dépense",isPresented: $showAlert){
                             Button("Manuellement", role: .cancel){
                                 shouldShowImagePicker
                                     .toggle()
@@ -74,9 +74,9 @@ struct NewExpenseView: View {
                     }
                     
                     Form{
-                        Section("Categorie"){
+                        Section("Catégorie"){
                             List {
-                                Picker("Categories", selection: $category){
+                                Picker("Catégories", selection: $category){
                                     ForEach(Category.allCases) {
                                         category in
                                         Text(category.rawValue.capitalized)
@@ -115,13 +115,13 @@ struct NewExpenseView: View {
                                     date = Date()
                                     category = Category.Carburant
                                     image = UIImage(systemName: "camera.fill")
-                                        
+                                    
                                 }
                                 Button("Accueil", role: .none){
                                     isExpenseValidate.toggle()
                                 }
                                 .navigationDestination(isPresented: $isExpenseValidate){
-
+                                    
                                     MainView()
                                 }
                             }
@@ -134,9 +134,9 @@ struct NewExpenseView: View {
                 .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
                     ImagePicker(image: $image)
                 }
-               
+            
                 .navigationBarBackButtonHidden(true)
-          
+            
         }
     }
     
@@ -147,10 +147,7 @@ struct NewExpenseView: View {
                 showAlertExpense.toggle()
             }
         }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//            isExpenseValidate.toggle()
-//        }
-    
+        
     }
     
     

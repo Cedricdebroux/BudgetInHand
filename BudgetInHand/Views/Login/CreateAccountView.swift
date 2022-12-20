@@ -114,7 +114,7 @@ struct CreateAccountView: View {
                         .foregroundColor(Color( "Gray600"))
                         Section("Répétez votre mot de passe"){
                             ZStack(alignment: .trailing){
-                                SecureField("Confirmer votre mot de passe", text: $passwordTwo)
+                                SecureField("Confirmez votre mot de passe", text: $passwordTwo)
                                     .keyboardType(.emailAddress)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)

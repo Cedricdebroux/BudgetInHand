@@ -35,7 +35,7 @@ struct ResetPasswordView: View {
             VStack{
 
                 VStack(spacing: 20){
-                    TextField("Email",text: $email, prompt: Text("Enter email..."))
+                    TextField("Email",text: $email, prompt: Text("Entrez votre Email ..."))
                         .font(.title2)
                         .textFieldStyle(.roundedBorder)
                         .autocapitalization(.none)
@@ -49,7 +49,7 @@ struct ResetPasswordView: View {
                         showalert = true
                         resetPassword()
                     } label: {
-                        Text("Reset Password")
+                        Text("Réinitialisation du mot de passe")
                             .frame(maxWidth: .infinity)
                             .font(.title2)
                     }.alert("Si votre mail existe dans notre base de données.Un mail vous a été envoyé pour créer un nouveau mot de passe", isPresented: $showalert){
@@ -70,7 +70,7 @@ struct ResetPasswordView: View {
                 Spacer()
                 
                 NavigationLink(destination: LoginView()){
-                    Button("Back to login"){
+                    Button("Retour vers la page de connexion"){
                         showSheet.toggle()
                     }
                 }

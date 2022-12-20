@@ -86,7 +86,7 @@ struct LoginView: View {
                         Button(action: {
                             loginUser()
                         }){
-                                Text("Connection")
+                                Text("Connexion")
                                     .frame(maxWidth: 300)
                         }
                         .tint(Color("Blue600"))
@@ -99,7 +99,7 @@ struct LoginView: View {
                             Text("Nouveau compte")
                             
                         }
-                        Button("Reset Password"){
+                        Button("Mot de passe oublié ?"){
                             showSheet.toggle()
                         }.sheet(isPresented: $showSheet){
                             ResetPasswordView(showSheet: $showSheet)
