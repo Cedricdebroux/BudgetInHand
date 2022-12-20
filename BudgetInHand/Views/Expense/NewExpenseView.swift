@@ -30,6 +30,7 @@ struct NewExpenseView: View {
     @State private var loginStatusMessage = ""
     @State private var showAlert = false
     @State private var isExpenseValidate = false
+    @State private var showAlertExpense = false
    
     var body: some View {
         NavigationStack{
@@ -95,7 +96,6 @@ struct NewExpenseView: View {
                         
                         Button(action: {
                             textPicker = ("\(self.category.rawValue.capitalized)")
-                            isExpenseValidate.toggle()
                             createExpense()
                             // post the text to Firestore, then erase the text
                             
@@ -108,12 +108,25 @@ struct NewExpenseView: View {
                         .tint(Color("Blue600"))
                         .controlSize(.large)
                         .foregroundColor(Color.white)
-                        .alert(isPresented: $isExpenseValidate){
-                            
-                            Alert(title: Text("Dépense validée"), message: Text("Cette dépense a bien été enregistrée")
-                            )
-                        }.foregroundColor(Color("Blue600"))
-                            .background(Color("Yellow600"))
+                        .alert("Cette dépense a bien été enregistrée",isPresented: $showAlertExpense){
+                            HStack{
+                                Button("Nouvelle", role: .cancel){
+                                    amountText = 0.0
+                                    date = Date()
+                                    category = Category.Carburant
+                                    image = UIImage(systemName: "camera.fill")
+                                        
+                                }
+                                Button("Accueil", role: .none){
+                                    isExpenseValidate.toggle()
+                                }
+                                .navigationDestination(isPresented: $isExpenseValidate){
+
+                                    MainView()
+                                }
+                            }
+                        }
+                        
                     }
                     Spacer()
                 }
@@ -121,10 +134,7 @@ struct NewExpenseView: View {
                 .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
                     ImagePicker(image: $image)
                 }
-                .navigationDestination(isPresented: $isExpenseValidate){
-
-                    MainView()
-                }
+               
                 .navigationBarBackButtonHidden(true)
           
         }
@@ -134,6 +144,7 @@ struct NewExpenseView: View {
         DispatchQueue.main.async {
             self.persistImageToStorage(){ imageUrl in
                 self.viewModel.addData(userId: Auth.auth().currentUser?.uid  ?? "",category: textPicker, amount: amountText, date: date, image: imageUrl)
+                showAlertExpense.toggle()
             }
         }
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
