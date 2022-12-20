@@ -134,8 +134,8 @@ struct HomeView: View {
 //                                    .frame(minWidth: 180)
                                 Spacer()
 
-                                HStack(spacing: -30){
-                                    Text(String(Expense.amount ?? 0.0) )
+                                HStack(){
+                                    Text(String(Expense.amount ?? 0.0))
                                         .font(.system(size: 18, weight: .regular))
                                         .frame(maxHeight: .none)
                                         .bold()
